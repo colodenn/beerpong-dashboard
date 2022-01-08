@@ -171,16 +171,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             )}
           </div>
           <div className='modal-action'>
-            <button
+            <a
+              href=''
               onClick={() => {
                 addGame(toggle);
-                router.push('/');
               }}
               type='submit'
               className='btn btn-primary'
             >
               Accept
-            </button>
+            </a>
             <a href='' className='btn'>
               Close
             </a>
