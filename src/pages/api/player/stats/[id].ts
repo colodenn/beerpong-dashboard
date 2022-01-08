@@ -6,16 +6,13 @@ import { supabase } from '@/utils/client';
 
 export default async function hello(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
-  const { data } = await supabase
-    .from('games_solo')
-    .select('*')
-    .filter('player1,player2,winner,schnickeln', 'in', `(${id})`);
+  const { data } = await supabase.from('games_solo').select('*');
 
   let schickeln = 0;
   let played = 0;
   let won = 0;
   data?.map((e) => {
-    if ((e.player1 || e.player2) == id) {
+    if (e.player1 == id || e.player2 == id) {
       played += 1;
     }
     if (e.winner == id) {
@@ -33,7 +30,7 @@ export default async function hello(req: NextApiRequest, res: NextApiResponse) {
         played: played,
         won: won,
         schnickeln: schickeln,
-        winrate: won / played,
+        winrate: won / played ?? 0,
         drunk: played * 0.5,
       },
     });

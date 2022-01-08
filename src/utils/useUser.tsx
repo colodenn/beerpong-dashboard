@@ -79,7 +79,7 @@ export function UserContextProvider({
       updated_at: new Date(),
     };
 
-    const { error } = await supabase.from('profiles').upsert(updates);
+    const { data, error } = await supabase.from('profiles').upsert(updates);
     if (error) {
       throw error;
     }

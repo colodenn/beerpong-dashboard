@@ -9,7 +9,7 @@ import { useUser } from '@/utils/useUser';
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
-  const { user, logoutUser } = useUser();
+  const { user, logoutUser, profile } = useUser();
 
   function changeTheme() {
     setIsDarkMode(!isDarkMode);
@@ -30,7 +30,15 @@ export default function Header() {
               </li>
               {user && (
                 <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
-                  <Link href='/profile'>profile</Link>
+                  <Link
+                    href={
+                      profile.username
+                        ? `/player/${profile.username}`
+                        : '/profile'
+                    }
+                  >
+                    profile
+                  </Link>
                 </li>
               )}
 
