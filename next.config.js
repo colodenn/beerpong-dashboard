@@ -9,6 +9,7 @@ module.exports = {
       'media1.giphy.com',
       '*',
       'gitlab-iwi.dfki.de',
+      'thumbs.gfycat.com',
     ],
   },
   reactStrictMode: true,
