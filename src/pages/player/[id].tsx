@@ -18,13 +18,12 @@ const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 export default function HomePage() {
   const router = useRouter();
-  const { updateProfile } = useUser();
+  const { updateProfile, profile } = useUser();
   const { id } = router.query;
   const { data } = useSWR(`/api/player/${id}`, fetcher);
   const { data: stats } = useSWR(`/api/player/stats/${id}`, fetcher);
   const [editAvatar, setAvatarName] = useState(data?.player.avatar_url);
   const [avatarToggle, setAvatarToggle] = useState(true);
-
   React.useEffect(() => {
     setAvatarName(data?.player.avatar_url);
   }, [data]);
@@ -64,7 +63,7 @@ export default function HomePage() {
 
                   {avatarToggle ? (
                     <>
-                      {id !== data?.player.username ? (
+                      {id == profile.username ? (
                         <div
                           className=''
                           onClick={() => {
