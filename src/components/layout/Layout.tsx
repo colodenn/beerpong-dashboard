@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable unused-imports/no-unused-vars */
 import Image from 'next/image';
 import * as React from 'react';
 import { useState } from 'react';
+import useSWR from 'swr';
 export default function Layout({ children }: { children: React.ReactNode }) {
   // Put Header or Footer Here
   const [toggle, setToggle] = useState(true);
@@ -14,15 +16,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [winner, setWinner] = useState('');
   const [schnickel, setSchnickel] = useState('');
   const [cups, setCups] = useState(0);
+  const fetcher = (...args: any) => fetch(...args).then((res) => res.json());
+  const { data } = useSWR('/api/players', fetcher);
 
   function addGame(isDuo: boolean) {
     if (!isDuo) {
       fetch('/api/addSolo', {
         body: JSON.stringify({
-          player1: player1,
-          player2: player2,
-          winner: winner,
-          schnickel: schnickel,
+          player1: player1 == '' ? data['players'][0].username : player1,
+          player2: player2 == '' ? data['players'][0].username : player2,
+          winner: winner == '' ? data['players'][0].username : winner,
+          schnickel: schnickel == '' ? data['players'][0].username : schnickel,
           cups: cups,
           lng: lng,
           lat: lat,
@@ -60,20 +64,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         href='#my-modal'
         className='border-full fixed right-0 bottom-0 z-50 p-8 mr-4 mb-4 text-white bg-red-500 rounded-full shadow-xl md:mr-16 md:mb-16 hover:bg-red-800'
       >
-        {/* <svg
-            xmlns='http://www.w3.org/2000/svg'
-            className='h-6 w-6'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='currentColor'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              d='M12 4v16m8-8H4'
-            />
-          </svg> */}
         <Image
           width={55}
           height={55}
@@ -88,7 +78,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <h5 className='mr-2'>Solo</h5>
             <input
               type='checkbox'
-              checked={toggle}
               onClick={() => setToggle(!toggle)}
               className='toggle'
             />
@@ -102,36 +91,47 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <label className='label'>
                       <span className='label-text'>Player 1</span>
                     </label>
-                    <input
-                      name='player1'
-                      type='text'
-                      placeholder='Player 1'
-                      className='input input-bordered'
+
+                    <select
+                      className='select select-bordered w-full max-w-xs'
                       value={player1}
                       onChange={(e) => setPlayer1(e.target.value)}
-                    />
+                    >
+                      {data['players'].map((e, i) => {
+                        return (
+                          <option value={e.username} selected={i == 0} key={i}>
+                            {e.username}
+                          </option>
+                        );
+                      })}
+                    </select>
                     <label className='label'>
                       <span className='label-text'>Player 2</span>
                     </label>
-                    <input
-                      type='text'
-                      name='player2'
-                      placeholder='Player 2'
-                      className='input input-bordered'
+                    <select
+                      className='select select-bordered w-full max-w-xs'
                       value={player2}
                       onChange={(e) => setPlayer2(e.target.value)}
-                    />
+                    >
+                      {data['players'].map((e, i) => {
+                        return <option key={i}>{e.username}</option>;
+                      })}
+                    </select>
                     <label className='label'>
                       <span className='label-text'>Schnickel winner</span>
                     </label>
-                    <input
-                      type='text'
-                      name='schnickel'
-                      placeholder='Scnickel winner'
-                      className='input input-bordered'
+                    <select
+                      className='select select-bordered w-full max-w-xs'
                       value={schnickel}
                       onChange={(e) => setSchnickel(e.target.value)}
-                    />
+                    >
+                      <option disabled={true} selected={true}>
+                        Choose player
+                      </option>
+                      {data['players'].map((e, i) => {
+                        return <option key={i}>{e.username}</option>;
+                      })}
+                    </select>
 
                     <label className='label'>
                       <span className='label-text'>Cups left</span>
@@ -147,17 +147,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <label className='label'>
                       <span className='label-text'>Winner</span>
                     </label>
-                    <input
-                      type='text'
-                      placeholder='Winner'
-                      name='winner'
+                    <select
+                      className='select select-bordered w-full max-w-xs'
                       value={winner}
                       onChange={(e) => setWinner(e.target.value)}
-                      className='input input-bordered'
-                    />
+                    >
+                      {data['players'].map((e: any, i: any) => {
+                        return <option key={i}>{e.username}</option>;
+                      })}
+                    </select>
                   </div>
-                  <div>
-                    {lat}:{lng}
+                  <div className='mt-6'>
+                    <p>lat:{lat}</p>
+                    <p>long:{lng}</p>
                   </div>
                 </form>
               </>
