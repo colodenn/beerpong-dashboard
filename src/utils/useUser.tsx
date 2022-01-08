@@ -94,6 +94,8 @@ export function UserContextProvider({
       .single();
 
     if (error && status !== 406) {
+      // eslint-disable-next-line no-console
+      console.log(error);
       throw error;
     }
 
