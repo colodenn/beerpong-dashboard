@@ -10,7 +10,7 @@ module.exports = {
       '*',
       'gitlab-iwi.dfki.de',
       'thumbs.gfycat.com',
-      'https://i.imgur.com/',
+      'i.imgur.com',
     ],
   },
   reactStrictMode: true,
