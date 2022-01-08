@@ -31,14 +31,27 @@ export default function Table() {
                         passHref={true}
                       >
                         <div className='flex items-center space-x-3 cursor-pointer'>
-                          <div className='avatar'>
-                            <div className='mask mask-squircle w-12 h-12'>
-                              <Image
-                                height={55}
-                                width={55}
-                                src={e.player1.avatar_url}
-                                alt='Avatar Tailwind CSS Component'
-                              />
+                          <div className='flex items-center'>
+                            <div className='mr-2'>
+                              {e.winner == e.player1.username && (
+                                <Image
+                                  alt=''
+                                  className='mx-auto my-auto mr-2'
+                                  height={25}
+                                  width={25}
+                                  src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
+                                />
+                              )}
+                            </div>
+                            <div className='avatar'>
+                              <div className='mask mask-squircle w-12 h-12'>
+                                <Image
+                                  height={55}
+                                  width={55}
+                                  src={e.player1.avatar_url}
+                                  alt='Avatar Tailwind CSS Component'
+                                />
+                              </div>
                             </div>
                           </div>
                           <div>

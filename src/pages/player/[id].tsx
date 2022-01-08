@@ -63,7 +63,7 @@ export default function HomePage() {
 
                   {avatarToggle ? (
                     <>
-                      {id == profile.username ? (
+                      {id == profile?.username ? (
                         <div
                           className=''
                           onClick={() => {
