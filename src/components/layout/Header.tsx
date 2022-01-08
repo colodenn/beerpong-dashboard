@@ -20,8 +20,8 @@ export default function Header() {
         <div className='flex items-center'>
           <Hamburger toggled={isOpen} toggle={setOpen} />
           {isOpen && (
-            <ul className='fade-in slide-in-bottom flex ml-8'>
-              <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
+            <ul className='fade-in slide-in-bottom ml-2 md:flex md:ml-8'>
+              <li className='underline-offset-2 ml-1 text-lg font-semibold underline cursor-pointer md:ml-4'>
                 {!user ? (
                   <Link href='/login'>login</Link>
                 ) : (
@@ -29,7 +29,7 @@ export default function Header() {
                 )}
               </li>
               {user && (
-                <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
+                <li className='underline-offset-2 ml-1 text-lg font-semibold underline cursor-pointer md:ml-4'>
                   <Link
                     href={
                       profile?.username
@@ -42,7 +42,7 @@ export default function Header() {
                 </li>
               )}
 
-              <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
+              {/* <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
                 table
               </li>
               <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
@@ -50,7 +50,7 @@ export default function Header() {
               </li>
               <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
                 rules
-              </li>
+              </li> */}
             </ul>
           )}
         </div>
