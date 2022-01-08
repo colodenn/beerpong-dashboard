@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable unused-imports/no-unused-vars */
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useState } from 'react';
 import useSWR from 'swr';
@@ -54,6 +55,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       );
     }
   };
+  const router = useRouter();
 
   React.useEffect(() => {
     getLocation();
@@ -170,7 +172,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
           <div className='modal-action'>
             <button
-              onClick={() => addGame(toggle)}
+              onClick={() => {
+                addGame(toggle);
+                router.push('/');
+              }}
               type='submit'
               className='btn btn-primary'
             >
