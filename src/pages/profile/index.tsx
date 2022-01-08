@@ -29,6 +29,8 @@ export default function HomePage() {
               {profile ? (
                 <>
                   <Image
+                    height={240}
+                    width={240}
                     alt=''
                     className='mx-auto rounded-full'
                     src={profile.avatar_url}

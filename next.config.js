@@ -8,6 +8,7 @@ module.exports = {
       'emojipedia-us.s3.dualstack.us-west-1.amazonaws.com',
       'media1.giphy.com',
       '*',
+      'gitlab-iwi.dfki.de',
     ],
   },
   reactStrictMode: true,

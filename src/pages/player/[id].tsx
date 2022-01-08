@@ -19,21 +19,23 @@ export default function HomePage() {
         <main className='container mx-auto mt-48 mb-24'>
           <div className='flex justify-center'>
             <div>
-              <Image
-                height={55}
-                width={55}
-                alt=''
-                className='mx-auto rounded-full'
-                src='https://gitlab-iwi.dfki.de/uploads/-/system/user/avatar/205/avatar.png?width=180'
-              />
+              <div className='flex justify-center mx-auto rounded-full'>
+                <Image
+                  height={250}
+                  width={250}
+                  alt=''
+                  className='mx-auto rounded-full'
+                  src='https://gitlab-iwi.dfki.de/uploads/-/system/user/avatar/205/avatar.png?width=180'
+                />
+              </div>
               <h3 className='mt-6 text-center'>@Cornelius</h3>
               <div className='flex justify-center mx-auto'>
                 <ul className='grid grid-cols-2 gap-12 mx-auto mt-12 md:grid-cols-5'>
                   <li className='px-8 text-lg'>
-                    <div className='mb-4'>
+                    <div className='flex justify-center mb-4'>
                       <Image
-                        height={55}
-                        width={55}
+                        height={48}
+                        width={48}
                         alt=''
                         src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
                         className='mx-auto w-12'
@@ -47,10 +49,10 @@ export default function HomePage() {
                     </div>
                   </li>
                   <li className='px-8 text-lg'>
-                    <div className='mb-4'>
+                    <div className='flex justify-center mb-4'>
                       <Image
-                        height={55}
-                        width={55}
+                        height={48}
+                        width={48}
                         alt=''
                         src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/raised-fist_270a.png'
                         className='mx-auto w-12'
@@ -66,10 +68,10 @@ export default function HomePage() {
                     </div>
                   </li>
                   <li className='px-8 text-lg'>
-                    <div className='mb-4'>
+                    <div className='flex justify-center mb-4'>
                       <Image
-                        height={55}
-                        width={55}
+                        height={48}
+                        width={48}
                         alt=''
                         src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/goal-net_1f945.png'
                         className='mx-auto w-12'
@@ -83,10 +85,10 @@ export default function HomePage() {
                     </div>
                   </li>
                   <li className='px-8 text-lg'>
-                    <div className='mb-4'>
+                    <div className='flex justify-center mb-4'>
                       <Image
-                        height={55}
-                        width={55}
+                        height={48}
+                        width={48}
                         alt=''
                         src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/fire_1f525.png'
                         className='mx-auto w-12'
@@ -100,10 +102,10 @@ export default function HomePage() {
                     </div>
                   </li>
                   <li className='px-8 text-lg'>
-                    <div className='mb-4'>
+                    <div className='flex justify-center mb-4'>
                       <Image
-                        height={55}
-                        width={55}
+                        height={48}
+                        width={48}
                         alt=''
                         src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/beer-mug_1f37a.png'
                         className='mx-auto w-12'
@@ -122,7 +124,12 @@ export default function HomePage() {
           </div>
           <ScrollAnimation animateIn='fade-in slide-in-bottom'>
             <section className='mx-auto mt-24 w-full'>
-              <Table />
+              <div
+                className='py-4 rounded-lg shadow-lg md:p-8'
+                style={{ backgroundColor: '#cdf9ec' }}
+              >
+                <Table />
+              </div>
             </section>
           </ScrollAnimation>
           <ScrollAnimation animateIn='fade-in slide-in-bottom'>

@@ -33,9 +33,12 @@ export default function Header() {
                   <span onClick={() => logoutUser()}>logout</span>
                 )}
               </li>
-              <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
-                <Link href='/profile'>profile</Link>
-              </li>
+              {user && (
+                <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
+                  <Link href='/profile'>profile</Link>
+                </li>
+              )}
+
               <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
                 table
               </li>
