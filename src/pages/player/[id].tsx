@@ -64,7 +64,7 @@ export default function HomePage() {
 
                   {avatarToggle ? (
                     <>
-                      {id !== data.player.username ? (
+                      {id !== data?.player.username ? (
                         <div
                           className=''
                           onClick={() => {
