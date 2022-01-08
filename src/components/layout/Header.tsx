@@ -1,30 +1,68 @@
+import { Rotate as Hamburger } from 'hamburger-react';
+import Link from 'next/link';
 import * as React from 'react';
+import { useEffect, useState } from 'react';
+import DarkModeToggle from 'react-dark-mode-toggle';
+import { themeChange } from 'theme-change';
 
-import UnstyledLink from '@/components/links/UnstyledLink';
-
-const links = [
-  { href: '/', label: 'Route 1' },
-  { href: '/', label: 'Route 2' },
-];
+import { useUser } from '@/utils/useUser';
 
 export default function Header() {
+  const [isOpen, setOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const { user, logoutUser } = useUser();
+
+  useEffect(() => {
+    themeChange(false);
+    // 👆 false parameter is required for react project
+  }, []);
+  function changeTheme() {
+    setIsDarkMode(!isDarkMode);
+  }
   return (
-    <header className='sticky top-0 z-50 bg-white'>
-      <div className='layout flex justify-between items-center h-14'>
-        <UnstyledLink href='/' className='font-bold hover:text-gray-600'>
-          Home
-        </UnstyledLink>
-        <nav>
-          <ul className='flex justify-between items-center space-x-4'>
-            {links.map(({ href, label }) => (
-              <li key={`${href}${label}`}>
-                <UnstyledLink href={href} className='hover:text-gray-600'>
-                  {label}
-                </UnstyledLink>
+    <header className='bg-primary border-b-3 fixed top-0 z-50 pb-4 mx-auto w-full bg-white bg-opacity-60 border-b-2 border-gray-200 backdrop-filter backdrop-blur-md backdrop-saturate-150'>
+      <div className='container grid grid-cols-3 auto-cols-max mx-auto mt-6 w-full'>
+        <div className='flex items-center'>
+          <Hamburger toggled={isOpen} toggle={setOpen} />
+          {isOpen && (
+            <ul className='fade-in slide-in-bottom flex ml-8'>
+              <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
+                {!user ? (
+                  <Link href='/login'>login</Link>
+                ) : (
+                  <span onClick={() => logoutUser()}>logout</span>
+                )}
               </li>
-            ))}
-          </ul>
-        </nav>
+              <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
+                <Link href='/profile'>profile</Link>
+              </li>
+              <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
+                table
+              </li>
+              <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
+                gameplan
+              </li>
+              <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
+                rules
+              </li>
+            </ul>
+          )}
+        </div>
+        <div className='flex justify-center items-center text-xl font-bold'>
+          <Link href='/'>beerpong.</Link>
+        </div>
+
+        <div
+          data-toggle-theme='dark,light'
+          className='flex justify-end items-center'
+        >
+          {' '}
+          <DarkModeToggle
+            onChange={() => changeTheme()}
+            checked={isDarkMode}
+            size={55}
+          />
+        </div>
       </div>
     </header>
   );

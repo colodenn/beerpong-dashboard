@@ -1,74 +1,76 @@
+import Image from 'next/image';
 import * as React from 'react';
+import ScrollAnimation from 'react-animate-on-scroll';
 
+import Footer from '@/components/layout/Footer';
+import Header from '@/components/layout/Header';
 import Layout from '@/components/layout/Layout';
-import ArrowLink from '@/components/links/ArrowLink';
-import ButtonLink from '@/components/links/ButtonLink';
-import UnderlineLink from '@/components/links/UnderlineLink';
-import UnstyledLink from '@/components/links/UnstyledLink';
 import Seo from '@/components/Seo';
-
-/**
- * SVGR Support
- * Caveat: No React Props Type.
- *
- * You can override the next-env if the type is important to you
- * @see https://stackoverflow.com/questions/68103844/how-to-override-next-js-svg-module-declaration
- */
-import Vercel from '~/svg/Vercel.svg';
-
-// !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
-// Before you begin editing, follow all comments with `STARTERCONF`,
-// to customize the default configuration.
-
+import Table from '@/components/stats/Table';
+import TableTeam from '@/components/stats/Table_team';
 export default function HomePage() {
   return (
-    <Layout>
-      {/* <Seo templateTitle='Home' /> */}
-      <Seo />
+    <>
+      <Layout>
+        {/* <Seo templateTitle='Home' /> */}
+        <Seo />
+        <Header />
 
-      <main>
-        <section className='bg-white'>
-          <div className='layout flex flex-col justify-center items-center min-h-screen text-center'>
-            <Vercel className='text-5xl' />
-            <h1 className='mt-4'>
-              Next.js + Tailwind CSS + TypeScript Starter
-            </h1>
-            <p className='mt-2 text-sm text-gray-800'>
-              A starter for Next.js, Tailwind CSS, and TypeScript with Absolute
-              Import, Seo, Link component, pre-configured with Husky{' '}
-            </p>
-            <p className='mt-2 text-sm text-gray-700'>
-              <ArrowLink href='https://github.com/theodorusclarence/ts-nextjs-tailwind-starter'>
-                See the repository
-              </ArrowLink>
-            </p>
+        <main className='container mx-auto mt-48 mb-24'>
+          <ScrollAnimation animateIn='fade-in slide-in-bottom'>
+            <div className='mb-48 lg:px-72'>
+              <h1 className='flex justify-center items-center mx-auto text-center lg:text-8xl'>
+                Season WS21/22{' '}
+                <span className=''>
+                  <Image
+                    width={55}
+                    height={55}
+                    alt=''
+                    className='mx-auto w-28'
+                    src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/fire_1f525.png'
+                  />
+                </span>
+              </h1>
+              <p className='mt-8 text-2xl text-center'>
+                Beer pong, also known as Beirut, is a drinking game in which
+                players throw a ping pong ball across a table with the intent of
+                landing the ball in a cup of beer on the other end.
+              </p>
+            </div>
+          </ScrollAnimation>
+          <ScrollAnimation animateIn='fade-in slide-in-bottom'>
+            <section className='mx-auto mb-24'>
+              <div
+                className='py-4 rounded-lg shadow-lg md:p-8'
+                style={{ backgroundColor: '#cdf9ec' }}
+              >
+                <div className='flex justify-start mb-4 ml-6 md:mb-6 md:ml-0'>
+                  <h1>Solo Table</h1>
+                </div>
+                <Table />
+              </div>
+            </section>
+          </ScrollAnimation>
+          <ScrollAnimation animateIn='fade-in slide-in-bottom'>
+            <section className='mx-auto mb-24'>
+              <div
+                className='py-4 rounded-lg shadow-lg md:p-8'
+                style={{ backgroundColor: '#cdf9ec' }}
+              >
+                <div className='flex justify-start mb-4 ml-6 md:mb-6 md:ml-0'>
+                  <h1>Team table</h1>
+                </div>
+                <TableTeam />
+              </div>
+            </section>
+          </ScrollAnimation>
 
-            <ButtonLink className='mt-6' href='/components' variant='light'>
-              See all components
-            </ButtonLink>
-
-            <UnstyledLink
-              href='https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Ftheodorusclarence%2Fts-nextjs-tailwind-starter'
-              className='mt-4'
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                width='92'
-                height='32'
-                src='https://vercel.com/button'
-                alt='Deploy with Vercel'
-              />
-            </UnstyledLink>
-
-            <footer className='absolute bottom-2 text-gray-700'>
-              © {new Date().getFullYear()} By{' '}
-              <UnderlineLink href='https://theodorusclarence.com?ref=tsnextstarter'>
-                Theodorus Clarence
-              </UnderlineLink>
-            </footer>
-          </div>
-        </section>
-      </main>
-    </Layout>
+          {/* <div className='flex justify-center xl:text-9xl'>
+            <animated.div>{number.to((n) => n.toFixed(0))}</animated.div>l
+          </div> */}
+        </main>
+        <Footer />
+      </Layout>
+    </>
   );
 }

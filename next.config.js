@@ -3,9 +3,15 @@ module.exports = {
   eslint: {
     dirs: ['src'],
   },
-
+  images: {
+    domains: [
+      'emojipedia-us.s3.dualstack.us-west-1.amazonaws.com',
+      'media1.giphy.com',
+      '*',
+    ],
+  },
   reactStrictMode: true,
-
+  disableStaticImages: true,
   // Uncoment to add domain whitelist
   // images: {
   //   domains: [
