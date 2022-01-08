@@ -30,7 +30,7 @@ export default async function hello(req: NextApiRequest, res: NextApiResponse) {
         played: played,
         won: won,
         schnickeln: schickeln,
-        winrate: won / played ?? 0,
+        winrate: (won / played) * 100 ?? 0,
         drunk: played * 0.5,
       },
     });
