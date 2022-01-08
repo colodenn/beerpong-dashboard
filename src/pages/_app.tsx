@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable unused-imports/no-unused-vars */
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
@@ -44,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       setAuthenticatedState('authenticated');
     }
   }
-  async function handleAuthChange(event: string, session: Session | null) {
+  async function handleAuthChange(event: string, session: any | null) {
     await fetch('/api/auth', {
       method: 'POST',
       headers: new Headers({ 'Content-Type': 'application/json' }),

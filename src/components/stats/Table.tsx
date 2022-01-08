@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Key } from 'react';
 import useSWR from 'swr';
 
-const fetcher = (...args: any) => fetch(...args).then((res) => res.json());
+const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 export default function Table() {
   const { data } = useSWR('/api/solos', fetcher);

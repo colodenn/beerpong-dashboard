@@ -7,14 +7,13 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 
 import { supabase } from '@/utils/client';
 
-import { Subscription, UserDetails } from '../../types';
+import { UserDetails } from '../../types';
 type UserContextInterface = {
   user: AuthUser | null;
   loginUser: (email: string) => Promise<any>;
   logoutUser: () => Promise<any> | void;
   setUser: (user: AuthUser) => void;
   session: Session | null;
-  subscription: Subscription | null;
   profile: null | any;
   updateProfile: (username: string, avatar_url: string) => void;
 };
@@ -30,35 +29,24 @@ export function UserContextProvider({
 }) {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [session, setSession] = useState<Session | null>(null);
-  const [subscription, setSubscription] = useState<Subscription | null>(null);
+
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [userLoaded, setUserLoaded] = useState(false);
   const [profile, setProfile] = useState(null);
   const getUserDetails = () =>
     supabase.from<UserDetails>('users').select('*').single();
-  const getSubscription = () =>
-    supabase
-      .from<Subscription>('subscriptions')
-      .select('*, prices(*, products(*))')
-      .in('status', ['trialing', 'active'])
-      .single();
+
   const router = useRouter();
   useEffect(() => {
     if (user) {
-      Promise.allSettled([getUserDetails(), getSubscription()]).then(
-        (results) => {
-          const userDetailsPromise = results[0];
-          const subscriptionPromise = results[1];
+      Promise.allSettled([getUserDetails()]).then((results) => {
+        const userDetailsPromise = results[0];
 
-          if (userDetailsPromise.status === 'fulfilled')
-            setUserDetails(userDetailsPromise.value.data);
+        if (userDetailsPromise.status === 'fulfilled')
+          setUserDetails(userDetailsPromise.value.data);
 
-          if (subscriptionPromise.status === 'fulfilled')
-            setSubscription(subscriptionPromise.value.data);
-
-          setUserLoaded(true);
-        }
-      );
+        setUserLoaded(true);
+      });
     }
   }, [user]);
   useEffect(() => {
@@ -83,21 +71,17 @@ export function UserContextProvider({
   }
 
   async function updateProfile(username: any, avatar_url: any) {
-    try {
-      const user = supabase.auth.user();
-      const updates = {
-        id: user?.id,
-        username: username,
-        avatar_url: avatar_url,
-        updated_at: new Date(),
-      };
+    const user = supabase.auth.user();
+    const updates = {
+      id: user?.id,
+      username: username,
+      avatar_url: avatar_url,
+      updated_at: new Date(),
+    };
 
-      const { error } = await supabase.from('profiles').upsert(updates);
-      if (error) {
-        throw error;
-      }
-    } catch (error) {
-      alert(error?.message);
+    const { error } = await supabase.from('profiles').upsert(updates);
+    if (error) {
+      throw error;
     }
   }
 
@@ -132,7 +116,6 @@ export function UserContextProvider({
         logoutUser,
         setUser,
         session,
-        subscription,
         profile,
         updateProfile,
       }}

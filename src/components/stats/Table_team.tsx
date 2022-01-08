@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import useSWR from 'swr';
 
-const fetcher = (...args: any) => fetch(...args).then((res) => res.json());
+const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 export default function TableTeam() {
   const { data } = useSWR('/api/teams', fetcher);

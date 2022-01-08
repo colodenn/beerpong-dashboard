@@ -11,7 +11,7 @@ import Layout from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
 import Heatmap from '@/components/stats/Heatmap';
 import Table from '@/components/stats/Table';
-const fetcher = (...args: any) => fetch(...args).then((res) => res.json());
+const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 export default function HomePage() {
   const router = useRouter();

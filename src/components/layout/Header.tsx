@@ -1,9 +1,8 @@
 import { Rotate as Hamburger } from 'hamburger-react';
 import Link from 'next/link';
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import DarkModeToggle from 'react-dark-mode-toggle';
-import { themeChange } from 'theme-change';
 
 import { useUser } from '@/utils/useUser';
 
@@ -12,10 +11,6 @@ export default function Header() {
   const [isDarkMode, setIsDarkMode] = useState(true);
   const { user, logoutUser } = useUser();
 
-  useEffect(() => {
-    themeChange(false);
-    // 👆 false parameter is required for react project
-  }, []);
   function changeTheme() {
     setIsDarkMode(!isDarkMode);
   }

@@ -7,16 +7,16 @@ import useSWR from 'swr';
 export default function Layout({ children }: { children: React.ReactNode }) {
   // Put Header or Footer Here
   const [toggle, setToggle] = useState(true);
-  const [lat, setLat] = useState(null);
-  const [lng, setLng] = useState(null);
-  const [status, setStatus] = useState(null);
+  const [lat, setLat] = useState<null | number>(null);
+  const [lng, setLng] = useState<null | number>(null);
+  const [status, setStatus] = useState<null | string>(null);
 
   const [player1, setPlayer1] = useState('');
   const [player2, setPlayer2] = useState('');
   const [winner, setWinner] = useState('');
   const [schnickel, setSchnickel] = useState('');
   const [cups, setCups] = useState(0);
-  const fetcher = (...args: any) => fetch(...args).then((res) => res.json());
+  const fetcher = (args: any) => fetch(args).then((res) => res.json());
   const { data } = useSWR('/api/players', fetcher);
 
   function addGame(isDuo: boolean) {
@@ -98,7 +98,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       value={player1}
                       onChange={(e) => setPlayer1(e.target.value)}
                     >
-                      {data['players'].map((e, i) => {
+                      {data['players'].map((e: any, i: any) => {
                         return (
                           <option value={e.username} selected={i == 0} key={i}>
                             {e.username}
@@ -114,7 +114,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       value={player2}
                       onChange={(e) => setPlayer2(e.target.value)}
                     >
-                      {data['players'].map((e, i) => {
+                      {data['players'].map((e: any, i: any) => {
                         return <option key={i}>{e.username}</option>;
                       })}
                     </select>
@@ -129,7 +129,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       <option disabled={true} selected={true}>
                         Choose player
                       </option>
-                      {data['players'].map((e, i) => {
+                      {data['players'].map((e: any, i: any) => {
                         return <option key={i}>{e.username}</option>;
                       })}
                     </select>
