@@ -26,7 +26,10 @@ export default function Table() {
                 return (
                   <tr key={i} className=''>
                     <td>
-                      <Link href='/player/yannick' passHref={true}>
+                      <Link
+                        href={`/player/${e.player1.username}`}
+                        passHref={true}
+                      >
                         <div className='flex items-center space-x-3 cursor-pointer'>
                           <div className='avatar'>
                             <div className='mask mask-squircle w-12 h-12'>
@@ -47,7 +50,10 @@ export default function Table() {
                       </Link>
                     </td>
                     <td>
-                      <Link href='/player/corno' passHref={true}>
+                      <Link
+                        href={`/player/${e.player2.username}`}
+                        passHref={true}
+                      >
                         <div className='flex items-center space-x-3 cursor-pointer'>
                           <div className='avatar'>
                             <div className='mask mask-squircle w-12 h-12'>

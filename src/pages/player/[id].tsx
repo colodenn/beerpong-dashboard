@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import ScrollAnimation from 'react-animate-on-scroll';
+import useSWR from 'swr';
 
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
@@ -8,7 +11,13 @@ import Layout from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
 import Heatmap from '@/components/stats/Heatmap';
 import Table from '@/components/stats/Table';
+const fetcher = (...args: any) => fetch(...args).then((res) => res.json());
+
 export default function HomePage() {
+  const router = useRouter();
+  const { id } = router.query;
+  const { data } = useSWR(`/api/player/${id}`, fetcher);
+  const { data: stats } = useSWR(`/api/player/stats/${id}`, fetcher);
   return (
     <>
       <Layout>
@@ -25,10 +34,13 @@ export default function HomePage() {
                   width={250}
                   alt=''
                   className='mx-auto rounded-full'
-                  src='https://gitlab-iwi.dfki.de/uploads/-/system/user/avatar/205/avatar.png?width=180'
+                  src={
+                    data?.player.avatar_url ??
+                    'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
+                  }
                 />
               </div>
-              <h3 className='mt-6 text-center'>@Cornelius</h3>
+              <h3 className='mt-6 text-center'>@{data?.player.username}</h3>
               <div className='flex justify-center mx-auto'>
                 <ul className='grid grid-cols-2 gap-12 mx-auto mt-12 md:grid-cols-5'>
                   <li className='px-8 text-lg'>
@@ -42,7 +54,7 @@ export default function HomePage() {
                       />
                     </div>
                     <div>
-                      <h3 className='text-center'>122</h3>
+                      <h3 className='text-center'>{stats?.stats.played}</h3>
                     </div>
                     <div>
                       <h5 className='mx-auto text-center'>Solo Games Played</h5>
@@ -59,7 +71,7 @@ export default function HomePage() {
                       />
                     </div>
                     <div>
-                      <h3 className='text-center'>122</h3>
+                      <h3 className='text-center'>{stats?.stats.schnickeln}</h3>
                     </div>
                     <div>
                       <h5 className='mx-auto text-center'>
@@ -78,7 +90,7 @@ export default function HomePage() {
                       />
                     </div>
                     <div>
-                      <h3 className='text-center'>122</h3>
+                      <h3 className='text-center'>{stats?.stats.won}</h3>
                     </div>
                     <div>
                       <h5 className='mx-auto text-center'>Games Won</h5>
@@ -95,7 +107,7 @@ export default function HomePage() {
                       />
                     </div>
                     <div>
-                      <h3 className='text-center'>0.57%</h3>
+                      <h3 className='text-center'>{stats?.stats.winrate}%</h3>
                     </div>
                     <div>
                       <h5 className='mx-auto text-center'>Winrate</h5>
@@ -112,7 +124,7 @@ export default function HomePage() {
                       />
                     </div>
                     <div>
-                      <h3 className='text-center'>62 l</h3>
+                      <h3 className='text-center'>{stats?.stats.drunk} l</h3>
                     </div>
                     <div>
                       <h5 className='mx-auto text-center'>Beer drunk</h5>

@@ -78,6 +78,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <h5 className='mr-2'>Solo</h5>
             <input
               type='checkbox'
+              checked={toggle}
               onClick={() => setToggle(!toggle)}
               className='toggle'
             />
@@ -175,7 +176,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             >
               Accept
             </button>
-            <a href='#' className='btn'>
+            <a href='' className='btn'>
               Close
             </a>
           </div>
