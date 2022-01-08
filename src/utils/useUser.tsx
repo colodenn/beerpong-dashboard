@@ -52,12 +52,14 @@ export function UserContextProvider({
   useEffect(() => {
     const session = supabase.auth.session();
     setSession(session);
-    getProfile();
+
     setUser(session?.user ?? null);
+    getProfile();
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
+        getProfile();
       }
     );
 
