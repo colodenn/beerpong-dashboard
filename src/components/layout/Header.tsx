@@ -32,7 +32,7 @@ export default function Header() {
                 <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
                   <Link
                     href={
-                      profile.username
+                      profile?.username
                         ? `/player/${profile.username}`
                         : '/profile'
                     }
