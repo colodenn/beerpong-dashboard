@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import * as React from 'react';
 import ScrollAnimation from 'react-animate-on-scroll';
 
@@ -21,15 +20,6 @@ export default function HomePage() {
             <div className='mb-48 lg:px-72'>
               <h1 className='flex justify-center items-center mx-auto text-center lg:text-8xl'>
                 Season WS21/22{' '}
-                <span className=''>
-                  <Image
-                    width={55}
-                    height={55}
-                    alt=''
-                    className='mx-auto w-28'
-                    src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/fire_1f525.png'
-                  />
-                </span>
               </h1>
               <p className='mt-8 text-2xl text-center'>
                 Beer pong, also known as Beirut, is a drinking game in which
