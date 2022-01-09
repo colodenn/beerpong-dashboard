@@ -11,6 +11,7 @@ module.exports = {
       'gitlab-iwi.dfki.de',
       'thumbs.gfycat.com',
       'i.imgur.com',
+      'media3.giphy.com',
     ],
   },
   reactStrictMode: true,

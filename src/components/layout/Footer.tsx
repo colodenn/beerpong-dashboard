@@ -10,7 +10,7 @@ export default function Header() {
               <Link href='/impressum'>Impressum</Link>
             </li>
             <li className='underline'>
-              <Link href='/cookies'>Cookies</Link>
+              <Link href='/privacy'>Privacy Policy</Link>
             </li>
           </ul>
           <div>Made with ❤️ in Saarland</div>
