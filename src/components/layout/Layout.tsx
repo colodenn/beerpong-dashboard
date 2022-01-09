@@ -44,10 +44,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     } else {
       fetch('/api/addDuo', {
         body: JSON.stringify({
-          t1_player1: t1_player1 == '' ? data['players'][0].username : player1,
-          t1_player2: t1_player2 == '' ? data['players'][0].username : player2,
-          t2_player1: t2_player1 == '' ? data['players'][0].username : player1,
-          t2_player2: t2_player2 == '' ? data['players'][0].username : player2,
+          t1_player1:
+            t1_player1 == '' ? data['players'][0].username : t1_player1,
+          t1_player2:
+            t1_player2 == '' ? data['players'][0].username : t1_player2,
+          t2_player1:
+            t2_player1 == '' ? data['players'][0].username : t2_player1,
+          t2_player2:
+            t2_player2 == '' ? data['players'][0].username : t2_player2,
           winner: winner == '' ? 'Team 1' : winner,
           schnickel: schnickel == '' ? data['players'][0].username : schnickel,
           cups: cups,
