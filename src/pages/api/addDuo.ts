@@ -6,11 +6,16 @@ import { supabase } from '@/utils/client';
 
 export default async function hello(req: NextApiRequest, res: NextApiResponse) {
   const data2 = req.body;
-  const { data } = await supabase.from('games_solo').insert([
+
+  const { data } = await supabase.from('games_duo').insert([
     {
-      player1: data2.player1,
-      player2: data2.player2,
-      winner: data2.winner,
+      team1_player1: data2.t1_player1,
+      team1_player2: data2.t1_player2,
+      team2_player1: data2.t1_player1,
+      team2_player2: data2.t1_player2,
+      winner1: data2.winner == 'Team 1' ? data2.t1_player1 : data2.t2_player1,
+      winner2: data2.winner == 'Team 1' ? data2.t1_player1 : data2.t2_player1,
+
       schnickeln: data2.schnickel,
       cupsleft: data2.cups,
       latitude: data2.lat,

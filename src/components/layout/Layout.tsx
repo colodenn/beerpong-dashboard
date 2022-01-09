@@ -17,6 +17,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [winner, setWinner] = useState('');
   const [schnickel, setSchnickel] = useState('');
   const [cups, setCups] = useState(0);
+
+  const [t1_player1, setT1_player1] = useState('');
+  const [t1_player2, setT1_player2] = useState('');
+  const [t2_player1, setT2_player1] = useState('');
+  const [t2_player2, setT2_player2] = useState('');
+
   const fetcher = (args: any) => fetch(args).then((res) => res.json());
   const { data } = useSWR('/api/players', fetcher);
 
@@ -27,6 +33,22 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           player1: player1 == '' ? data['players'][0].username : player1,
           player2: player2 == '' ? data['players'][0].username : player2,
           winner: winner == '' ? data['players'][0].username : winner,
+          schnickel: schnickel == '' ? data['players'][0].username : schnickel,
+          cups: cups,
+          lng: lng,
+          lat: lat,
+        }),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+    } else {
+      fetch('/api/addDuo', {
+        body: JSON.stringify({
+          t1_player1: t1_player1 == '' ? data['players'][0].username : player1,
+          t1_player2: t1_player2 == '' ? data['players'][0].username : player2,
+          t2_player1: t2_player1 == '' ? data['players'][0].username : player1,
+          t2_player2: t2_player2 == '' ? data['players'][0].username : player2,
+          winner: winner == '' ? 'Team 1' : winner,
           schnickel: schnickel == '' ? data['players'][0].username : schnickel,
           cups: cups,
           lng: lng,
@@ -167,7 +189,113 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </form>
               </>
             ) : (
-              <></>
+              <>
+                <form action='/api/addSolo' method='post'>
+                  <div className='form-control'>
+                    <label className='label'>
+                      <span className='label-text'>Team 1: Player 1</span>
+                    </label>
+
+                    <select
+                      className='select select-bordered w-full max-w-xs'
+                      value={player1}
+                      onChange={(e) => setT1_player1(e.target.value)}
+                    >
+                      {data?.['players'].map((e: any, i: any) => {
+                        return (
+                          <option value={e.username} selected={i == 0} key={i}>
+                            {e.username}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <label className='label'>
+                      <span className='label-text'>Team 1: Player 2</span>
+                    </label>
+                    <select
+                      className='select select-bordered w-full max-w-xs'
+                      value={player2}
+                      onChange={(e) => setT1_player2(e.target.value)}
+                    >
+                      {data?.['players'].map((e: any, i: any) => {
+                        return <option key={i}>{e.username}</option>;
+                      })}
+                    </select>
+
+                    <label className='label'>
+                      <span className='label-text'>Team 2: Player 1</span>
+                    </label>
+
+                    <select
+                      className='select select-bordered w-full max-w-xs'
+                      value={player1}
+                      onChange={(e) => setT2_player1(e.target.value)}
+                    >
+                      {data?.['players'].map((e: any, i: any) => {
+                        return (
+                          <option value={e.username} selected={i == 0} key={i}>
+                            {e.username}
+                          </option>
+                        );
+                      })}
+                    </select>
+                    <label className='label'>
+                      <span className='label-text'>Team 2: Player 2</span>
+                    </label>
+                    <select
+                      className='select select-bordered w-full max-w-xs'
+                      value={player2}
+                      onChange={(e) => setT2_player2(e.target.value)}
+                    >
+                      {data?.['players'].map((e: any, i: any) => {
+                        return <option key={i}>{e.username}</option>;
+                      })}
+                    </select>
+                    <label className='label'>
+                      <span className='label-text'>Schnickel winner</span>
+                    </label>
+                    <select
+                      className='select select-bordered w-full max-w-xs'
+                      value={schnickel}
+                      onChange={(e) => setSchnickel(e.target.value)}
+                    >
+                      <option disabled={true} selected={true}>
+                        Choose player
+                      </option>
+                      {data?.['players'].map((e: any, i: any) => {
+                        return <option key={i}>{e.username}</option>;
+                      })}
+                    </select>
+
+                    <label className='label'>
+                      <span className='label-text'>Cups left</span>
+                    </label>
+                    <input
+                      type='number'
+                      name='cupsleft'
+                      placeholder='Cups left'
+                      className='input input-bordered'
+                      value={cups}
+                      onChange={(e) => setCups(Number(e.target.value))}
+                    />
+                    <label className='label'>
+                      <span className='label-text'>Winner</span>
+                    </label>
+                    <select
+                      className='select select-bordered w-full max-w-xs'
+                      value={winner}
+                      onChange={(e) => setWinner(e.target.value)}
+                    >
+                      <option>Team 1</option>
+                      <option>Team 2</option>
+                    </select>
+                  </div>
+                  <div className='mt-6'>
+                    <p>lat:{lat}</p>
+                    <p>long:{lng}</p>
+                  </div>
+                </form>
+              </>
             )}
           </div>
           <div className='modal-action'>
