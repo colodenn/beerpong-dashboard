@@ -13,8 +13,18 @@ export default async function hello(req: NextApiRequest, res: NextApiResponse) {
       team1_player2: data2.t1_player2,
       team2_player1: data2.t1_player1,
       team2_player2: data2.t1_player2,
-      winner1: data2.winner == 'Team 1' ? data2.t1_player1 : data2.t2_player1,
-      winner2: data2.winner == 'Team 1' ? data2.t1_player1 : data2.t2_player1,
+      winner1:
+        data2.winner == 'Team 1'
+          ? data2.t1_player1
+          : data2.winner == 'Team 2'
+          ? data2.t2_player1
+          : 'unentschieden',
+      winner2:
+        data2.winner == 'Team 1'
+          ? data2.t1_player1
+          : data2.winner == 'Team 2'
+          ? data2.t2_player1
+          : 'unentschieden',
 
       schnickeln: data2.schnickel,
       cupsleft: data2.cups,

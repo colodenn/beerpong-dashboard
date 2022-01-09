@@ -288,6 +288,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     >
                       <option>Team 1</option>
                       <option>Team 2</option>
+                      <option>Unentschieden</option>
                     </select>
                   </div>
                   <div className='mt-6'>
