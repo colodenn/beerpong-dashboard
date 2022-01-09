@@ -11,7 +11,7 @@ import Header from '@/components/layout/Header';
 import Layout from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
 import Heatmap from '@/components/stats/Heatmap';
-import Table from '@/components/stats/Table';
+import TablePersonal from '@/components/stats/TablePersonal';
 
 import { useUser } from '@/utils/useUser';
 const fetcher = (args: any) => fetch(args).then((res) => res.json());
@@ -218,7 +218,7 @@ export default function HomePage() {
                 className='py-4 rounded-lg shadow-lg md:p-8'
                 style={{ backgroundColor: '#cdf9ec' }}
               >
-                <Table />
+                <TablePersonal id={String(id)} />
               </div>
             </section>
           </ScrollAnimation>
