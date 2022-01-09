@@ -8,6 +8,8 @@ export default async function hello(req: NextApiRequest, res: NextApiResponse) {
 
     .select(
       'team1_player1 (username, avatar_url),team1_player2 (username, avatar_url),team2_player1 (username, avatar_url), team2_player2 (username, avatar_url),cupsleft'
-    );
+    )
+    .order('timestamp', { ascending: false })
+    .limit(15);
   res.send({ games: data });
 }

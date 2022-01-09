@@ -1,4 +1,5 @@
 import { Rotate as Hamburger } from 'hamburger-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 import { useState } from 'react';
@@ -55,7 +56,19 @@ export default function Header() {
           )}
         </div>
         <div className='flex justify-center items-center text-xl font-bold'>
-          <Link href='/'>beerpong.</Link>
+          <Link passHref={true} href='/'>
+            <div className='flex justify-center items-center text-xl font-bold'>
+              <div className='mr-2'>
+                <Image
+                  alt='logo'
+                  width={48}
+                  height={48}
+                  className='mx-atuo my-auto'
+                  src='/images/redcuplogo.png'
+                />
+              </div>
+            </div>
+          </Link>
         </div>
 
         <div

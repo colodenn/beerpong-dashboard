@@ -11,7 +11,7 @@ export default function Table(props: { id: string }) {
 
   return (
     <>
-      <div className='overflow-x-auto'>
+      <div className='overflow-x-auto h-96'>
         <table className='table overflow-y-scroll w-full h-24 bg-white rounded-lg'>
           <thead className='bg-white'>
             <tr className='bg-white'>

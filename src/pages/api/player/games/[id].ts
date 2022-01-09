@@ -11,7 +11,9 @@ export default async function hello(req: NextApiRequest, res: NextApiResponse) {
     .select(
       'player1,player2,cupsleft, winner,player1 (avatar_url,username),player2 (avatar_url,username)'
     )
-    .or(`player1.eq.${id},player2.eq.${id}`);
+    .or(`player1.eq.${id},player2.eq.${id}`)
+    .order('timestamp', { ascending: false })
+    .limit(15);
 
   if (data) {
     res.status(200).json({ games: data });
