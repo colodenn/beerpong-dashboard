@@ -26,3 +26,15 @@ export interface UserDetails {
   billing_address?: any; // type unknown;
   payment_method?: any; // type unknown;
 }
+
+export type Solo = {
+  id: string /* primary key */;
+  player1: string;
+  player2: string;
+  schnickeln: string;
+  winner: string;
+  cupsleft: number;
+  timestamp: Date;
+  latitude: number;
+  longitude: number;
+};

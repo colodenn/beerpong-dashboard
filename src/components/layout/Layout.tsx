@@ -198,7 +198,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
                     <select
                       className='select select-bordered w-full max-w-xs'
-                      value={player1}
+                      value={t1_player1}
                       onChange={(e) => setT1_player1(e.target.value)}
                     >
                       {data?.['players'].map((e: any, i: any) => {
@@ -214,7 +214,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     </label>
                     <select
                       className='select select-bordered w-full max-w-xs'
-                      value={player2}
+                      value={t1_player2}
                       onChange={(e) => setT1_player2(e.target.value)}
                     >
                       {data?.['players'].map((e: any, i: any) => {
@@ -228,7 +228,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
                     <select
                       className='select select-bordered w-full max-w-xs'
-                      value={player1}
+                      value={t2_player1}
                       onChange={(e) => setT2_player1(e.target.value)}
                     >
                       {data?.['players'].map((e: any, i: any) => {
@@ -244,7 +244,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     </label>
                     <select
                       className='select select-bordered w-full max-w-xs'
-                      value={player2}
+                      value={t2_player2}
                       onChange={(e) => setT2_player2(e.target.value)}
                     >
                       {data?.['players'].map((e: any, i: any) => {
