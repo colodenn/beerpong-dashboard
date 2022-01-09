@@ -58,7 +58,7 @@ export default function Header() {
         <div className='flex justify-center items-center text-xl font-bold'>
           <Link passHref={true} href='/'>
             <div className='flex justify-center items-center text-xl font-bold'>
-              <div className='mr-2'>
+              <div className='mr-2 cursor-pointer'>
                 <Image
                   alt='logo'
                   width={48}
