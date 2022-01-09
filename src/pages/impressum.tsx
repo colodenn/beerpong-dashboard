@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import * as React from 'react';
 import ScrollAnimation from 'react-animate-on-scroll';
 
@@ -22,7 +23,7 @@ export default function HomePage() {
                 <h5 className='mt-8 text-2xl font-bold'>
                   Angaben gemäß § 5 TMG
                 </h5>
-                <ul className='mt-4 text-xl'>
+                <ul className='mt-4 mb-8 text-xl'>
                   <li>Cornelius Denninger</li>
                   <li>Im Birkenfeld 9</li>
                   <li>66125 Dudweiler</li>
@@ -31,13 +32,23 @@ export default function HomePage() {
                 <ul className='mt-4 text-xl'>
                   <li>Telefon: +49 (0)176 82964396</li>
                   <li>Email: cornelius@codenn.de</li>
+                  <li>
+                    Webseite:{' '}
+                    <Link
+                      alt='Webseite'
+                      passHref={true}
+                      href={'https://www.codenn.de/'}
+                    >
+                      codenn.de
+                    </Link>
+                  </li>
                 </ul>
 
                 <Image
                   width={400}
                   height={400}
                   alt=''
-                  className='mt-24'
+                  className=''
                   src='https://media3.giphy.com/media/1N3zxEgVuLeJ9OzOSf/giphy.gif'
                 />
               </div>

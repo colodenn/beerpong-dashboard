@@ -54,10 +54,6 @@ export default function HomePage() {
               </div>
             </section>
           </ScrollAnimation>
-
-          {/* <div className='flex justify-center xl:text-9xl'>
-            <animated.div>{number.to((n) => n.toFixed(0))}</animated.div>l
-          </div> */}
         </main>
         <Footer />
       </Layout>
