@@ -316,7 +316,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <p>lat:{lat}</p>
                     <p>long:{lng}</p>
                   </div>
-                  <div>
+                  <div className='mt-4 w-full'>
                     <DatePicker
                       selected={startDate}
                       onChange={(date: React.SetStateAction<Date>) =>
