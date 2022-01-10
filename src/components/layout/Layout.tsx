@@ -287,17 +287,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     </select>
 
                     <label className='label'>
-                      <span className='label-text'>Cups left</span>
-                    </label>
-                    <input
-                      type='number'
-                      name='cupsleft'
-                      placeholder='Cups left'
-                      className='input input-bordered'
-                      value={cups}
-                      onChange={(e) => setCups(Number(e.target.value))}
-                    />
-                    <label className='label'>
                       <span className='label-text'>Winner</span>
                     </label>
                     <select
@@ -309,6 +298,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       <option>Team 2</option>
                       <option>Unentschieden</option>
                     </select>
+                    <label className='label'>
+                      <span className='label-text'>Cups left</span>
+                    </label>
+                    <input
+                      type='number'
+                      name='cupsleft'
+                      placeholder='Cups left'
+                      className='input input-bordered'
+                      value={cups}
+                      onChange={(e) => setCups(Number(e.target.value))}
+                    />
                   </div>
                   <div className='mt-6'>
                     <p>lat:{lat}</p>
