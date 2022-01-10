@@ -15,6 +15,7 @@ export default async function hello(req: NextApiRequest, res: NextApiResponse) {
       cupsleft: data2.cups,
       latitude: data2.lat,
       longitude: data2.lat,
+      timestamp: data2.startDate,
     },
   ]);
   if (data) {
