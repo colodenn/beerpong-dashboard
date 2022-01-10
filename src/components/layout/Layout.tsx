@@ -4,7 +4,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useState } from 'react';
+import DatePicker from 'react-datepicker';
 import useSWR from 'swr';
+
+import 'react-datepicker/dist/react-datepicker.css';
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   // Put Header or Footer Here
   const [toggle, setToggle] = useState(false);
@@ -22,6 +26,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [t1_player2, setT1_player2] = useState('');
   const [t2_player1, setT2_player1] = useState('');
   const [t2_player2, setT2_player2] = useState('');
+  const [startDate, setStartDate] = useState(new Date());
 
   const fetcher = (args: any) => fetch(args).then((res) => res.json());
   const { data } = useSWR('/api/players', fetcher);
@@ -37,6 +42,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           cups: cups,
           lng: lng,
           lat: lat,
+          startDate: startDate,
         }),
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -57,6 +63,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           cups: cups,
           lng: lng,
           lat: lat,
+          startDate: startDate,
         }),
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -192,6 +199,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <p>lat:{lat}</p>
                     <p>long:{lng}</p>
                   </div>
+                  <div>
+                    <DatePicker
+                      selected={startDate}
+                      onChange={(date: any) => setStartDate(date)}
+                    />
+                  </div>
                 </form>
               </>
             ) : (
@@ -300,6 +313,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <div className='mt-6'>
                     <p>lat:{lat}</p>
                     <p>long:{lng}</p>
+                  </div>
+                  <div className='mt-4 w-full'>
+                    <DatePicker
+                      selected={startDate}
+                      onChange={(date: any) => setStartDate(date)}
+                    />
                   </div>
                 </form>
               </>
