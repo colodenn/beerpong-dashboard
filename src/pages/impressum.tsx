@@ -34,11 +34,7 @@ export default function HomePage() {
                   <li>Email: cornelius@codenn.de</li>
                   <li>
                     Webseite:{' '}
-                    <Link
-                      alt='Webseite'
-                      passHref={true}
-                      href={'https://www.codenn.de/'}
-                    >
+                    <Link passHref={true} href={'https://www.codenn.de/'}>
                       codenn.de
                     </Link>
                   </li>
