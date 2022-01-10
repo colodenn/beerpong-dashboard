@@ -7,7 +7,7 @@ import { useState } from 'react';
 import useSWR from 'swr';
 export default function Layout({ children }: { children: React.ReactNode }) {
   // Put Header or Footer Here
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(false);
   const [lat, setLat] = useState<null | number>(null);
   const [lng, setLng] = useState<null | number>(null);
   const [status, setStatus] = useState<null | string>(null);
@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [winner, setWinner] = useState('');
   const [schnickel, setSchnickel] = useState('');
   const [cups, setCups] = useState(0);
-
+  const [over, setOver] = useState(false);
   const [t1_player1, setT1_player1] = useState('');
   const [t1_player2, setT1_player2] = useState('');
   const [t2_player1, setT2_player1] = useState('');
@@ -93,10 +93,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         className='border-full flex fixed right-0 bottom-0 z-50 justify-center items-center p-8 mr-4 mb-4 text-white bg-blue-500 bg-opacity-60 rounded-full shadow-xl backdrop-filter backdrop-blur-md backdrop-saturate-150 md:mr-16 md:mb-16 hover:bg-blue-600'
       >
         <Image
-          width={48}
-          height={48}
+          width={72}
+          height={72}
           alt=''
-          src='/images/redcuptransparent.png'
+          src={over ? '/images/BallHitCup.gif' : '/images/BallHitCup.png'}
+          onMouseOver={() => setOver(true)}
+          onMouseLeave={() => setOver(false)}
           className='mx-auto my-auto'
         />
       </a>
@@ -126,7 +128,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       value={player1}
                       onChange={(e) => setPlayer1(e.target.value)}
                     >
-                      {data['players'].map((e: any, i: any) => {
+                      {data?.['players'].map((e: any, i: any) => {
                         return (
                           <option value={e.username} selected={i == 0} key={i}>
                             {e.username}
@@ -142,7 +144,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       value={player2}
                       onChange={(e) => setPlayer2(e.target.value)}
                     >
-                      {data['players'].map((e: any, i: any) => {
+                      {data?.['players'].map((e: any, i: any) => {
                         return <option key={i}>{e.username}</option>;
                       })}
                     </select>
@@ -157,7 +159,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       <option disabled={true} selected={true}>
                         Choose player
                       </option>
-                      {data['players'].map((e: any, i: any) => {
+                      {data?.['players'].map((e: any, i: any) => {
                         return <option key={i}>{e.username}</option>;
                       })}
                     </select>
@@ -181,7 +183,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       value={winner}
                       onChange={(e) => setWinner(e.target.value)}
                     >
-                      {data['players'].map((e: any, i: any) => {
+                      {data?.['players'].map((e: any, i: any) => {
                         return <option key={i}>{e.username}</option>;
                       })}
                     </select>
