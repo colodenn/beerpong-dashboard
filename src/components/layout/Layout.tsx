@@ -92,7 +92,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         href='#my-modal'
         onMouseOver={() => setOver(true)}
         onMouseLeave={() => setOver(false)}
-        className='border-full flex fixed right-0 bottom-8 z-50 justify-center items-center p-4 mr-4 mb-4 text-white bg-blue-500 bg-opacity-60 rounded-full shadow-xl backdrop-filter backdrop-blur-md backdrop-saturate-150 md:mr-16 md:mb-16 hover:bg-blue-600'
+        className='border-full flex fixed right-0 bottom-0 z-50 justify-center items-center p-4 mr-4 mb-4 text-white bg-blue-500 bg-opacity-60 rounded-full shadow-xl backdrop-filter backdrop-blur-md backdrop-saturate-150 md:mr-16 md:mb-16 hover:bg-blue-600'
       >
         <Image
           width={72}
