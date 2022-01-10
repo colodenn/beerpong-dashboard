@@ -202,9 +202,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <div>
                     <DatePicker
                       selected={startDate}
-                      onChange={(date: React.SetStateAction<Date>) =>
-                        setStartDate(date)
-                      }
+                      onChange={(date: any) => setStartDate(date)}
                     />
                   </div>
                 </form>
@@ -319,9 +317,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <div className='mt-4 w-full'>
                     <DatePicker
                       selected={startDate}
-                      onChange={(date: React.SetStateAction<Date>) =>
-                        setStartDate(date)
-                      }
+                      onChange={(date: any) => setStartDate(date)}
                     />
                   </div>
                 </form>
