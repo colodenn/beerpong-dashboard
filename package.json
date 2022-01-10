@@ -22,6 +22,7 @@
   "dependencies": {
     "@supabase/supabase-js": "^1.29.1",
     "@types/react-animate-on-scroll": "^2.1.5",
+    "@types/react-datepicker": "^4.3.4",
     "clsx": "^1.1.1",
     "daisyui": "^1.21.0",
     "hamburger-react": "^2.4.1",
