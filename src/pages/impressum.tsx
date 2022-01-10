@@ -44,7 +44,7 @@ export default function HomePage() {
                   width={400}
                   height={400}
                   alt=''
-                  className=''
+                  className='mt-8'
                   src='https://media3.giphy.com/media/1N3zxEgVuLeJ9OzOSf/giphy.gif'
                 />
               </div>
