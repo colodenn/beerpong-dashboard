@@ -226,11 +226,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       onChange={(e) => setCups(Number(e.target.value))}
                     />
                   </div>
-                  <div className='mt-6'>
+                  <div className='hidden mt-6'>
                     <p>lat:{lat}</p>
                     <p>long:{lng}</p>
                   </div>
                   <div>
+                    <label className='label'>
+                      <span className='label-text'>Cups left</span>
+                    </label>
                     <DatePicker
                       selected={startDate}
                       onChange={(date: any) => setStartDate(date)}
