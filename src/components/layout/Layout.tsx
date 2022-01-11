@@ -43,7 +43,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             src={e.avatar_url}
             alt=''
           />
-          <p>{e.username}</p>
+          <p className='font-semibold'>{e.username}</p>
         </div>
       ),
     };
@@ -172,7 +172,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       player1,
                       setPlayer1,
                       playerOptions?.filter((option: any) => {
-                        return option.value != 'unentschieden';
+                        return !['unentschieden', player2].includes(
+                          option.value
+                        );
                       })
                     )}
                     <label className='label'>
@@ -182,7 +184,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       player2,
                       setPlayer2,
                       playerOptions?.filter((option: any) => {
-                        return option.value != 'unentschieden';
+                        return !['unentschieden', player1].includes(
+                          option.value
+                        );
                       })
                     )}
                     <label className='label'>
@@ -245,7 +249,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       t1_player1,
                       setT1_player1,
                       playerOptions?.filter((option: any) => {
-                        return option.value != 'unentschieden';
+                        return ![
+                          'unentschieden',
+                          t1_player2,
+                          t2_player1,
+                          t2_player2,
+                        ].includes(option.value);
                       })
                     )}
 
@@ -256,7 +265,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       t1_player2,
                       setT1_player2,
                       playerOptions?.filter((option: any) => {
-                        return option.value != 'unentschieden';
+                        return ![
+                          'unentschieden',
+                          t1_player1,
+                          t2_player1,
+                          t2_player2,
+                        ].includes(option.value);
                       })
                     )}
 
@@ -267,7 +281,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       t2_player1,
                       setT2_player1,
                       playerOptions?.filter((option: any) => {
-                        return option.value != 'unentschieden';
+                        return ![
+                          'unentschieden',
+                          t1_player1,
+                          t1_player2,
+                          t2_player2,
+                        ].includes(option.value);
                       })
                     )}
 
@@ -278,7 +297,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       t2_player2,
                       setT2_player2,
                       playerOptions?.filter((option: any) => {
-                        return option.value != 'unentschieden';
+                        return ![
+                          'unentschieden',
+                          t1_player1,
+                          t1_player2,
+                          t2_player1,
+                        ].includes(option.value);
                       })
                     )}
 
