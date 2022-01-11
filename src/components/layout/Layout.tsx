@@ -149,7 +149,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         />
       </a>
       <div id='my-modal' className='modal'>
-        <div className='modal-box2'>
+        <div className='modal-box'>
           <div className='flex'>
             <h5 className='mr-2'>Solo</h5>
             <input
@@ -232,7 +232,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   </div>
                   <div>
                     <label className='label'>
-                      <span className='label-text'>Cups left</span>
+                      <span className='label-text'>Date</span>
                     </label>
                     <DatePicker
                       selected={startDate}
