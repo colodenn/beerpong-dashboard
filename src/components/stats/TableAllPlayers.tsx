@@ -16,6 +16,7 @@ export default function Table() {
           <thead className='bg-white'>
             <tr className='bg-white'>
               <th className='bg-white'>Player</th>
+              <td>Games Won</td>
             </tr>
           </thead>
           <tbody>
@@ -24,11 +25,14 @@ export default function Table() {
                 return (
                   <tr key={i} className=''>
                     <td>
-                      <Link href={`/player/${e.username}`} passHref={true}>
+                      <Link
+                        href={`/player/${e.winner.username}`}
+                        passHref={true}
+                      >
                         <div className='flex items-center space-x-3 cursor-pointer'>
                           <div className='flex items-center'>
                             <div className='flex items-center mr-2 w-12 h-12'>
-                              {e.winner == e.username && (
+                              {e.winner == e.winner.username && (
                                 <Image
                                   alt=''
                                   className='mx-auto my-auto mr-2'
@@ -43,17 +47,20 @@ export default function Table() {
                                 <Image
                                   height={55}
                                   width={55}
-                                  src={e.avatar_url}
+                                  src={e.winner.avatar_url}
                                   alt='Avatar Tailwind CSS Component'
                                 />
                               </div>
                             </div>
                           </div>
                           <div>
-                            <div className='font-bold'>{e.username}</div>
+                            <div className='font-bold'>{e.winner.username}</div>
                           </div>
                         </div>
                       </Link>
+                    </td>
+                    <td>
+                      <div className='font-bold'>{e.count}</div>
                     </td>
                   </tr>
                 );
@@ -62,6 +69,7 @@ export default function Table() {
           <tfoot>
             <tr>
               <th className='bg-white'>Player</th>
+              <td>Games Won</td>
             </tr>
           </tfoot>
         </table>

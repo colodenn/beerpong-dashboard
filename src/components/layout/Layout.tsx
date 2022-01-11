@@ -37,7 +37,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       label: (
         <div className='flex items-center space-x-2'>
           <Image
-            className='rounded-xl mx-8'
+            className='mx-8 rounded-xl'
             width={35}
             height={35}
             src={e.avatar_url}
