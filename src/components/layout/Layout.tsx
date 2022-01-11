@@ -35,11 +35,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return {
       value: e.username,
       label: (
-        <div className='flex space-x-2'>
+        <div className='flex items-center space-x-2'>
           <Image
-            className='rounded mx-8'
-            width={25}
-            height={25}
+            className='rounded-xl mx-8'
+            width={35}
+            height={35}
             src={e.avatar_url}
             alt=''
           />
@@ -52,8 +52,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return (
       <Select
         className='basic-single'
+        isSearchable={true}
         isClearable={true}
-        onChange={(e) => onChangeFunction(e.value)}
+        onChange={(e) => onChangeFunction(e?.value)}
         classNamePrefix='select'
         defaultValue={playerOptions?.['Max']}
         placeholder='Select Player'
