@@ -14,7 +14,7 @@ export default async function hello(req: NextApiRequest, res: NextApiResponse) {
       schnickeln: data2.schnickel,
       cupsleft: data2.cups,
       latitude: data2.lat,
-      longitude: data2.lat,
+      longitude: data2.lng,
       timestamp: data2.startDate,
     },
   ]);
