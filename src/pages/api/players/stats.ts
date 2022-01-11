@@ -7,7 +7,8 @@ import { supabase } from '@/utils/client';
 export default async function hello(req: NextApiRequest, res: NextApiResponse) {
   const { data } = await supabase
     .from('playerstats')
-    .select('winner (username, avatar_url), count');
+    .select('winner (username, avatar_url), count')
+    .order('count', { ascending: false });
 
   res.status(200).json({ players: data });
 }
