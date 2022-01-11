@@ -48,7 +48,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       ),
     };
   });
-  const playerSelect = (field: any, onChangeFunction: any) => {
+  const playerSelect = (
+    field: any,
+    onChangeFunction: any,
+    playerOptions: any
+  ) => {
     return (
       <Select
         className='basic-single'
@@ -164,19 +168,48 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <label className='label'>
                       <span className='label-text'>Player 1</span>
                     </label>
-                    {playerSelect(player1, setPlayer1)}
+                    {playerSelect(
+                      player1,
+                      setPlayer1,
+                      playerOptions?.filter((option: any) => {
+                        return option.value != 'unentschieden';
+                      })
+                    )}
                     <label className='label'>
                       <span className='label-text'>Player 2</span>
                     </label>
-                    {playerSelect(player2, setPlayer2)}
+                    {playerSelect(
+                      player2,
+                      setPlayer2,
+                      playerOptions?.filter((option: any) => {
+                        return option.value != 'unentschieden';
+                      })
+                    )}
                     <label className='label'>
                       <span className='label-text'>Schnickel winner</span>
                     </label>
-                    {playerSelect(schnickel, setSchnickel)}
+                    {playerSelect(
+                      schnickel,
+                      setSchnickel,
+                      playerOptions?.filter((option: any) => {
+                        return (
+                          option.value != 'unentschieden' &&
+                          [player1, player2].includes(option.value)
+                        );
+                      })
+                    )}
                     <label className='label'>
                       <span className='label-text'>Winner</span>
                     </label>
-                    {playerSelect(winner, setWinner)}
+                    {playerSelect(
+                      winner,
+                      setWinner,
+                      playerOptions?.filter((option: any) => {
+                        return [player1, player2, 'unentschieden'].includes(
+                          option.value
+                        );
+                      })
+                    )}
                     <label className='label'>
                       <span className='label-text'>Cups left</span>
                     </label>
@@ -208,32 +241,82 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <label className='label'>
                       <span className='label-text'>Team 1: Player 1</span>
                     </label>
-                    {playerSelect(t1_player1, setT1_player1)}
+                    {playerSelect(
+                      t1_player1,
+                      setT1_player1,
+                      playerOptions?.filter((option: any) => {
+                        return option.value != 'unentschieden';
+                      })
+                    )}
 
                     <label className='label'>
                       <span className='label-text'>Team 1: Player 2</span>
                     </label>
-                    {playerSelect(t1_player2, setT1_player2)}
+                    {playerSelect(
+                      t1_player2,
+                      setT1_player2,
+                      playerOptions?.filter((option: any) => {
+                        return option.value != 'unentschieden';
+                      })
+                    )}
 
                     <label className='label'>
                       <span className='label-text'>Team 2: Player 1</span>
                     </label>
-                    {playerSelect(t2_player1, setT2_player1)}
+                    {playerSelect(
+                      t2_player1,
+                      setT2_player1,
+                      playerOptions?.filter((option: any) => {
+                        return option.value != 'unentschieden';
+                      })
+                    )}
 
                     <label className='label'>
                       <span className='label-text'>Team 2: Player 2</span>
                     </label>
-                    {playerSelect(t2_player2, setT2_player2)}
+                    {playerSelect(
+                      t2_player2,
+                      setT2_player2,
+                      playerOptions?.filter((option: any) => {
+                        return option.value != 'unentschieden';
+                      })
+                    )}
 
                     <label className='label'>
                       <span className='label-text'>Schnickel winner</span>
                     </label>
-                    {playerSelect(schnickel, setSchnickel)}
+                    {playerSelect(
+                      schnickel,
+                      setSchnickel,
+                      playerOptions?.filter((option: any) => {
+                        return (
+                          option.value != 'unentschieden' &&
+                          [
+                            t1_player1,
+                            t1_player2,
+                            t2_player1,
+                            t2_player2,
+                          ].includes(option.value)
+                        );
+                      })
+                    )}
 
                     <label className='label'>
                       <span className='label-text'>Winner</span>
                     </label>
-                    {playerSelect(winner, setWinner)}
+                    {playerSelect(
+                      winner,
+                      setWinner,
+                      playerOptions?.filter((option: any) => {
+                        return [
+                          t1_player1,
+                          t1_player2,
+                          t2_player1,
+                          t2_player2,
+                          'unentschieden',
+                        ].includes(option.value);
+                      })
+                    )}
 
                     <label className='label'>
                       <span className='label-text'>Cups left</span>
