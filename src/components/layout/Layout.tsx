@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
+import Select from 'react-select';
 import useSWR from 'swr';
 
 import 'react-datepicker/dist/react-datepicker.css';
@@ -30,6 +31,39 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const fetcher = (args: any) => fetch(args).then((res) => res.json());
   const { data } = useSWR('/api/players', fetcher);
+  const playerOptions = data?.['players'].map((e: any) => {
+    return {
+      value: e.username,
+      label: (
+        <div className='flex space-x-2'>
+          <Image
+            className='rounded mx-8'
+            width={25}
+            height={25}
+            src={e.avatar_url}
+            alt=''
+          />
+          <p>{e.username}</p>
+        </div>
+      ),
+    };
+  });
+  const playerSelect = (field: any, onChangeFunction: any) => {
+    return (
+      <Select
+        className='basic-single'
+        isClearable={true}
+        onChange={(e) => onChangeFunction(e.value)}
+        classNamePrefix='select'
+        defaultValue={playerOptions?.['Max']}
+        placeholder='Select Player'
+        options={playerOptions}
+        value={playerOptions?.filter((option: any) => {
+          return option.value == field;
+        })}
+      />
+    );
+  };
 
   function addGame(isDuo: boolean) {
     if (!isDuo) {
@@ -129,60 +163,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <label className='label'>
                       <span className='label-text'>Player 1</span>
                     </label>
-
-                    <select
-                      className='select select-bordered w-full max-w-xs'
-                      value={player1}
-                      onChange={(e) => setPlayer1(e.target.value)}
-                    >
-                      {data?.['players'].map((e: any, i: any) => {
-                        return (
-                          <option value={e.username} selected={i == 0} key={i}>
-                            {e.username}
-                          </option>
-                        );
-                      })}
-                    </select>
+                    {playerSelect(player1, setPlayer1)}
                     <label className='label'>
                       <span className='label-text'>Player 2</span>
                     </label>
-                    <select
-                      className='select select-bordered w-full max-w-xs'
-                      value={player2}
-                      onChange={(e) => setPlayer2(e.target.value)}
-                    >
-                      {data?.['players'].map((e: any, i: any) => {
-                        return <option key={i}>{e.username}</option>;
-                      })}
-                    </select>
+                    {playerSelect(player2, setPlayer2)}
                     <label className='label'>
                       <span className='label-text'>Schnickel winner</span>
                     </label>
-                    <select
-                      className='select select-bordered w-full max-w-xs'
-                      value={schnickel}
-                      onChange={(e) => setSchnickel(e.target.value)}
-                    >
-                      <option disabled={true} selected={true}>
-                        Choose player
-                      </option>
-                      {data?.['players'].map((e: any, i: any) => {
-                        return <option key={i}>{e.username}</option>;
-                      })}
-                    </select>
-
+                    {playerSelect(schnickel, setSchnickel)}
                     <label className='label'>
                       <span className='label-text'>Winner</span>
                     </label>
-                    <select
-                      className='select select-bordered w-full max-w-xs'
-                      value={winner}
-                      onChange={(e) => setWinner(e.target.value)}
-                    >
-                      {data?.['players'].map((e: any, i: any) => {
-                        return <option key={i}>{e.username}</option>;
-                      })}
-                    </select>
+                    {playerSelect(winner, setWinner)}
                     <label className='label'>
                       <span className='label-text'>Cups left</span>
                     </label>
@@ -214,90 +207,33 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <label className='label'>
                       <span className='label-text'>Team 1: Player 1</span>
                     </label>
+                    {playerSelect(t1_player1, setT1_player1)}
 
-                    <select
-                      className='select select-bordered w-full max-w-xs'
-                      value={t1_player1}
-                      onChange={(e) => setT1_player1(e.target.value)}
-                    >
-                      {data?.['players'].map((e: any, i: any) => {
-                        return (
-                          <option value={e.username} selected={i == 0} key={i}>
-                            {e.username}
-                          </option>
-                        );
-                      })}
-                    </select>
                     <label className='label'>
                       <span className='label-text'>Team 1: Player 2</span>
                     </label>
-                    <select
-                      className='select select-bordered w-full max-w-xs'
-                      value={t1_player2}
-                      onChange={(e) => setT1_player2(e.target.value)}
-                    >
-                      {data?.['players'].map((e: any, i: any) => {
-                        return <option key={i}>{e.username}</option>;
-                      })}
-                    </select>
+                    {playerSelect(t1_player2, setT1_player2)}
 
                     <label className='label'>
                       <span className='label-text'>Team 2: Player 1</span>
                     </label>
+                    {playerSelect(t2_player1, setT2_player1)}
 
-                    <select
-                      className='select select-bordered w-full max-w-xs'
-                      value={t2_player1}
-                      onChange={(e) => setT2_player1(e.target.value)}
-                    >
-                      {data?.['players'].map((e: any, i: any) => {
-                        return (
-                          <option value={e.username} selected={i == 0} key={i}>
-                            {e.username}
-                          </option>
-                        );
-                      })}
-                    </select>
                     <label className='label'>
                       <span className='label-text'>Team 2: Player 2</span>
                     </label>
-                    <select
-                      className='select select-bordered w-full max-w-xs'
-                      value={t2_player2}
-                      onChange={(e) => setT2_player2(e.target.value)}
-                    >
-                      {data?.['players'].map((e: any, i: any) => {
-                        return <option key={i}>{e.username}</option>;
-                      })}
-                    </select>
+                    {playerSelect(t2_player2, setT2_player2)}
+
                     <label className='label'>
                       <span className='label-text'>Schnickel winner</span>
                     </label>
-                    <select
-                      className='select select-bordered w-full max-w-xs'
-                      value={schnickel}
-                      onChange={(e) => setSchnickel(e.target.value)}
-                    >
-                      <option disabled={true} selected={true}>
-                        Choose player
-                      </option>
-                      {data?.['players'].map((e: any, i: any) => {
-                        return <option key={i}>{e.username}</option>;
-                      })}
-                    </select>
+                    {playerSelect(schnickel, setSchnickel)}
 
                     <label className='label'>
                       <span className='label-text'>Winner</span>
                     </label>
-                    <select
-                      className='select select-bordered w-full max-w-xs'
-                      value={winner}
-                      onChange={(e) => setWinner(e.target.value)}
-                    >
-                      <option>Team 1</option>
-                      <option>Team 2</option>
-                      <option>Unentschieden</option>
-                    </select>
+                    {playerSelect(winner, setWinner)}
+
                     <label className='label'>
                       <span className='label-text'>Cups left</span>
                     </label>
