@@ -9,6 +9,6 @@ export default async function hello(req: NextApiRequest, res: NextApiResponse) {
       'player1,player2,cupsleft, winner,player1 (avatar_url,username),player2 (avatar_url,username)'
     )
     .order('timestamp', { ascending: false })
-    .limit(15);
+    .limit(55);
   res.send({ games: data });
 }
