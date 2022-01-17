@@ -12,6 +12,7 @@ module.exports = {
       'thumbs.gfycat.com',
       'i.imgur.com',
       'media3.giphy.com',
+      'i.giphy.com'
     ],
   },
   reactStrictMode: true,
