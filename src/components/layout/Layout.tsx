@@ -331,19 +331,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <label className='label'>
                       <span className='label-text'>Winner</span>
                     </label>
-                    {playerSelect(
-                      winner,
-                      setWinner,
-                      playerOptions?.filter((option: any) => {
-                        return [
-                          t1_player1,
-                          t1_player2,
-                          t2_player1,
-                          t2_player2,
-                          'unentschieden',
-                        ].includes(option.value);
-                      })
-                    )}
+                    <select
+                      className='select select-bordered w-full max-w-xs'
+                      value={winner}
+                      onChange={(e) => setWinner(e.target.value)}
+                    >
+                      <option>Team 1</option>
+                      <option>Team 2</option>
+                      <option>Unentschieden</option>
+                    </select>
 
                     <label className='label'>
                       <span className='label-text'>Cups left</span>

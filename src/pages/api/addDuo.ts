@@ -21,9 +21,9 @@ export default async function hello(req: NextApiRequest, res: NextApiResponse) {
           : 'unentschieden',
       winner2:
         data2.winner == 'Team 1'
-          ? data2.t1_player1
+          ? data2.t1_player2
           : data2.winner == 'Team 2'
-          ? data2.t2_player1
+          ? data2.t2_player2
           : 'unentschieden',
 
       schnickeln: data2.schnickel,
