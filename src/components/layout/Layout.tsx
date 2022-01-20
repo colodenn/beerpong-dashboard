@@ -56,7 +56,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return (
       <Select
         className='basic-single'
-        isSearchable={true}
+        isSearchable={false}
         isClearable={true}
         onChange={(e) => onChangeFunction(e?.value)}
         classNamePrefix='select'
