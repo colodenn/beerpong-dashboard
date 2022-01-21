@@ -56,7 +56,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return (
       <Select
         className='basic-single'
-        isSearchable={true}
+        isSearchable={false}
         isClearable={true}
         onChange={(e) => onChangeFunction(e?.value)}
         classNamePrefix='select'
@@ -226,11 +226,14 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       onChange={(e) => setCups(Number(e.target.value))}
                     />
                   </div>
-                  <div className='mt-6'>
+                  <div className='hidden mt-6'>
                     <p>lat:{lat}</p>
                     <p>long:{lng}</p>
                   </div>
                   <div>
+                    <label className='label'>
+                      <span className='label-text'>Date</span>
+                    </label>
                     <DatePicker
                       selected={startDate}
                       onChange={(date: any) => setStartDate(date)}
@@ -328,19 +331,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     <label className='label'>
                       <span className='label-text'>Winner</span>
                     </label>
-                    {playerSelect(
-                      winner,
-                      setWinner,
-                      playerOptions?.filter((option: any) => {
-                        return [
-                          t1_player1,
-                          t1_player2,
-                          t2_player1,
-                          t2_player2,
-                          'unentschieden',
-                        ].includes(option.value);
-                      })
-                    )}
+                    <select
+                      className='select select-bordered w-full max-w-xs'
+                      value={winner}
+                      onChange={(e) => setWinner(e.target.value)}
+                    >
+                      <option>Team 1</option>
+                      <option>Team 2</option>
+                      <option>Unentschieden</option>
+                    </select>
 
                     <label className='label'>
                       <span className='label-text'>Cups left</span>
