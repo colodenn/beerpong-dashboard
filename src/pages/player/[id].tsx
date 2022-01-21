@@ -22,10 +22,12 @@ export default function HomePage() {
   const { id } = router.query;
   const { data } = useSWR(`/api/player/${id}`, fetcher);
   const { data: stats } = useSWR(`/api/player/stats/${id}`, fetcher);
-  const [editAvatar, setAvatarName] = useState(data?.player.avatar_url);
+  const { data: stats2 } = useSWR(`/api/player/stats/duo/${id}`, fetcher);
+  const [editAvatar, setAvatarName] = useState(data?.player?.avatar_url);
   const [avatarToggle, setAvatarToggle] = useState(true);
+  const [solos, setSolos] = useState('Solos');
   React.useEffect(() => {
-    setAvatarName(data?.player.avatar_url);
+    setAvatarName(data?.player?.avatar_url);
   }, [data]);
   return (
     <>
@@ -119,125 +121,271 @@ export default function HomePage() {
               <div className='flex justify-center items-center'>
                 <h3 className='mt-6 text-center'>@{data?.player.username}</h3>
               </div>
-              <div className='flex justify-center mx-auto'>
-                <ul className='grid grid-cols-2 gap-12 mx-auto mt-12 md:grid-cols-5'>
-                  <ScrollAnimation
-                    animateIn='fade-in slide-in-bottom'
-                    style={{ animationDelay: '0s', opacity: 0 }}
+              <div className=''>
+                <div className='flex justify-center mt-8 md:justify-end'>
+                  <select
+                    value={solos}
+                    onChange={(e) => setSolos(e.target.value)}
+                    className='select select-bordered w-24'
                   >
-                    <li className='px-8 text-lg'>
-                      <div className='flex justify-center mb-4'>
-                        <Image
-                          height={48}
-                          width={48}
-                          alt=''
-                          src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
-                          className='mx-auto w-12'
-                        />
-                      </div>
-                      <div>
-                        <h3 className='text-center'>{stats?.stats.played}</h3>
-                      </div>
-                      <div>
-                        <h5 className='mx-auto text-center'>
-                          Solo Games Played
-                        </h5>
-                      </div>
-                    </li>
-                  </ScrollAnimation>
-                  <ScrollAnimation
-                    animateIn='fade-in slide-in-bottom'
-                    style={{ animationDelay: '0.1s', opacity: 0 }}
-                  >
-                    <li className='px-8 text-lg'>
-                      <div className='flex justify-center mb-4'>
-                        <Image
-                          height={48}
-                          width={48}
-                          alt=''
-                          src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/raised-fist_270a.png'
-                          className='mx-auto w-12'
-                        />
-                      </div>
-                      <div>
-                        <h3 className='text-center'>
-                          {stats?.stats.schnickeln}
-                        </h3>
-                      </div>
-                      <div>
-                        <h5 className='mx-auto text-center'>
-                          Rock, paper & scissors
-                        </h5>
-                      </div>
-                    </li>
-                  </ScrollAnimation>
-                  <ScrollAnimation
-                    animateIn='fade-in slide-in-bottom'
-                    style={{ animationDelay: '0.2s', opacity: 0 }}
-                  >
-                    <li className='px-8 text-lg'>
-                      <div className='flex justify-center mb-4'>
-                        <Image
-                          height={48}
-                          width={48}
-                          alt=''
-                          src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/goal-net_1f945.png'
-                          className='mx-auto w-12'
-                        />
-                      </div>
-                      <div>
-                        <h3 className='text-center'>{stats?.stats.won}</h3>
-                      </div>
-                      <div>
-                        <h5 className='mx-auto text-center'>Games Won</h5>
-                      </div>
-                    </li>
-                  </ScrollAnimation>
-                  <ScrollAnimation
-                    animateIn='fade-in slide-in-bottom'
-                    style={{ animationDelay: '0.3s', opacity: 0 }}
-                  >
-                    <li className='px-8 text-lg'>
-                      <div className='flex justify-center mb-4'>
-                        <Image
-                          height={48}
-                          width={48}
-                          alt=''
-                          src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/fire_1f525.png'
-                          className='mx-auto w-12'
-                        />
-                      </div>
-                      <div>
-                        <h3 className='text-center'>{stats?.stats.winrate}%</h3>
-                      </div>
-                      <div>
-                        <h5 className='mx-auto text-center'>Winrate</h5>
-                      </div>
-                    </li>
-                  </ScrollAnimation>
-                  <ScrollAnimation
-                    animateIn='fade-in slide-in-bottom'
-                    style={{ animationDelay: '0.4s', opacity: 0 }}
-                  >
-                    <li className='px-8 text-lg'>
-                      <div className='flex justify-center mb-4'>
-                        <Image
-                          height={48}
-                          width={48}
-                          alt=''
-                          src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/beer-mug_1f37a.png'
-                          className='mx-auto w-12'
-                        />
-                      </div>
-                      <div>
-                        <h3 className='text-center'>{stats?.stats.drunk} l</h3>
-                      </div>
-                      <div>
-                        <h5 className='mx-auto text-center'>Beer drunk</h5>
-                      </div>
-                    </li>
-                  </ScrollAnimation>
-                </ul>
+                    <option value='Solos'>Solos</option>
+                    <option value='Duos'>Duos</option>
+                  </select>
+                </div>
+
+                <div className='flex justify-center mx-auto'>
+                  {solos == 'Solos' ? (
+                    <ul className='grid grid-cols-2 gap-12 mx-auto mt-12 md:grid-cols-5'>
+                      <ScrollAnimation
+                        animateIn='fade-in slide-in-bottom'
+                        style={{ animationDelay: '0s', opacity: 0 }}
+                      >
+                        <li className='px-8 text-lg'>
+                          <div className='flex justify-center mb-4'>
+                            <Image
+                              height={48}
+                              width={48}
+                              alt=''
+                              src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
+                              className='mx-auto w-12'
+                            />
+                          </div>
+                          <div>
+                            <h3 className='text-center'>
+                              {stats?.stats.played}
+                            </h3>
+                          </div>
+                          <div>
+                            <h5 className='mx-auto text-center'>
+                              Solo Games Played
+                            </h5>
+                          </div>
+                        </li>
+                      </ScrollAnimation>
+                      <ScrollAnimation
+                        animateIn='fade-in slide-in-bottom'
+                        style={{ animationDelay: '0.1s', opacity: 0 }}
+                      >
+                        <li className='px-8 text-lg'>
+                          <div className='flex justify-center mb-4'>
+                            <Image
+                              height={48}
+                              width={48}
+                              alt=''
+                              src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/raised-fist_270a.png'
+                              className='mx-auto w-12'
+                            />
+                          </div>
+                          <div>
+                            <h3 className='text-center'>
+                              {stats?.stats.schnickeln}
+                            </h3>
+                          </div>
+                          <div>
+                            <h5 className='mx-auto text-center'>
+                              Rock, paper & scissors
+                            </h5>
+                          </div>
+                        </li>
+                      </ScrollAnimation>
+                      <ScrollAnimation
+                        animateIn='fade-in slide-in-bottom'
+                        style={{ animationDelay: '0.2s', opacity: 0 }}
+                      >
+                        <li className='px-8 text-lg'>
+                          <div className='flex justify-center mb-4'>
+                            <Image
+                              height={48}
+                              width={48}
+                              alt=''
+                              src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/goal-net_1f945.png'
+                              className='mx-auto w-12'
+                            />
+                          </div>
+                          <div>
+                            <h3 className='text-center'>{stats?.stats.won}</h3>
+                          </div>
+                          <div>
+                            <h5 className='mx-auto text-center'>Games Won</h5>
+                          </div>
+                        </li>
+                      </ScrollAnimation>
+                      <ScrollAnimation
+                        animateIn='fade-in slide-in-bottom'
+                        style={{ animationDelay: '0.3s', opacity: 0 }}
+                      >
+                        <li className='px-8 text-lg'>
+                          <div className='flex justify-center mb-4'>
+                            <Image
+                              height={48}
+                              width={48}
+                              alt=''
+                              src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/fire_1f525.png'
+                              className='mx-auto w-12'
+                            />
+                          </div>
+                          <div>
+                            <h3 className='text-center'>
+                              {stats?.stats.winrate}%
+                            </h3>
+                          </div>
+                          <div>
+                            <h5 className='mx-auto text-center'>Winrate</h5>
+                          </div>
+                        </li>
+                      </ScrollAnimation>
+                      <ScrollAnimation
+                        animateIn='fade-in slide-in-bottom'
+                        style={{ animationDelay: '0.4s', opacity: 0 }}
+                      >
+                        <li className='px-8 text-lg'>
+                          <div className='flex justify-center mb-4'>
+                            <Image
+                              height={48}
+                              width={48}
+                              alt=''
+                              src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/beer-mug_1f37a.png'
+                              className='mx-auto w-12'
+                            />
+                          </div>
+                          <div>
+                            <h3 className='text-center'>
+                              {stats?.stats.drunk} l
+                            </h3>
+                          </div>
+                          <div>
+                            <h5 className='mx-auto text-center'>Beer drunk</h5>
+                          </div>
+                        </li>
+                      </ScrollAnimation>
+                    </ul>
+                  ) : (
+                    <ul className='grid grid-cols-2 gap-12 mx-auto mt-12 md:grid-cols-5'>
+                      <ScrollAnimation
+                        animateIn='fade-in slide-in-bottom'
+                        style={{ animationDelay: '0s', opacity: 0 }}
+                      >
+                        <li className='px-8 text-lg'>
+                          <div className='flex justify-center mb-4'>
+                            <Image
+                              height={48}
+                              width={48}
+                              alt=''
+                              src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
+                              className='mx-auto w-12'
+                            />
+                          </div>
+                          <div>
+                            <h3 className='text-center'>
+                              {stats2?.stats?.played}
+                            </h3>
+                          </div>
+                          <div>
+                            <h5 className='mx-auto text-center'>
+                              Duo Games Played
+                            </h5>
+                          </div>
+                        </li>
+                      </ScrollAnimation>
+                      <ScrollAnimation
+                        animateIn='fade-in slide-in-bottom'
+                        style={{ animationDelay: '0.1s', opacity: 0 }}
+                      >
+                        <li className='px-8 text-lg'>
+                          <div className='flex justify-center mb-4'>
+                            <Image
+                              height={48}
+                              width={48}
+                              alt=''
+                              src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/raised-fist_270a.png'
+                              className='mx-auto w-12'
+                            />
+                          </div>
+                          <div>
+                            <h3 className='text-center'>
+                              {stats2?.stats?.draws}
+                            </h3>
+                          </div>
+                          <div>
+                            <h5 className='mx-auto text-center'>Draws</h5>
+                          </div>
+                        </li>
+                      </ScrollAnimation>
+                      <ScrollAnimation
+                        animateIn='fade-in slide-in-bottom'
+                        style={{ animationDelay: '0.2s', opacity: 0 }}
+                      >
+                        <li className='px-8 text-lg'>
+                          <div className='flex justify-center mb-4'>
+                            <Image
+                              height={48}
+                              width={48}
+                              alt=''
+                              src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/goal-net_1f945.png'
+                              className='mx-auto w-12'
+                            />
+                          </div>
+                          <div>
+                            <h3 className='text-center'>
+                              {stats2?.stats?.wins}
+                            </h3>
+                          </div>
+                          <div>
+                            <h5 className='mx-auto text-center'>Games Won</h5>
+                          </div>
+                        </li>
+                      </ScrollAnimation>
+                      <ScrollAnimation
+                        animateIn='fade-in slide-in-bottom'
+                        style={{ animationDelay: '0.3s', opacity: 0 }}
+                      >
+                        <li className='px-8 text-lg'>
+                          <div className='flex justify-center mb-4'>
+                            <Image
+                              height={48}
+                              width={48}
+                              alt=''
+                              src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/fire_1f525.png'
+                              className='mx-auto w-12'
+                            />
+                          </div>
+                          <div>
+                            <h3 className='text-center'>
+                              {stats2?.stats?.winrate}%
+                            </h3>
+                          </div>
+                          <div>
+                            <h5 className='mx-auto text-center'>Winrate</h5>
+                          </div>
+                        </li>
+                      </ScrollAnimation>
+                      <ScrollAnimation
+                        animateIn='fade-in slide-in-bottom'
+                        style={{ animationDelay: '0.4s', opacity: 0 }}
+                      >
+                        <li className='px-8 text-lg'>
+                          <div className='flex justify-center mb-4'>
+                            <Image
+                              height={48}
+                              width={48}
+                              alt=''
+                              src='https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/beer-mug_1f37a.png'
+                              className='mx-auto w-12'
+                            />
+                          </div>
+                          <div>
+                            <h3 className='text-center'>
+                              {stats2?.stats?.beerdrunk} l
+                            </h3>
+                          </div>
+                          <div>
+                            <h5 className='mx-auto text-center'>Beer drunk</h5>
+                          </div>
+                        </li>
+                      </ScrollAnimation>
+                    </ul>
+                  )}
+                </div>
               </div>
             </div>
           </div>
