@@ -38,6 +38,7 @@ export type SoloGame = {
   schnickeln: string;
   winner: string;
   cupsleft: number;
+  timestamp: number;
 };
 
 export type TeamGame = {
@@ -49,4 +50,5 @@ export type TeamGame = {
   winner1: string;
   winner2: string;
   cupsleft: number;
+  timestamp: number;
 };
