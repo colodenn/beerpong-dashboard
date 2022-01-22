@@ -9,7 +9,7 @@ export default async function hello(req: NextApiRequest, res: NextApiResponse) {
   const { data } = await supabase
     .from('games_solo')
     .select(
-      'player1,player2,cupsleft, winner,player1 (avatar_url,username),player2 (avatar_url,username)'
+      'player1,player2,cupsleft, winner,player1:profiles!player1 (avatar_url,username),player2:profiles!player2 (avatar_url,username)'
     )
     .or(`player1.eq.${id},player2.eq.${id}`)
     .order('timestamp', { ascending: false })
