@@ -14,6 +14,7 @@ import { SoloStats } from '@/components/profile/SoloStats';
 import { TeamStats } from '@/components/profile/TeamStats';
 import Seo from '@/components/Seo';
 import TablePersonal from '@/components/stats/TablePersonal';
+import TablePersonalTeam from '@/components/stats/TablePersonalTeam';
 
 import { useUser } from '@/utils/useUser';
 const fetcher = (args: any) => fetch(args).then((res) => res.json());
@@ -48,7 +49,7 @@ export default function HomePage() {
                       alt=''
                       className='mx-auto rounded-full'
                       src={
-                        data?.player.avatar_url ??
+                        data?.player?.avatar_url ??
                         'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
                       }
                     />
@@ -119,7 +120,7 @@ export default function HomePage() {
                 </div>
               </div>
               <div className='flex justify-center items-center'>
-                <h3 className='mt-6 text-center'>@{data?.player.username}</h3>
+                <h3 className='mt-6 text-center'>@{data?.player?.username}</h3>
               </div>
               <div className=''>
                 <div className='flex justify-center mt-8 md:justify-end'>
@@ -145,8 +146,15 @@ export default function HomePage() {
           </div>
           <ScrollAnimation animateIn='fade-in slide-in-bottom'>
             <section className='mx-auto mt-24 w-full'>
-              <Background title='' colour='#cdf9ec'>
+              <Background title='Solo Games' colour='#cdf9ec'>
                 <TablePersonal id={String(id)} />
+              </Background>
+            </section>
+          </ScrollAnimation>
+          <ScrollAnimation animateIn='fade-in slide-in-bottom'>
+            <section className='mx-auto mt-24 w-full'>
+              <Background title='Team Games' colour='#cdf9ec'>
+                <TablePersonalTeam id={String(id)} />
               </Background>
             </section>
           </ScrollAnimation>
