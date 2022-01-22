@@ -17,7 +17,7 @@ export default function HomePage() {
         <main className='container mx-auto mt-48 mb-24'>
           <ScrollAnimation animateIn='fade-in slide-in-bottom'>
             <section className='container mx-auto mt-32 lg:px-28'>
-              <div className='px-8 md:px-48'>
+              <div className='px-8 md:px-8 2xl:px-48'>
                 <h3 className='text-5xl'>Datenschutz</h3>
 
                 <p className='mt-8 md:text-2xl 2xl:w-2/3'>
@@ -53,10 +53,6 @@ export default function HomePage() {
               </div>
             </section>
           </ScrollAnimation>
-
-          {/* <div className='flex justify-center xl:text-9xl'>
-            <animated.div>{number.to((n) => n.toFixed(0))}</animated.div>l
-          </div> */}
         </main>
         <Footer />
       </Layout>
