@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useState } from 'react';
 
@@ -12,10 +13,11 @@ import { useUser } from '@/utils/useUser';
 export default function HomePage() {
   const { profile, updateProfile } = useUser();
   const [username, setUsername] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [avatar] = useState('');
   function updateUser() {
     updateProfile(username, avatar);
   }
+  const router = useRouter();
   return (
     <>
       <Layout>
@@ -39,17 +41,27 @@ export default function HomePage() {
                 </>
               ) : (
                 <div>
-                  <input
-                    placeholder='imgur.net/asf242'
-                    value={avatar}
-                    onChange={(e) => setAvatar(e.target.value)}
-                  />
-                  <input
-                    placeholder='username'
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                  <button onClick={() => updateUser()}>Update</button>
+                  <div className='form-control'>
+                    <label className='label'>
+                      <span className='label-text'>Username</span>
+                    </label>
+                    <input
+                      placeholder='username'
+                      className='input input-bordered'
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                  </div>
+
+                  <button
+                    className='btn btn-primary mt-4'
+                    onClick={() => {
+                      updateUser();
+                      router.push('/');
+                    }}
+                  >
+                    Set username
+                  </button>
                 </div>
               )}
             </div>
