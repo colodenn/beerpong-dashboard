@@ -11,7 +11,7 @@ export default function Table() {
 
   return (
     <>
-      <div className='overflow-x-auto right-4 h-96'>
+      <div className='overflow-x-auto right-4 h-96 lg:h-[36rem]'>
         <table className='table overflow-y-scroll w-full h-96 bg-white rounded-lg'>
           <thead className='bg-white'>
             <tr className='bg-white'>
