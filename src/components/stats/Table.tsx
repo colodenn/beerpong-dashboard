@@ -15,8 +15,8 @@ export default function Table() {
       <table className='table overflow-y-scroll w-full h-96 bg-white rounded-lg'>
         <thead className='bg-white'>
           <tr className='bg-white'>
-            <th className='bg-white'>Player 1</th>
-            <th className='bg-white'>Player 2</th>
+            <th className='bg-white'>Winner</th>
+            <th className='bg-white'>Loser</th>
             <th className='bg-white'>Score</th>
           </tr>
         </thead>
@@ -30,10 +30,10 @@ export default function Table() {
               return (
                 <tr key={i} className=''>
                   <td>
-                    <Team winner={true} player_1={player_left} />
+                    <Team player_1={player_left} />
                   </td>
                   <td>
-                    <Team winner={false} player_1={player_right} />
+                    <Team player_1={player_right} />
                   </td>
                   <td className=''>{e.cupsleft}</td>
                 </tr>

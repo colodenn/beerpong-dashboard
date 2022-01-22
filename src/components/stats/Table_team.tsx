@@ -15,8 +15,8 @@ export default function TableTeam() {
       <table className='table overflow-y-scroll w-full h-96 bg-white rounded-lg'>
         <thead className='bg-white'>
           <tr className='bg-white'>
-            <th className='bg-white'>Team 1</th>
-            <th className='bg-white'>Team 2</th>
+            <th className='bg-white'>Winner</th>
+            <th className='bg-white'>Loser</th>
             <th className='bg-white'>Score</th>
           </tr>
         </thead>
@@ -41,18 +41,10 @@ export default function TableTeam() {
               return (
                 <tr key={i} className=''>
                   <td>
-                    <Team
-                      player_1={player_left_1}
-                      winner={true}
-                      player_2={player_left_2}
-                    />
+                    <Team player_1={player_left_1} player_2={player_left_2} />
                   </td>
                   <td>
-                    <Team
-                      player_1={player_right_1}
-                      winner={false}
-                      player_2={player_right_2}
-                    />
+                    <Team player_1={player_right_1} player_2={player_right_2} />
                   </td>
 
                   <td className=''>{e.cupsleft}</td>
