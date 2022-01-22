@@ -7,11 +7,13 @@ import { supabase } from '@/utils/client';
 export default async function hello(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
   const { data } = await supabase
-    .from('games_solo')
+    .from('games_duo')
     .select(
-      'player1,player2,cupsleft, winner,player1:profiles!player1 (avatar_url,username),player2:profiles!player2 (avatar_url,username), timestamp'
+      'team1_player1:profiles!team1_player1 (username, avatar_url),team1_player2:profiles!team1_player2 (username, avatar_url),team2_player1:profiles!team2_player1(username, avatar_url), team2_player2:profiles!team2_player2(username, avatar_url),cupsleft, winner1, winner2, timestamp'
     )
-    .or(`player1.eq.${id},player2.eq.${id}`)
+    .or(
+      `team1_player1.eq.${id},team1_player2.eq.${id},team2_player1.eq.${id},team2_player2.eq.${id}`
+    )
     .order('timestamp', { ascending: false })
     .limit(15);
 
