@@ -6,10 +6,11 @@ import { supabase } from '@/utils/client';
 
 export default async function hello(req: NextApiRequest, res: NextApiResponse) {
   const { data } = await supabase
-    .from('playerstats')
-    .select('winner (username, avatar_url), count')
-    .order('count', { ascending: false });
-
+    .from('playerstatssolo')
+    .select('player,played, schnickelwins, winrate, *')
+    .order('winrate', { ascending: false })
+    .order('played', { ascending: false })
+    .order('schnickelwins', { ascending: false });
   res.status(200).json({ players: data });
 }
 

@@ -45,6 +45,9 @@ export default function Header() {
               <li className='underline-offset-2 ml-1 text-lg font-semibold underline cursor-pointer md:ml-4'>
                 <Link href={'/players'}>players</Link>
               </li>
+              <li className='underline-offset-2 ml-1 text-lg font-semibold underline cursor-pointer md:ml-4'>
+                <Link href={'/rules'}>rules</Link>
+              </li>
               {/* <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
                 table
               </li>

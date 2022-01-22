@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function Header() {
+export default function Footer() {
   return (
     <div className='container py-8 mx-auto'>
       <footer className='container flex justify-center md:justify-between'>

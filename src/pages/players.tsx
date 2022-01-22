@@ -17,7 +17,7 @@ export default function HomePage() {
         <main className='container mx-auto mt-48 mb-24'>
           <ScrollAnimation animateIn='fade-in slide-in-bottom'>
             <div
-              className='py-4 rounded-lg shadow-lg md:p-8'
+              className='bg-[#cdf9ec] py-4 rounded-lg shadow-lg md:p-8'
               style={{ backgroundColor: '#cdf9ec' }}
             >
               <div className='flex justify-start mb-4 ml-6 md:mb-6 md:ml-0'>
