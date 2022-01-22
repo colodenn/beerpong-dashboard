@@ -6,7 +6,7 @@ export default async function hello(req: NextApiRequest, res: NextApiResponse) {
   const { data } = await supabase
     .from('games_solo')
     .select(
-      'player1,player2,cupsleft, winner,player1 (avatar_url,username),player2 (avatar_url,username)'
+      'cupsleft, winner,player1:profiles!player1 (avatar_url,username), player2:profiles!player2 (avatar_url,username)'
     )
     .order('timestamp', { ascending: false })
     .limit(55);
