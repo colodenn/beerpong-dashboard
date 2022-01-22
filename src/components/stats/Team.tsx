@@ -1,20 +1,23 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Player } from 'types';
 
-export function Player({
-  username,
+import { User } from './User';
+
+export function Team({
+  player_1,
+  player_2,
   winner,
-  avatar_url,
 }: {
-  username: string;
-  winner: string;
-  avatar_url: string;
+  player_1: Player;
+  player_2?: Player | undefined;
+  winner: boolean;
 }) {
   return (
-    <Link href={`/player/${username}`} passHref={true}>
+    <Link href={`/player/${player_1.username}`} passHref={true}>
       <div className='flex items-center space-x-3 cursor-pointer'>
         <div className='flex justify-center items-center my-auto w-12 h-12'>
-          {winner == username && (
+          {winner == true && (
             <Image
               alt=''
               className='mx-auto my-auto mr-2'
@@ -24,19 +27,13 @@ export function Player({
             />
           )}
         </div>
-        <div className='avatar'>
-          <div className='mask mask-squircle w-12 h-12'>
-            <Image
-              height={55}
-              width={55}
-              src={avatar_url}
-              alt='Avatar Tailwind CSS Component'
-            />
-          </div>
+        <div className='flex w-44'>
+          <User username={player_1.username} avatar_url={player_1.avatar_url} />
         </div>
-        <div>
-          <div className='font-bold'>{username}</div>
-        </div>
+
+        {player_2 != undefined && (
+          <User username={player_2.username} avatar_url={player_2.avatar_url} />
+        )}
       </div>
     </Link>
   );

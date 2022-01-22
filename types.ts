@@ -27,14 +27,26 @@ export interface UserDetails {
   payment_method?: any; // type unknown;
 }
 
-export type Solo = {
-  id: string /* primary key */;
-  player1: string;
-  player2: string;
+export type Player = {
+  username: string;
+  avatar_url: string;
+};
+
+export type SoloGame = {
+  player1: Player;
+  player2: Player;
   schnickeln: string;
   winner: string;
   cupsleft: number;
-  timestamp: Date;
-  latitude: number;
-  longitude: number;
+};
+
+export type TeamGame = {
+  team1_player1: Player;
+  team1_player2: Player;
+  team2_player1: Player;
+  team2_player2: Player;
+  schnickeln: string;
+  winner1: string;
+  winner2: string;
+  cupsleft: number;
 };
