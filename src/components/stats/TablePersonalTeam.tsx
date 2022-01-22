@@ -6,8 +6,8 @@ import useSWR from 'swr';
 
 const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
-export default function TableTeam() {
-  const { data } = useSWR('/api/teams', fetcher);
+export default function Table(props: { id: string }) {
+  const { data } = useSWR(`/api/player/games/duo/${props.id}`, fetcher);
   let [lastDate] = useState(new Date());
   function setLastDate(date: Date) {
     date.getUTCHours() < 8
