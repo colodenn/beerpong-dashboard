@@ -36,9 +36,7 @@ export default function Table() {
                                 <Image
                                   height={55}
                                   width={55}
-                                  src={
-                                    'https://i.giphy.com/media/9uImty91ECrWIDNaHe/giphy.gif'
-                                  }
+                                  src={e.avatar_url}
                                   alt='Avatar Tailwind CSS Component'
                                 />
                               </div>
