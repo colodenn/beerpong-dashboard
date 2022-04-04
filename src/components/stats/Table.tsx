@@ -11,7 +11,7 @@ export default function Table() {
   const { data } = useSWR('/api/solos', fetcher);
   let [lastDate] = useState(new Date());
   function setLastDate(date: Date) {
-    date.getUTCHours() < 8
+    date.getHours() < 8
       ? date.setDate(date.getDate() - 1)
       : date.setDate(date.getDate());
     lastDate = new Date(
@@ -42,11 +42,9 @@ export default function Table() {
               if (currentDate < lastDate) {
                 setLastDate(currentDate);
                 additionalHTML = (
-                  <tr className='border-[#202a38] border-t-2 border-solid'>
+                  <tr>
                     <td>
-                      <h4 className='ml-6 underline'>
-                        {lastDate.toDateString()}
-                      </h4>
+                      <h4 className='ml-6'>{lastDate.toDateString()}</h4>
                     </td>
                   </tr>
                 );
