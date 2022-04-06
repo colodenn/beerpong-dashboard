@@ -13,7 +13,7 @@ module.exports = {
       'i.imgur.com',
       'media3.giphy.com',
       'i.giphy.com',
-      "jtvcdxtqxqyqiluktxaw.supabase.co"
+      'jtvcdxtqxqyqiluktxaw.supabase.co',
     ],
   },
   reactStrictMode: true,
