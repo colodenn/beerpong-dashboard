@@ -7,10 +7,18 @@ import { supabase } from '@/utils/client';
 
 export default async function hello(req: NextApiRequest, res: NextApiResponse) {
   const schema = object({
-    t1_player1: string().required(),
-    t1_player2: string().required(),
-    t2_player1: string().required(),
-    t2_player2: string().required(),
+    t1_player1: string()
+      .required()
+      .notOneOf([ref('t1_player2'), ref('t2_player1'), ref('t2_player2')]),
+    t1_player2: string()
+      .required()
+      .notOneOf([ref('t1_player1'), ref('t2_player1'), ref('t2_player2')]),
+    t2_player1: string()
+      .required()
+      .notOneOf([ref('t1_player1'), ref('t1_player2'), ref('t2_player2')]),
+    t2_player2: string()
+      .required()
+      .notOneOf([ref('t1_player1'), ref('t1_player2'), ref('t2_player1')]),
     winner: string()
       .required()
       .matches(/(Team 1|Team 2|unentschieden)/),
