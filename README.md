@@ -23,9 +23,9 @@
   `cp .env.example .env.local`
   - fill the first two lines with the database connection parameters (These are private of course, ask [colodenn](https://github.com/colodenn) for them)
 
-  ### Run Locally
-  
-  - start the server:  
+### Run Locally
+
+- start the server:  
   `yarn dev`
-  
-  This project supports hot-reloading, so you only need to execute this once while working on it locally.
+
+This project supports hot-reloading, so you only need to execute this once while working on it locally.
