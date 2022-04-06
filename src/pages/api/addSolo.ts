@@ -6,6 +6,8 @@ import { date, number, object, ref, string } from 'yup';
 import { supabase } from '@/utils/client';
 
 export default async function hello(req: NextApiRequest, res: NextApiResponse) {
+  supabase.auth.setAuth(req.cookies['sb:token']);
+
   const schema = object({
     player1: string().required(),
     player2: string()

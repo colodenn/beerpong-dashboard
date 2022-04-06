@@ -23,6 +23,8 @@ const getUser = async (token: string) => {
 };
 
 export default async function hello(req: NextApiRequest, res: NextApiResponse) {
+  supabase.auth.setAuth(req.cookies['sb:token']);
+
   const form = new formidable.IncomingForm();
 
   const token = req.headers.token;
