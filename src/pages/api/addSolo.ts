@@ -5,6 +5,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { supabase } from '@/utils/client';
 
 export default async function hello(req: NextApiRequest, res: NextApiResponse) {
+  // console.log(req.cookies['sb:token'])
+  supabase.auth.setAuth(req.cookies['sb:token']);
   const data2 = req.body;
   const { data } = await supabase.from('games_solo').insert([
     {

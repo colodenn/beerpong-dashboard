@@ -6,6 +6,7 @@ import { supabase } from '@/utils/client';
 
 export default async function hello(req: NextApiRequest, res: NextApiResponse) {
   const data2 = req.body;
+  supabase.auth.setAuth(req.cookies['sb:token']);
 
   const { data } = await supabase.from('games_duo').insert([
     {
