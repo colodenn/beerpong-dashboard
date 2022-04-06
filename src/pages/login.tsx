@@ -1,5 +1,6 @@
 import { GetServerSideProps } from 'next';
 import { MouseEvent, useState } from 'react';
+import ScaleLoader from 'react-spinners/ScaleLoader';
 
 import { supabase } from '@/utils/client';
 import { useUser } from '@/utils/useUser';
@@ -8,7 +9,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const loginUser = useUser();
-
+  const [clicked, setClicked] = useState(false);
   async function login(
     e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
   ) {
@@ -28,28 +29,49 @@ export default function Login() {
           beerpong.
         </h1>
         <form className='p-8 w-96 bg-gray-50 rounded shadow'>
-          <h1 className='text-3xl text-center text-black md:text-4xl'>Login</h1>
-          <p className='mt-2 text-black'>
-            Enter your email address to sign in or create a new account.
-            We&apos;ll send you a login link.
-          </p>
-          <input
-            className='mt-4 w-full text-black rounded'
-            type='email'
-            placeholder='user@ertappen.com'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />{' '}
-          <br />
-          <button
-            onClick={(e) => {
-              login(e);
-            }}
-            className='btn mt-2 w-full'
-          >
-            Send login link
-          </button>
-          <p className='text-black'>{message}</p>
+          {!clicked ? (
+            <div>
+              <h1 className='text-3xl text-center text-black md:text-4xl'>
+                Login
+              </h1>
+              <p className='mt-2 text-black'>
+                Enter your email address to sign in or create a new account.
+                We&apos;ll send you a login link.
+              </p>
+              <input
+                className='mt-4 w-full text-black rounded'
+                type='email'
+                placeholder='user@ertappen.com'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />{' '}
+              <br />
+              <button
+                onClick={(e) => {
+                  setClicked(true);
+                  login(e);
+                }}
+                className='btn mt-2 w-full'
+              >
+                Send login link
+              </button>
+              <p className='text-black'>{message}</p>
+            </div>
+          ) : (
+            <div className='justify-center items-center'>
+              <div className='flex justify-center mb-4'>
+                <ScaleLoader
+                  color='#292929'
+                  loading={true}
+                  height={35}
+                  width={4}
+                  radius={2}
+                  margin={2}
+                />
+              </div>
+              <p className='text-center'>Check you emails to sign in.</p>
+            </div>
+          )}
         </form>
       </div>
     </main>
