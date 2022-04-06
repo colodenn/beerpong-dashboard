@@ -1,9 +1,11 @@
+/* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useState } from 'react';
 import ScrollAnimation from 'react-animate-on-scroll';
+import ImageUploading from 'react-images-uploading';
 import useSWR from 'swr';
 
 import Background from '@/components/charts/Background';
@@ -21,12 +23,30 @@ const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 export default function HomePage() {
   const router = useRouter();
+  const { session } = useUser();
+  const [images, setImages] = React.useState([]);
+  const maxNumber = 1;
+
+  const onChange = (imageList: any) => {
+    // data for submit
+    setImages(imageList);
+    const formData = new FormData();
+    formData.append('myFile', imageList[0].file);
+    fetch('/api/uploadProfileimage', {
+      method: 'POST',
+      body: formData,
+      headers: {
+        token: session?.access_token || '',
+      },
+    });
+  };
   const { updateProfile, profile } = useUser();
   const { id } = router.query;
   const { data } = useSWR(`/api/player/${id}`, fetcher);
   const [editAvatar, setAvatarName] = useState(data?.player?.avatar_url);
   const [avatarToggle, setAvatarToggle] = useState(true);
   const [solos, setSolos] = useState('Solos');
+  const [hover, setHover] = useState(false);
   React.useEffect(() => {
     setAvatarName(data?.player?.avatar_url);
   }, [data]);
@@ -41,82 +61,92 @@ export default function HomePage() {
           <div className='flex justify-center'>
             <div>
               <div className='flex justify-center mx-auto rounded-full'>
-                <div className='flex ml-4'>
-                  {avatarToggle ? (
-                    <Image
-                      height={250}
-                      width={250}
-                      alt=''
-                      className='mx-auto rounded-full'
-                      src={
-                        data?.player?.avatar_url ??
-                        'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
-                      }
-                    />
-                  ) : (
-                    <div className='form-control'>
-                      <input
-                        type='text'
-                        value={editAvatar}
-                        onChange={(e) => setAvatarName(e.target.value)}
-                        className='input input-bordered'
-                      />
-                    </div>
-                  )}
-
-                  {avatarToggle ? (
-                    <>
-                      {id == profile?.username ? (
-                        <div
-                          className=''
-                          onClick={() => {
-                            setAvatarToggle(!avatarToggle);
-                          }}
-                        >
-                          <svg
-                            xmlns='http://www.w3.org/2000/svg'
-                            className='w-6 h-6'
-                            fill='none'
-                            viewBox='0 0 24 24'
-                            stroke='currentColor'
-                          >
-                            <path
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                              strokeWidth={2}
-                              d='M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z'
-                            />
-                          </svg>
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                    </>
-                  ) : (
-                    <div
-                      className=''
-                      onClick={() => {
-                        setAvatarToggle(!avatarToggle);
-
-                        updateProfile(data?.player.username, editAvatar);
-                      }}
-                    >
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        className='w-6 h-6'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        stroke='currentColor'
+                <div
+                  className='grid relative z-50 grid-cols-1 grid-rows-1 ml-4 rounded-full'
+                  onMouseEnter={() => setHover(true)}
+                  onMouseLeave={() => setHover(false)}
+                >
+                  <div className=''>
+                    {id == profile?.username ? (
+                      <ImageUploading
+                        multiple
+                        value={images}
+                        onChange={onChange}
+                        maxNumber={maxNumber}
+                        dataURLKey='data_url'
                       >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth={2}
-                          d='M5 13l4 4L19 7'
-                        />
-                      </svg>
-                    </div>
-                  )}
+                        {({
+                          imageList,
+
+                          onImageUpload,
+                          onImageRemoveAll,
+                          onImageUpdate,
+                          onImageRemove,
+                          isDragging,
+                          dragProps,
+                        }) => (
+                          // write your building UI
+                          <div className='relative w-full h-full'>
+                            {imageList.map((image, index) => (
+                              <div key={index} className='image-item z-50'>
+                                <div className='w-full h-full'>
+                                  <Image
+                                    src={image['data_url']}
+                                    alt=''
+                                    height={250}
+                                    width={250}
+                                    className='rounded-full'
+                                  />
+                                </div>
+                                {/* <div className='flex items-center justify-around'>
+                                  <button onClick={() => onImageUpdate(index)}>
+                                    Confirm
+                                  </button>
+                                  <button onClick={() => onImageRemove(index)}>
+                                    Remove
+                                  </button>
+                                </div> */}
+                              </div>
+                            ))}
+                            <button
+                              className='upload__image-wrapper'
+                              onClick={() => {
+                                onImageUpload();
+                              }}
+                              {...dragProps}
+                            >
+                              {' '}
+                              {imageList.length == 0 && (
+                                <div className='w-full h-full'>
+                                  <Image
+                                    height={250}
+                                    width={250}
+                                    alt=''
+                                    className='absolute mx-auto rounded-full hover:cursor-pointer'
+                                    src={
+                                      data?.player?.avatar_url ??
+                                      'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
+                                    }
+                                  />
+                                </div>
+                              )}
+                            </button>
+                          </div>
+                        )}
+                      </ImageUploading>
+                    ) : (
+                      <Image
+                        height={250}
+                        width={250}
+                        alt=''
+                        className='absolute mx-auto rounded-full'
+                        src={
+                          data?.player?.avatar_url ??
+                          'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
+                        }
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
               <div className='flex justify-center items-center'>
