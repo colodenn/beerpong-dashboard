@@ -2,7 +2,7 @@ export default function Hero() {
   return (
     <>
       <h1 className='flex justify-center items-center mx-auto text-center lg:text-8xl'>
-        Season WS21/22{' '}
+        Summer Season 22 (beta){' '}
       </h1>
       <p className='mt-8 text-2xl text-center'>
         Beer pong, also known as Beirut, is a drinking game in which players
