@@ -6,7 +6,7 @@ import { supabase } from '@/utils/client';
 
 export default async function hello(req: NextApiRequest, res: NextApiResponse) {
   const { data } = await supabase
-    .from('playerstatssolo')
+    .from('ss22_playerstatssolo')
     .select('player,played, schnickelwins, winrate, *')
     .order('winrate', { ascending: false })
     .order('played', { ascending: false })

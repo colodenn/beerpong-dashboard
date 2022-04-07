@@ -47,7 +47,7 @@ export function SoloStats({ id }: { id: string }) {
             />
           </div>
           <div>
-            <h3 className='text-center'>{stats?.stats.schnickeln}</h3>
+            <h3 className='text-center'>{stats?.stats.schnickelwins}</h3>
           </div>
           <div>
             <h5 className='mx-auto text-center'>Rock, paper & scissors</h5>
@@ -69,7 +69,7 @@ export function SoloStats({ id }: { id: string }) {
             />
           </div>
           <div>
-            <h3 className='text-center'>{stats?.stats.won}</h3>
+            <h3 className='text-center'>{stats?.stats.wins}</h3>
           </div>
           <div>
             <h5 className='mx-auto text-center'>Games Won</h5>
@@ -113,7 +113,7 @@ export function SoloStats({ id }: { id: string }) {
             />
           </div>
           <div>
-            <h3 className='text-center'>{stats?.stats.drunk} l</h3>
+            <h3 className='text-center'>{stats?.stats.beerdrunk} l</h3>
           </div>
           <div>
             <h5 className='mx-auto text-center'>Beer drunk</h5>

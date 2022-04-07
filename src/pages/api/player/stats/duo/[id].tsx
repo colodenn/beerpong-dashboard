@@ -7,7 +7,7 @@ import { supabase } from '@/utils/client';
 export default async function hello(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
   const { data } = await supabase
-    .from('playerstatsduo')
+    .from('ss22_playerstatsduo')
     .select('player, *')
     .eq('player', id)
     .single();
