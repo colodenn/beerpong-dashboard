@@ -43,7 +43,7 @@ export default function TableTeam() {
               if (currentDate < lastDate) {
                 setLastDate(currentDate);
                 additionalHTML = (
-                  <tr>
+                  <tr key={i + '5'}>
                     <td>
                       <h4 className='ml-6'>{lastDate.toDateString()}</h4>
                     </td>

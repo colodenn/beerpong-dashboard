@@ -62,7 +62,7 @@ export default function HomePage() {
             <div>
               <div className='flex justify-center mx-auto rounded-full'>
                 <div
-                  className='grid relative z-50 grid-cols-1 grid-rows-1 ml-4 rounded-full'
+                  className='grid relative grid-cols-1 grid-rows-1 ml-4 rounded-full'
                   onMouseEnter={() => setHover(true)}
                   onMouseLeave={() => setHover(false)}
                 >
@@ -88,7 +88,7 @@ export default function HomePage() {
                           // write your building UI
                           <div className='relative w-full h-full'>
                             {imageList.map((image, index) => (
-                              <div key={index} className='image-item z-50'>
+                              <div key={index} className='image-item'>
                                 <div className='w-full h-full'>
                                   <Image
                                     src={image['data_url']}
