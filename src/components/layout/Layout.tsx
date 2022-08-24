@@ -155,6 +155,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <input
               type='checkbox'
               checked={toggle}
+              // eslint-disable-next-line no-console
+              onChange={() => console.log('')}
               onClick={() => setToggle(!toggle)}
               className='toggle'
             />
