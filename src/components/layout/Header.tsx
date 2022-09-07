@@ -3,18 +3,31 @@ import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 import { useState } from 'react';
-import DarkModeToggle from 'react-dark-mode-toggle';
+import Select from 'react-select';
+import useSWR from 'swr';
+import { Season } from 'types';
+import useLocalStorageState from 'use-local-storage-state';
 
 import { useUser } from '@/utils/useUser';
+const fetcher = (args: RequestInfo | URL) =>
+  fetch(args).then((res) => res.json());
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  // const [isDarkMode, setIsDarkMode] = useState(true);
   const { user, logoutUser, profile } = useUser();
+  const { data } = useSWR(`/api/seasons`, fetcher);
+  const seasonDropdownOptions = data?.['seasons'].map((e: Season) => {
+    return {
+      id: e.id,
+      name: e.name,
+    };
+  });
+  const [season, setSeason] = useLocalStorageState('SS 22');
 
-  function changeTheme() {
-    setIsDarkMode(!isDarkMode);
-  }
+  // function changeTheme() {
+  //   setIsDarkMode(!isDarkMode);
+  // }
   return (
     <header className='bg-primary border-b-3 fixed top-0 z-50 pb-4 mx-auto w-full bg-white bg-opacity-60 border-b-2 border-gray-200 backdrop-filter backdrop-blur-md backdrop-saturate-150'>
       <div className='container grid grid-cols-3 auto-cols-max mx-auto mt-6 w-full'>
@@ -75,10 +88,23 @@ export default function Header() {
             </div>
           </Link>
         </div>
+        <div className='flex justify-end items-center'>
+          <Select
+            className='basic-single max-w-fit'
+            isSearchable={false}
+            isClearable={false}
+            classNamePrefix='select'
+            options={seasonDropdownOptions}
+            value={seasonDropdownOptions?.filter((option: Season) => {
+              return option.name == season;
+            })}
+            onChange={(e) => setSeason(e.value)}
+          ></Select>
+        </div>
 
-        <div
+        {/* <div
           data-toggle-theme='dark,light'
-          className='flex justify-end items-center'
+          className='flex items-center justify-end'
         >
           {' '}
           <DarkModeToggle
@@ -86,7 +112,7 @@ export default function Header() {
             checked={isDarkMode}
             size={55}
           />
-        </div>
+        </div> */}
       </div>
     </header>
   );
