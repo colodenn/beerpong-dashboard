@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Rotate as Hamburger } from 'hamburger-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,8 +20,8 @@ export default function Header() {
   const { data } = useSWR(`/api/seasons`, fetcher);
   const seasonDropdownOptions = data?.['seasons'].map((e: Season) => {
     return {
-      id: e.id,
-      name: e.name,
+      value: e.id,
+      label: e.name,
     };
   });
   const [season, setSeason] = useLocalStorageState('SS 22');
@@ -95,8 +96,8 @@ export default function Header() {
             isClearable={false}
             classNamePrefix='select'
             options={seasonDropdownOptions}
-            value={seasonDropdownOptions?.filter((option: Season) => {
-              return option.name == season;
+            value={seasonDropdownOptions?.filter((option: any) => {
+              return option.value == season;
             })}
             onChange={(e) => setSeason(e.value)}
           ></Select>
