@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Image from 'next/image';
-import Link from 'next/link';
 import { Key } from 'react';
 import useSWR from 'swr';
+
+import { User } from './User';
 const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 export default function Table() {
@@ -28,25 +28,7 @@ export default function Table() {
                 return (
                   <tr key={i} className=''>
                     <td>
-                      <Link href={`/player/${e.player}`} passHref={true}>
-                        <div className='flex items-center space-x-3 cursor-pointer'>
-                          <div className='flex items-center'>
-                            <div className='avatar'>
-                              <div className='mask mask-squircle w-12 h-12'>
-                                <Image
-                                  height={55}
-                                  width={55}
-                                  src={e.avatar_url}
-                                  alt='Avatar Tailwind CSS Component'
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div>
-                            <div className='font-bold'>{e.player}</div>
-                          </div>
-                        </div>
-                      </Link>
+                      <User username={e.player} avatar_url={e.avatar_url} />
                     </td>
                     <td>
                       <div className='font-bold'>{e.wins}</div>
