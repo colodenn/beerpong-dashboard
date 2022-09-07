@@ -16,7 +16,11 @@ export function User({
             <Image
               height={55}
               width={55}
-              src={avatar_url}
+              src={
+                avatar_url != ''
+                  ? avatar_url
+                  : 'https://i.imgur.com/WxNkK7J.png'
+              }
               alt='Avatar Tailwind CSS Component'
             />
           </div>
