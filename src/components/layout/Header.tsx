@@ -10,8 +10,7 @@ import { Season } from 'types';
 import useLocalStorageState from 'use-local-storage-state';
 
 import { useUser } from '@/utils/useUser';
-const fetcher = (args: RequestInfo | URL) =>
-  fetch(args).then((res) => res.json());
+const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
