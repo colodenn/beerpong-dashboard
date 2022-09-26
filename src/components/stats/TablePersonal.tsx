@@ -3,13 +3,15 @@
 // import Link from 'next/link';
 import { Key, useState } from 'react';
 import useSWR from 'swr';
+import useLocalStorageState from 'use-local-storage-state';
 
 import { Team } from './Team';
 
 const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 export default function Table(props: { id: string }) {
-  const { data } = useSWR(`/api/player/games/${props.id}`, fetcher);
+  const [season] = useLocalStorageState('SS 22');
+  const { data } = useSWR(`/api/player/games/${props.id}/${season}`, fetcher);
   let [lastDate] = useState(new Date());
   function setLastDate(date: Date) {
     date.getUTCHours() < 8
