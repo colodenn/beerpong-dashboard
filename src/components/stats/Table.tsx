@@ -1,6 +1,7 @@
 import { Key, useState } from 'react';
 import useSWR from 'swr';
 import { SoloGame } from 'types';
+import useLocalStorageState from 'use-local-storage-state';
 
 import { Team } from './Team';
 
@@ -8,7 +9,8 @@ import { Team } from './Team';
 const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 export default function Table() {
-  const { data } = useSWR('/api/solos', fetcher);
+  const [season] = useLocalStorageState('SS 22');
+  const { data } = useSWR('/api/solos/' + season, fetcher);
   let [lastDate] = useState(new Date());
   function setLastDate(date: Date) {
     date.getHours() < 8
