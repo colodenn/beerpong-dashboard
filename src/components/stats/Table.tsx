@@ -38,7 +38,7 @@ export default function Table() {
         </thead>
         <tbody>
           {data &&
-            data?.games.map((e: SoloGame, i: Key | null | undefined) => {
+            data?.games?.map((e: SoloGame, i: Key | null | undefined) => {
               const currentDate = new Date(e.timestamp);
               let additionalHTML = <></>;
               if (currentDate < lastDate) {

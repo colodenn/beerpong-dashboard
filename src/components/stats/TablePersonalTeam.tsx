@@ -41,7 +41,7 @@ export default function Table(props: { id: string }) {
           </thead>
           <tbody>
             {data &&
-              data?.games.map((e: any, i: any) => {
+              data?.games?.map((e: any, i: any) => {
                 const currentDate = new Date(e.timestamp);
                 let additionalHTML = <></>;
                 if (currentDate < lastDate) {
