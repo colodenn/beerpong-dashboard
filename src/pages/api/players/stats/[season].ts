@@ -3,11 +3,22 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { supabase } from '@/utils/client';
+import { getSeasonData } from '@/utils/seasonData';
 
 export default async function hello(req: NextApiRequest, res: NextApiResponse) {
+  const season = req.query['season'][0];
+  const seasonData = season ? await getSeasonData(season) : null;
+  const minimumGames = 5;
+
   const { data } = await supabase
-    .from('ss22_playerstatssolo')
-    .select('player,played, schnickelwins, winrate, *')
+    .rpc(
+      'playerstats_solo_function',
+      seasonData
+        ? { start_date: seasonData.data?.start, end_date: seasonData.data?.end }
+        : {}
+    )
+    .select('player, played, schnickelwins, winrate, *')
+    .gte('played', minimumGames)
     .order('winrate', { ascending: false })
     .order('played', { ascending: false })
     .order('schnickelwins', { ascending: false });

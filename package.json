@@ -47,6 +47,7 @@
     "tailwind-merge": "^1.1.1",
     "theme-change": "^2.0.2",
     "use-dark-mode": "^2.3.1",
+    "use-local-storage-state": "17",
     "yup": "^0.32.11"
   },
   "devDependencies": {

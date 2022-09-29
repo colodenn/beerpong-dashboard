@@ -3,11 +3,20 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { supabase } from '@/utils/client';
+import { getSeasonData } from '@/utils/seasonData';
 
 export default async function hello(req: NextApiRequest, res: NextApiResponse) {
-  const { id } = req.query;
+  const id = req.query['id'][0];
+  const season = req.query['id'][1];
+  const seasonData = season ? await getSeasonData(season) : null;
+
   const { data } = await supabase
-    .from('ss22_playerstatsduo')
+    .rpc(
+      'playerstats_solo_function',
+      seasonData
+        ? { start_date: seasonData.data?.start, end_date: seasonData.data?.end }
+        : {}
+    )
     .select('player, *')
     .eq('player', id)
     .single();

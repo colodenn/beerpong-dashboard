@@ -2,6 +2,7 @@ import { Key } from 'react';
 import { useState } from 'react';
 import useSWR from 'swr';
 import { TeamGame } from 'types';
+import useLocalStorageState from 'use-local-storage-state';
 
 import { Team } from './Team';
 
@@ -9,7 +10,8 @@ import { Team } from './Team';
 const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 export default function TableTeam() {
-  const { data } = useSWR('/api/teams', fetcher);
+  const [season] = useLocalStorageState('SS 22');
+  const { data } = useSWR('/api/teams/' + season, fetcher);
   let [lastDate] = useState(new Date());
   function setLastDate(date: Date) {
     date.getHours() < 8
@@ -37,7 +39,7 @@ export default function TableTeam() {
         </thead>
         <tbody>
           {data &&
-            data?.games.map((e: TeamGame, i: Key | null | undefined) => {
+            data?.games?.map((e: TeamGame, i: Key | null | undefined) => {
               const currentDate = new Date(e.timestamp);
               let additionalHTML = <></>;
               if (currentDate < lastDate) {
@@ -87,8 +89,8 @@ export default function TableTeam() {
         </tbody>
         <tfoot>
           <tr>
-            <th className='bg-white'>Team 1</th>
-            <th className='bg-white'>Team 2</th>
+            <th className='bg-white'>Winner</th>
+            <th className='bg-white'>Loser</th>
             <th className='bg-white'>Score</th>
           </tr>
         </tfoot>

@@ -52,3 +52,11 @@ export type TeamGame = {
   cupsleft: number;
   timestamp: number;
 };
+
+export type Season = {
+  id: string;
+  start: number;
+  end: number;
+  name: string;
+  type: string;
+};
