@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Key } from 'react';
 import useSWR from 'swr';
+import useLocalStorageState from 'use-local-storage-state';
 
 import { User } from './User';
 const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 export default function Table() {
-  const { data } = useSWR('/api/players/stats', fetcher);
+  const [season] = useLocalStorageState('SS 22');
+  const { data } = useSWR('/api/players/stats/' + season, fetcher);
   return (
     <>
       <div className='overflow-x-auto right-4'>

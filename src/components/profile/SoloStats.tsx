@@ -2,11 +2,14 @@
 import Image from 'next/image';
 import ScrollAnimation from 'react-animate-on-scroll';
 import useSWR from 'swr';
+import useLocalStorageState from 'use-local-storage-state';
 
 const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 export function SoloStats({ id }: { id: string }) {
-  const { data: stats } = useSWR(`/api/player/stats/${id}`, fetcher);
+  const [season] = useLocalStorageState('SS 22');
+  const { data: stats } = useSWR(`/api/player/stats/${id}/${season}`, fetcher);
+  const errorString = '0';
 
   return (
     <ul className='grid grid-cols-2 gap-12 mx-auto mt-12 md:grid-cols-5'>
@@ -25,7 +28,9 @@ export function SoloStats({ id }: { id: string }) {
             />
           </div>
           <div>
-            <h3 className='text-center'>{stats?.stats.played}</h3>
+            <h3 className='text-center'>
+              {stats?.stats?.played ? stats.stats.played : errorString}
+            </h3>
           </div>
           <div>
             <h5 className='mx-auto text-center'>Solo Games Played</h5>
@@ -47,7 +52,11 @@ export function SoloStats({ id }: { id: string }) {
             />
           </div>
           <div>
-            <h3 className='text-center'>{stats?.stats.schnickelwins}</h3>
+            <h3 className='text-center'>
+              {stats?.stats?.schnickelwins
+                ? stats.stats.schnickelwins
+                : errorString}
+            </h3>
           </div>
           <div>
             <h5 className='mx-auto text-center'>Rock, paper & scissors</h5>
@@ -69,7 +78,9 @@ export function SoloStats({ id }: { id: string }) {
             />
           </div>
           <div>
-            <h3 className='text-center'>{stats?.stats.wins}</h3>
+            <h3 className='text-center'>
+              {stats?.stats?.wins ? stats.stats.wins : errorString}
+            </h3>
           </div>
           <div>
             <h5 className='mx-auto text-center'>Games Won</h5>
@@ -91,7 +102,9 @@ export function SoloStats({ id }: { id: string }) {
             />
           </div>
           <div>
-            <h3 className='text-center'>{stats?.stats.winrate}%</h3>
+            <h3 className='text-center'>
+              {stats?.stats?.winrate ? stats.stats.winrate : errorString}%
+            </h3>
           </div>
           <div>
             <h5 className='mx-auto text-center'>Winrate</h5>
@@ -113,7 +126,9 @@ export function SoloStats({ id }: { id: string }) {
             />
           </div>
           <div>
-            <h3 className='text-center'>{stats?.stats.beerdrunk} l</h3>
+            <h3 className='text-center'>
+              {stats?.stats?.beerdrunk ? stats.stats.beerdrunk : errorString} l
+            </h3>
           </div>
           <div>
             <h5 className='mx-auto text-center'>Beer drunk</h5>
