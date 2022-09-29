@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { supabase } from '@/utils/client';
+import { getSeasonData } from '@/utils/seasonData';
 
 export default async function hello(req: NextApiRequest, res: NextApiResponse) {
   const season = req.query['id'][0];
@@ -20,8 +21,4 @@ export default async function hello(req: NextApiRequest, res: NextApiResponse) {
     .order('timestamp', { ascending: false })
     .limit(55);
   res.send({ games: data });
-}
-
-function getSeasonData(id: string) {
-  return supabase.from('seasons').select('*').eq('id', id).single();
 }
