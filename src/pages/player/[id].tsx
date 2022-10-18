@@ -17,6 +17,8 @@ import { TeamStats } from '@/components/profile/TeamStats';
 import Seo from '@/components/Seo';
 import TablePersonal from '@/components/stats/TablePersonal';
 import TablePersonalTeam from '@/components/stats/TablePersonalTeam';
+import TableAgainstSolo from '@/components/stats/TableSoloStatsAgainst';
+import TableWithDuo from '@/components/stats/TableTeamStatsWith';
 
 import { useUser } from '@/utils/useUser';
 const fetcher = (args: any) => fetch(args).then((res) => res.json());
@@ -176,16 +178,28 @@ export default function HomePage() {
           </div>
           <ScrollAnimation animateIn='fade-in slide-in-bottom'>
             <section className='mx-auto mt-24 w-full'>
-              <Background title='Solo Games' colour='#cdf9ec'>
-                <TablePersonal id={String(id)} />
-              </Background>
+              {solos == 'Solos' ? (
+                <Background title='Solo Games' colour='#cdf9ec'>
+                  <TablePersonal id={String(id)} />
+                </Background>
+              ) : (
+                <Background title='Team Games' colour='#cdf9ec'>
+                  <TablePersonalTeam id={String(id)} />
+                </Background>
+              )}
             </section>
           </ScrollAnimation>
           <ScrollAnimation animateIn='fade-in slide-in-bottom'>
             <section className='mx-auto mt-24 w-full'>
-              <Background title='Team Games' colour='#cdf9ec'>
-                <TablePersonalTeam id={String(id)} />
-              </Background>
+              {solos == 'Solos' ? (
+                <Background title='Stats against others' colour='#cdf9ec'>
+                  <TableAgainstSolo id={String(id)} />
+                </Background>
+              ) : (
+                <Background title='Stats with others' colour='#cdf9ec'>
+                  <TableWithDuo id={String(id)} />
+                </Background>
+              )}
             </section>
           </ScrollAnimation>
         </main>
