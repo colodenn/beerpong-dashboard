@@ -26,6 +26,7 @@ const fetcher = (args: any) => fetch(args).then((res) => res.json());
 export default function HomePage() {
   const router = useRouter();
   const { session } = useUser();
+
   const [images, setImages] = React.useState([]);
   const maxNumber = 1;
 
@@ -45,6 +46,7 @@ export default function HomePage() {
   const { updateProfile, profile } = useUser();
   const { id } = router.query;
   const { data } = useSWR(`/api/player/${id}`, fetcher);
+
   const [editAvatar, setAvatarName] = useState(data?.player?.avatar_url);
   const [avatarToggle, setAvatarToggle] = useState(true);
   const [solos, setSolos] = useState('Solos');
@@ -68,39 +70,41 @@ export default function HomePage() {
                   onMouseEnter={() => setHover(true)}
                   onMouseLeave={() => setHover(false)}
                 >
-                  <div className=''>
-                    {id == profile?.username ? (
-                      <ImageUploading
-                        multiple
-                        value={images}
-                        onChange={onChange}
-                        maxNumber={maxNumber}
-                        dataURLKey='data_url'
-                      >
-                        {({
-                          imageList,
+                  <div className='grid grid-cols-3'>
+                    <div></div>
+                    <div className=''>
+                      {id == profile?.username ? (
+                        <ImageUploading
+                          multiple
+                          value={images}
+                          onChange={onChange}
+                          maxNumber={maxNumber}
+                          dataURLKey='data_url'
+                        >
+                          {({
+                            imageList,
 
-                          onImageUpload,
-                          onImageRemoveAll,
-                          onImageUpdate,
-                          onImageRemove,
-                          isDragging,
-                          dragProps,
-                        }) => (
-                          // write your building UI
-                          <div className='relative w-full h-full'>
-                            {imageList.map((image, index) => (
-                              <div key={index} className='image-item'>
-                                <div className='w-full h-full'>
-                                  <Image
-                                    src={image['data_url']}
-                                    alt=''
-                                    height={250}
-                                    width={250}
-                                    className='rounded-full'
-                                  />
-                                </div>
-                                {/* <div className='flex items-center justify-around'>
+                            onImageUpload,
+                            onImageRemoveAll,
+                            onImageUpdate,
+                            onImageRemove,
+                            isDragging,
+                            dragProps,
+                          }) => (
+                            // write your building UI
+                            <div className='relative w-full h-full'>
+                              {imageList.map((image, index) => (
+                                <div key={index} className='image-item'>
+                                  <div className='w-full h-full'>
+                                    <Image
+                                      src={image['data_url']}
+                                      alt=''
+                                      height={250}
+                                      width={250}
+                                      className='rounded-full'
+                                    />
+                                  </div>
+                                  {/* <div className='flex items-center justify-around'>
                                   <button onClick={() => onImageUpdate(index)}>
                                     Confirm
                                   </button>
@@ -108,46 +112,50 @@ export default function HomePage() {
                                     Remove
                                   </button>
                                 </div> */}
-                              </div>
-                            ))}
-                            <button
-                              className='upload__image-wrapper'
-                              onClick={() => {
-                                onImageUpload();
-                              }}
-                              {...dragProps}
-                            >
-                              {' '}
-                              {imageList.length == 0 && (
-                                <div className='w-full h-full'>
-                                  <Image
-                                    height={250}
-                                    width={250}
-                                    alt=''
-                                    className='absolute mx-auto rounded-full hover:cursor-pointer'
-                                    src={
-                                      data?.player?.avatar_url ??
-                                      'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
-                                    }
-                                  />
                                 </div>
-                              )}
-                            </button>
-                          </div>
-                        )}
-                      </ImageUploading>
-                    ) : (
-                      <Image
-                        height={250}
-                        width={250}
-                        alt=''
-                        className='absolute mx-auto rounded-full'
-                        src={
-                          data?.player?.avatar_url ??
-                          'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
-                        }
-                      />
-                    )}
+                              ))}
+                              <button
+                                className='upload__image-wrapper'
+                                onClick={() => {
+                                  onImageUpload();
+                                }}
+                                {...dragProps}
+                              >
+                                {' '}
+                                {imageList.length == 0 && (
+                                  <div className='w-full h-full'>
+                                    <Image
+                                      height={250}
+                                      width={250}
+                                      alt=''
+                                      className='absolute mx-auto rounded-full hover:cursor-pointer'
+                                      src={
+                                        data?.player?.avatar_url ??
+                                        'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
+                                      }
+                                    />
+                                  </div>
+                                )}
+                              </button>
+                            </div>
+                          )}
+                        </ImageUploading>
+                      ) : (
+                        <Image
+                          height={250}
+                          width={250}
+                          alt=''
+                          className='absolute mx-auto rounded-full'
+                          src={
+                            data?.player?.avatar_url ??
+                            'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
+                          }
+                        />
+                      )}
+                    </div>
+                    <div>
+                      <Badges id={id} />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -192,11 +200,11 @@ export default function HomePage() {
           <ScrollAnimation animateIn='fade-in slide-in-bottom'>
             <section className='mx-auto mt-24 w-full'>
               {solos == 'Solos' ? (
-                <Background title='Stats against others' colour='#cdf9ec'>
+                <Background title='Stats against others' colour='#FFEEA8'>
                   <TableAgainstSolo id={String(id)} />
                 </Background>
               ) : (
-                <Background title='Stats with others' colour='#cdf9ec'>
+                <Background title='Stats with others' colour='#FFEEA8'>
                   <TableWithDuo id={String(id)} />
                 </Background>
               )}
@@ -208,3 +216,28 @@ export default function HomePage() {
     </>
   );
 }
+
+const Badges = (props: any) => {
+  const { data: badges } = useSWR(`/api/badges/player/${props.id}`, fetcher);
+
+  return !badges ? (
+    <>Loading</>
+  ) : (
+    <div className='md:flex md:ml-12 md:space-x-12'>
+      {badges?.badges.map((e: any, key: number) => (
+        <div key={key} className=''>
+          <div className='flex justify-center'>
+            <Image
+              height={75}
+              width={75}
+              alt={e.description}
+              src={e.url}
+              className='mx-auto'
+            />
+          </div>
+          <h3 className='mt-1 text-sm font-semibold text-center'>{e.name}</h3>
+        </div>
+      ))}
+    </div>
+  );
+};
