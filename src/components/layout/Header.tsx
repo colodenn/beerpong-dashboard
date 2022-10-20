@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Rotate as Hamburger } from 'hamburger-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import useSWR from 'swr';
 import { Season } from 'types';
@@ -24,6 +25,10 @@ export default function Header() {
     };
   });
   const [season, setSeason] = useLocalStorageState('SS 22');
+  useEffect(() => {
+    setSeason(season ? season : 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // function changeTheme() {
   //   setIsDarkMode(!isDarkMode);
