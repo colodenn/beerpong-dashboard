@@ -9,7 +9,7 @@ export default async function getSeasons(
   const { data } = await supabase
     .from('seasons')
     .select('*')
-    .order('start', { ascending: true });
+    .order('start', { ascending: false });
   if (data) {
     res.status(200).json({ seasons: data });
   } else {
