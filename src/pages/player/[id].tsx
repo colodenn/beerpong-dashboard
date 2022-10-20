@@ -226,7 +226,10 @@ const Badges = (props: any) => {
     <div className='md:flex md:ml-12 md:space-x-12'>
       {badges?.badges.map((e: any, key: number) => (
         <div key={key} className=''>
-          <div className='flex justify-center'>
+          <div
+            className='tooltip tooltip-top flex justify-center'
+            data-tip={e.description}
+          >
             <Image
               height={75}
               width={75}
