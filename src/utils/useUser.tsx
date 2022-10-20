@@ -1,7 +1,7 @@
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { AuthUser, Session } from '@supabase/supabase-js';
+import { AuthUser, Provider, Session } from '@supabase/supabase-js';
 import { useRouter } from 'next/router';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
@@ -11,6 +11,7 @@ import { UserDetails } from '../../types';
 type UserContextInterface = {
   user: AuthUser | null;
   loginUser: (email: string) => Promise<any>;
+  loginUserProvider: (provider: Provider) => Promise<any>;
   logoutUser: () => Promise<any> | void;
   setUser: (user: AuthUser) => void;
   session: Session | null;
@@ -67,6 +68,14 @@ export function UserContextProvider({
       authListener?.unsubscribe();
     };
   }, []);
+
+  async function loginUserProvider(provider: Provider) {
+    const { user, session, error } = await supabase.auth.signIn({
+      provider: provider,
+    });
+    return { error, session, user };
+  }
+
   async function loginUser(email: string) {
     const { user, session, error } = await supabase.auth.signIn({ email });
     return { error, session, user };
@@ -117,6 +126,7 @@ export function UserContextProvider({
       value={{
         user,
         loginUser,
+        loginUserProvider,
         logoutUser,
         setUser,
         session,

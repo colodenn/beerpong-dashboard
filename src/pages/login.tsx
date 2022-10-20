@@ -22,6 +22,18 @@ export default function Login() {
     }
   }
 
+  async function loginProvider(
+    e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+  ) {
+    e.preventDefault();
+    const { error } = await loginUser?.loginUserProvider('google');
+    if (error) {
+      setMessage('Something went wront...Try again');
+    } else {
+      setMessage('Check your emails to log in!');
+    }
+  }
+
   return (
     <main className='align-center dotted flex justify-center mx-auto w-full h-screen'>
       <div className='mt-48'>
@@ -39,7 +51,7 @@ export default function Login() {
                 We&apos;ll send you a login link.
               </p>
               <input
-                className='mt-4 w-full text-black rounded'
+                className='border-1 input mt-4 w-full max-w-xs border-gray-400'
                 type='email'
                 placeholder='user@ertappen.com'
                 value={email}
@@ -54,6 +66,15 @@ export default function Login() {
                 className='btn mt-2 w-full'
               >
                 Send login link
+              </button>
+              <button
+                onClick={(e) => {
+                  setClicked(true);
+                  loginProvider(e);
+                }}
+                className='btn btn-error mt-2 w-full'
+              >
+                Goolge Login
               </button>
               <p className='text-black'>{message}</p>
             </div>
