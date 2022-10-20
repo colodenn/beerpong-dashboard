@@ -51,7 +51,7 @@ export default function Login() {
                 We&apos;ll send you a login link.
               </p>
               <input
-                className='mt-4 w-full text-black rounded'
+                className='border-1 input mt-4 w-full max-w-xs border-gray-400'
                 type='email'
                 placeholder='user@ertappen.com'
                 value={email}
