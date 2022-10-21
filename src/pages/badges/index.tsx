@@ -43,21 +43,24 @@ const Badges = () => {
   return !badges ? (
     <>Loading</>
   ) : (
-    <div className='grid grid-flow-col auto-cols-max gap-24 mt-12'>
+    <div className='grid grid-cols-2 gap-6 mt-12 md:grid-cols-4 lg:grid-cols-6'>
       {badges?.badges.map((e: any, key: number) => (
-        <div key={key} className='flex'>
+        <div key={key} className='flex justify-start'>
           <ScrollAnimation
             animateIn='fade-in slide-in-bottom'
             style={{ animationDelay: 0 + key * 0.1 + 's', opacity: 0 }}
           >
             <div className=''>
-              <div className='tooltip tooltip-top' data-tip={e.description}>
+              <div
+                className='tooltip tooltip-top flex justify-center'
+                data-tip={e.description}
+              >
                 <Image
-                  height={125}
-                  width={125}
+                  height={140}
+                  width={140}
                   alt={e.description}
                   src={e.url}
-                  className=''
+                  className='mx-auto'
                 />
               </div>
               <h3 className='mt-1 text-lg font-semibold text-center'>
