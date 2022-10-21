@@ -20,8 +20,8 @@ import TablePersonalTeam from '@/components/stats/TablePersonalTeam';
 import TableAgainstSolo from '@/components/stats/TableSoloStatsAgainst';
 import TableWithDuo from '@/components/stats/TableTeamStatsWith';
 
+import { fetcher } from '@/utils/fetch';
 import { useUser } from '@/utils/useUser';
-const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 export default function HomePage() {
   const router = useRouter();
