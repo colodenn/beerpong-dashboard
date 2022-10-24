@@ -1,24 +1,21 @@
 <div align="center">
-  <h1>Beerpong Website</h1>
-  <p>Template made by <a href="https://theodorusclarence.com">Theodorus Clarence</a></p>
-  
-  
-  [![CodeFactor](https://www.codefactor.io/repository/github/colodenn/beerpong-dashboard/badge)](https://www.codefactor.io/repository/github/colodenn/beerpong-dashboard)
-
+  <h1>Beerpong Dashboard 🍻</h1>
+  <image src="https://media.giphy.com/media/3o7abJISAFpHbEHEKQ/giphy.gif">
 </div>
   
-  ## Development
+  ## Getting started
   ### Setup
   
-  - Install nodejs, preferrably via a package manager, e.g. [nvm](https://github.com/nvm-sh/nvm):  
-  `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`  
-  `nvm install --lts`
+  - Clone the repository:  
+  `$ git clone https://github.com/colodenn/beerpong-dashboard`  
+
+  - Change directory:   
+  `$ cd beerpong-dashboard`
+  - Install using npm or yarn:  
+  `npm install`  <br/>
+  or  <br/>
+  `yarn`
   
-  - Install yarn:  
-  `npm install --global yarn`
-  
-  - clone this project, navigate to its root folder
-  - run `yarn`
   - create the local environment:  
   `cp .env.example .env.local`
   - fill the first two lines with the database connection parameters (These are private of course, ask [colodenn](https://github.com/colodenn) for them)
