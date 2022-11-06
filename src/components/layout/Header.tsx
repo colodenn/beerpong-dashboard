@@ -15,7 +15,6 @@ const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
-  // const [isDarkMode, setIsDarkMode] = useState(true);
   const { user, logoutUser, profile } = useUser();
   const { data } = useSWR(`/api/seasons`, fetcher);
   const seasonDropdownOptions = data?.['seasons'].map((e: Season) => {
@@ -30,9 +29,6 @@ export default function Header() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // function changeTheme() {
-  //   setIsDarkMode(!isDarkMode);
-  // }
   return (
     <header className='bg-primary border-b-3 fixed top-0 z-50 pb-4 mx-auto w-full bg-white bg-opacity-60 border-b-2 border-gray-200 backdrop-filter backdrop-blur-md backdrop-saturate-150'>
       <div className='container grid grid-cols-3 auto-cols-max mx-auto mt-6 w-full'>
@@ -69,15 +65,6 @@ export default function Header() {
               <li className='underline-offset-2 ml-1 text-lg font-semibold underline cursor-pointer md:ml-4'>
                 <Link href={'/badges'}>badges</Link>
               </li>
-              {/* <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
-                table
-              </li>
-              <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
-                gameplan
-              </li>
-              <li className='underline-offset-2 ml-4 text-lg font-semibold underline cursor-pointer'>
-                rules
-              </li> */}
             </ul>
           )}
         </div>
@@ -101,6 +88,8 @@ export default function Header() {
             className='basic-single max-w-fit'
             isSearchable={false}
             isClearable={false}
+            instanceId={'season-select'}
+            id={'season-select'}
             classNamePrefix='select'
             options={seasonDropdownOptions}
             value={seasonDropdownOptions?.filter((option: any) => {
@@ -109,18 +98,6 @@ export default function Header() {
             onChange={(e) => setSeason(e.value)}
           ></Select>
         </div>
-
-        {/* <div
-          data-toggle-theme='dark,light'
-          className='flex items-center justify-end'
-        >
-          {' '}
-          <DarkModeToggle
-            onChange={() => changeTheme()}
-            checked={isDarkMode}
-            size={55}
-          />
-        </div> */}
       </div>
     </header>
   );

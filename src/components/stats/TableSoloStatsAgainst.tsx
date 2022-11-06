@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import Image from 'next/image';
 // import Link from 'next/link';
-import { Key } from 'react';
+import React, { Key } from 'react';
 import useSWR from 'swr';
 import useLocalStorageState from 'use-local-storage-state';
 
@@ -42,10 +42,10 @@ export default function Table(props: { id: string }) {
           </thead>
           <tbody>
             {data &&
-              stats.map((e: any, i: Key | null | undefined) => {
+              stats.map((e: any, i: Key) => {
                 return (
-                  <>
-                    <tr key={i} className=''>
+                  <React.Fragment key={i}>
+                    <tr>
                       <td>
                         <User username={e.player} avatar_url={e.avatar_url} />
                       </td>
@@ -65,7 +65,7 @@ export default function Table(props: { id: string }) {
                         <div className='font-bold'>{e.schnickelwinrate} %</div>
                       </td>
                     </tr>
-                  </>
+                  </React.Fragment>
                 );
               })}
           </tbody>
