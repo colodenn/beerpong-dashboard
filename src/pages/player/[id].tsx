@@ -104,14 +104,6 @@ export default function HomePage() {
                                       className='rounded-full'
                                     />
                                   </div>
-                                  {/* <div className='flex items-center justify-around'>
-                                  <button onClick={() => onImageUpdate(index)}>
-                                    Confirm
-                                  </button>
-                                  <button onClick={() => onImageRemove(index)}>
-                                    Remove
-                                  </button>
-                                </div> */}
                                 </div>
                               ))}
                               <button

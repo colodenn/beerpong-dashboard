@@ -7,18 +7,18 @@
   ### Setup
   
   - Clone the repository:  
-  `$ git clone https://github.com/colodenn/beerpong-dashboard`  
+  `$ git clone https://github.com/colodenn/beerpong-dashboard`
 
-  - Change directory:   
+- Change directory:  
   `$ cd beerpong-dashboard`
-  - Install using npm or yarn:  
-  `npm install`  <br/>
-  or  <br/>
+- Install using npm or yarn:  
+  `npm install` <br/>
+  or <br/>
   `yarn`
-  
-  - create the local environment:  
+
+- create the local environment:  
   `cp .env.example .env.local`
-  - fill the first two lines with the database connection parameters (These are private of course, ask [colodenn](https://github.com/colodenn) for them)
+- fill the first two lines with the database connection parameters (These are private of course, ask [colodenn](https://github.com/colodenn) for them)
 
 ### Run Locally
 

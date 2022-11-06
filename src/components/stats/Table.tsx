@@ -1,4 +1,4 @@
-import { Key, useState } from 'react';
+import React, { Key, useState } from 'react';
 import useSWR from 'swr';
 import { SoloGame } from 'types';
 import useLocalStorageState from 'use-local-storage-state';
@@ -30,7 +30,7 @@ export default function Table() {
     <div className='overflow-x-auto right-4 h-96 lg:h-[36rem]'>
       <table className='table overflow-y-scroll w-full h-96 bg-white rounded-lg'>
         <thead className='bg-white'>
-          <tr className='bg-white'>
+          <tr key={'test2'} className='bg-white'>
             <th className='bg-white'>Winner</th>
             <th className='bg-white'>Loser</th>
             <th className='bg-white'>Score</th>
@@ -38,7 +38,7 @@ export default function Table() {
         </thead>
         <tbody>
           {data &&
-            data?.games?.map((e: SoloGame, i: Key | null | undefined) => {
+            data?.games?.map((e: SoloGame, i: Key) => {
               const currentDate = new Date(e.timestamp);
               let additionalHTML = <></>;
               if (currentDate < lastDate) {
@@ -56,18 +56,18 @@ export default function Table() {
               const player_right =
                 e.winner == e.player1.username ? e.player2 : e.player1;
               return (
-                <>
+                <React.Fragment key={i}>
                   {additionalHTML}
-                  <tr key={i} className=''>
+                  <tr>
                     <td>
                       <Team player_1={player_left} />
                     </td>
                     <td>
                       <Team player_1={player_right} />
                     </td>
-                    <td className=''>{e.cupsleft}</td>
+                    <td>{e.cupsleft}</td>
                   </tr>
-                </>
+                </React.Fragment>
               );
             })}
         </tbody>
