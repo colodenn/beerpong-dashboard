@@ -18,7 +18,7 @@ export default function HomePage() {
         <Header />
         <main className='container mx-auto mt-48 mb-24'>
           <ScrollAnimation animateIn='fade-in slide-in-bottom'>
-            <section className='mb-48 lg:px-72'>
+            <section className='mb-48 xl:px-72'>
               <Hero />
             </section>
           </ScrollAnimation>
