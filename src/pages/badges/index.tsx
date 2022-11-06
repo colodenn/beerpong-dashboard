@@ -17,18 +17,15 @@ export default function HomePage() {
         {/* <Seo templateTitle='Home' /> */}
         <Seo />
         <Header />
-
         <main className='container mx-auto mt-48 mb-24'>
-          <section className='mx-auto mt-32'>
-            <h1 className='text-5xl'>Badges</h1>
-            <div>
-              <Badges />
+          <section className='mx-auto mt-32 lg:px-28'>
+            <div className='px-8 md:px-8 2xl:px-48'>
+              <h1 className='text-5xl'>Badges</h1>
+              <div>
+                <Badges />
+              </div>
             </div>
           </section>
-
-          {/* <div className='flex justify-center xl:text-9xl'>
-            <animated.div>{number.to((n) => n.toFixed(0))}</animated.div>l
-          </div> */}
         </main>
         <Footer />
       </Layout>

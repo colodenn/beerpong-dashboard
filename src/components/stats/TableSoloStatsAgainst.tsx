@@ -32,12 +32,12 @@ export default function Table(props: { id: string }) {
         <table className='table overflow-y-scroll w-full h-24 bg-white rounded-lg'>
           <thead className='bg-white'>
             <tr className='bg-white'>
-              <th className='bg-white'>Opponent</th>
-              <th className='bg-white'>Winrate</th>
-              <th className='bg-white'>Played</th>
-              <th className='bg-white'>Draws</th>
-              <th className='bg-white'>Beerdrunk</th>
-              <th className='bg-white'>Schnickel-Winrate</th>
+              <th className='sticky top-0 z-10 bg-white'>Opponent</th>
+              <th className='sticky top-0 z-10 bg-white'>Winrate</th>
+              <th className='sticky top-0 z-10 bg-white'>Played</th>
+              <th className='sticky top-0 z-10 bg-white'>Draws</th>
+              <th className='sticky top-0 z-10 bg-white'>Beerdrunk</th>
+              <th className='sticky top-0 z-10 bg-white'>Schnickel-Winrate</th>
             </tr>
           </thead>
           <tbody>

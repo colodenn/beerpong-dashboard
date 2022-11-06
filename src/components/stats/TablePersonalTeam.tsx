@@ -34,9 +34,9 @@ export default function Table(props: { id: string }) {
         <table className='table overflow-y-scroll w-full h-96 bg-white rounded-lg'>
           <thead className='bg-white'>
             <tr className='bg-white'>
-              <th className='bg-white'>Winner</th>
-              <th className='bg-white'>Loser</th>
-              <th className='bg-white'>Score</th>
+              <th className='sticky top-0 z-10 bg-white'>Winner</th>
+              <th className='sticky top-0 z-10 bg-white'>Loser</th>
+              <th className='sticky top-0 z-10 bg-white'>Score</th>
             </tr>
           </thead>
           <tbody>
