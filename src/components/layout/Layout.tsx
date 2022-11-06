@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable unused-imports/no-unused-vars */
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -129,25 +130,31 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const router = useRouter();
+
   useEffect(() => {
     getLocation();
   }, []);
   return (
     <>
-      <a
-        href='#my-modal'
-        onMouseOver={() => setOver(true)}
-        onMouseLeave={() => setOver(false)}
-        className='border-full flex fixed right-0 bottom-0 z-50 justify-center items-center p-4 mr-4 mb-4 text-white bg-blue-500 bg-opacity-60 rounded-full shadow-xl backdrop-filter backdrop-blur-md backdrop-saturate-150 md:mr-16 md:mb-16 hover:bg-blue-600'
-      >
-        <Image
-          width={72}
-          height={72}
-          alt=''
-          src={over ? '/images/BallHitCup.gif' : '/images/BallHitCup.png'}
-          className='mx-auto my-auto'
-        />
-      </a>
+      {router.route != '/login' ? (
+        <a
+          href='#my-modal'
+          onMouseOver={() => setOver(true)}
+          onMouseLeave={() => setOver(false)}
+          className='border-full flex fixed right-0 bottom-0 z-50 justify-center items-center p-4 mr-4 mb-4 text-white bg-blue-500 bg-opacity-60 rounded-full shadow-xl backdrop-filter backdrop-blur-md backdrop-saturate-150 md:mr-16 md:mb-16 hover:bg-blue-600'
+        >
+          <Image
+            width={72}
+            height={72}
+            alt=''
+            src={over ? '/images/BallHitCup.gif' : '/images/BallHitCup.png'}
+            className='mx-auto my-auto'
+          />
+        </a>
+      ) : (
+        <div />
+      )}
       <div id='my-modal' className='modal'>
         <div className='modal-box'>
           <div className='flex'>
