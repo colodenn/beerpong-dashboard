@@ -1,4 +1,4 @@
-import { Key } from 'react';
+import React, { Key } from 'react';
 import { useState } from 'react';
 import useSWR from 'swr';
 import { TeamGame } from 'types';
@@ -39,13 +39,13 @@ export default function TableTeam() {
         </thead>
         <tbody>
           {data &&
-            data?.games?.map((e: TeamGame, i: Key | null | undefined) => {
+            data?.games?.map((e: TeamGame, i: Key) => {
               const currentDate = new Date(e.timestamp);
               let additionalHTML = <></>;
               if (currentDate < lastDate) {
                 setLastDate(currentDate);
                 additionalHTML = (
-                  <tr key={i + '5'}>
+                  <tr key={'date' + i}>
                     <td>
                       <h4 className='ml-6'>{lastDate.toDateString()}</h4>
                     </td>
@@ -68,9 +68,9 @@ export default function TableTeam() {
                 player_right_2 = e.team1_player2;
               }
               return (
-                <>
+                <React.Fragment key={i}>
                   {additionalHTML}
-                  <tr key={i} className=''>
+                  <tr>
                     <td>
                       <Team player_1={player_left_1} player_2={player_left_2} />
                     </td>
@@ -80,10 +80,9 @@ export default function TableTeam() {
                         player_2={player_right_2}
                       />
                     </td>
-
-                    <td className=''>{e.cupsleft}</td>
+                    <td>{e.cupsleft}</td>
                   </tr>
-                </>
+                </React.Fragment>
               );
             })}
         </tbody>

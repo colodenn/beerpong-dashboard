@@ -98,20 +98,20 @@ export function UserContextProvider({
 
   async function getProfile() {
     const user = supabase.auth.user();
-    const { data, error, status } = await supabase
-      .from('profiles')
-      .select(`*`)
-      .eq('id', user?.id)
-      .single();
+    if (user) {
+      const { data, error, status } = await supabase
+        .from('profiles')
+        .select(`*`)
+        .eq('id', user.id)
+        .single();
 
-    if (error && status !== 406) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-      throw error;
-    }
+      if (error && status !== 406) {
+        throw error;
+      }
 
-    if (data) {
-      setProfile(data);
+      if (data) {
+        setProfile(data);
+      }
     }
   }
 

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import Image from 'next/image';
 // import Link from 'next/link';
-import { Key, useState } from 'react';
+import React, { Key, useState } from 'react';
 import useSWR from 'swr';
 import useLocalStorageState from 'use-local-storage-state';
 
@@ -58,9 +58,9 @@ export default function Table(props: { id: string }) {
                 const player_right =
                   e.winner == e.player1.username ? e.player2 : e.player1;
                 return (
-                  <>
+                  <React.Fragment key={i}>
                     {additionalHTML}
-                    <tr key={i} className=''>
+                    <tr className=''>
                       <td>
                         <Team player_1={player_left} />
                       </td>
@@ -69,7 +69,7 @@ export default function Table(props: { id: string }) {
                       </td>
                       <td className=''>{e.cupsleft}</td>
                     </tr>
-                  </>
+                  </React.Fragment>
                 );
               })}
           </tbody>
