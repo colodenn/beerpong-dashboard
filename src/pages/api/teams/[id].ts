@@ -19,6 +19,6 @@ export default async function hello(req: NextApiRequest, res: NextApiResponse) {
   }
   const { data } = await query
     .order('timestamp', { ascending: false })
-    .limit(55);
+    .limit(20);
   res.send({ games: data });
 }
