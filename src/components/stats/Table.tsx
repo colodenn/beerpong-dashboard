@@ -73,8 +73,8 @@ export default function Table() {
         </tbody>
         <tfoot>
           <tr>
-            <th className='bg-white'>Player 1</th>
-            <th className='bg-white'>Player 2</th>
+            <th className='bg-white'>Winner</th>
+            <th className='bg-white'>Loser</th>
             <th className='bg-white'>Score</th>
           </tr>
         </tfoot>

@@ -1,10 +1,10 @@
 import Image from 'next/image';
-
-export const Stat = (props: {
+export interface StatType {
   text: string;
   stats: string;
   imageUrl: string;
-}) => {
+}
+export const Stat = (props: StatType) => {
   return (
     <li className='px-8 text-lg'>
       <div className='flex justify-center mb-4'>
