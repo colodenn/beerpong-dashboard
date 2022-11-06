@@ -22,7 +22,7 @@ export default function Table() {
               <td className='bg-white'>Draws</td>
               <td className='bg-white'>Winrate</td>
               <td className='bg-white'>Drunk</td>
-              <td className='bg-white'>Cup Difference</td>
+              <td className='bg-white'>Cup Difference Overall</td>
             </tr>
           </thead>
           <tbody>
@@ -52,7 +52,9 @@ export default function Table() {
                       <div className='font-bold'>{e.beerdrunk} l</div>
                     </td>
                     <td>
-                      <div className='font-bold'>{e.cup_difference}</div>
+                      <div className='font-bold'>
+                        {e.cup_difference_overall}
+                      </div>
                     </td>
                   </tr>
                 );
@@ -67,7 +69,7 @@ export default function Table() {
               <td className='bg-white'>Draws</td>
               <td className='bg-white'>Winrate</td>
               <td className='bg-white'>Drunk</td>
-              <td className='bg-white'>Cup Difference</td>
+              <td className='bg-white'>Cup Difference Overall</td>
             </tr>
           </tfoot>
         </table>

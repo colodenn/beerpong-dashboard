@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import useLocalStorageState from 'use-local-storage-state';
 
 import { Stat } from './Stat';
+import { StatSwitcher } from './StatSwitcher';
 
 const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
@@ -76,14 +77,36 @@ export function SoloStats({ id }: { id: string }) {
         animateIn='fade-in slide-in-bottom'
         style={{ animationDelay: '0.4s', opacity: 0 }}
       >
-        <Stat
-          text={'Cup Difference'}
-          stats={`${
-            stats?.stats?.cup_difference
-              ? stats.stats.cup_difference
-              : errorString
-          }`}
-          imageUrl={'/images/icons/divide.png'}
+        <StatSwitcher
+          stats={[
+            {
+              text: 'Cup Difference Win',
+              stats: `${
+                stats?.stats?.cup_difference_win
+                  ? stats.stats.cup_difference_win
+                  : errorString
+              }`,
+              imageUrl: '/images/icons/divide-green.png',
+            },
+            {
+              text: 'Cup Difference Loss',
+              stats: `${
+                stats?.stats?.cup_difference_loss
+                  ? stats.stats.cup_difference_loss
+                  : errorString
+              }`,
+              imageUrl: '/images/icons/divide-red.png',
+            },
+            {
+              text: 'Cup Difference Overall',
+              stats: `${
+                stats?.stats?.cup_difference_overall
+                  ? stats.stats.cup_difference_overall
+                  : errorString
+              }`,
+              imageUrl: '/images/icons/divide-gray.png',
+            },
+          ]}
         />
       </ScrollAnimation>
     </ul>
