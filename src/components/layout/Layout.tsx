@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable unused-imports/no-unused-vars */
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -128,6 +129,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       );
     }
   };
+
+  const router = useRouter();
 
   useEffect(() => {
     getLocation();
