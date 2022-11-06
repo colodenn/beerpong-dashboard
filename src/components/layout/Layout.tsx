@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable unused-imports/no-unused-vars */
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import Select from 'react-select';
 import useSWR from 'swr';
@@ -11,7 +11,6 @@ import useSWR from 'swr';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  // Put Header or Footer Here
   const [toggle, setToggle] = useState(false);
   const [lat, setLat] = useState<null | number>(null);
   const [lng, setLng] = useState<null | number>(null);
@@ -31,11 +30,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const fetcher = (args: any) => fetch(args).then((res) => res.json());
   const { data } = useSWR('/api/players', fetcher);
-  const playerOptions = data?.['players'].map((e: any) => {
+  const playerOptions = data?.['players'].map((e: any, index: number) => {
     return {
       value: e.username,
       label: (
-        <div className='flex items-center space-x-2'>
+        <div className='flex items-center space-x-2' key={index}>
           <Image
             className='mx-8 rounded-xl'
             width={35}
@@ -58,6 +57,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         className='basic-single'
         isSearchable={false}
         isClearable={true}
+        id={'player-select'}
+        instanceId={'player-select'}
         onChange={(e) => onChangeFunction(e?.value)}
         classNamePrefix='select'
         defaultValue={playerOptions?.['Max']}
@@ -127,9 +128,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       );
     }
   };
-  const router = useRouter();
 
-  React.useEffect(() => {
+  useEffect(() => {
     getLocation();
   }, []);
   return (

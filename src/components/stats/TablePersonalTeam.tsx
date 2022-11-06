@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from 'react';
+import React, { useState } from 'react';
 import useSWR from 'swr';
 import useLocalStorageState from 'use-local-storage-state';
 
@@ -70,9 +70,9 @@ export default function Table(props: { id: string }) {
                   player_right_2 = e.team1_player2;
                 }
                 return (
-                  <>
-                    <>{additionalHTML}</>
-                    <tr key={i} className=''>
+                  <React.Fragment key={i}>
+                    {additionalHTML}
+                    <tr className=''>
                       <td>
                         <Team
                           player_1={player_left_1}
@@ -87,7 +87,7 @@ export default function Table(props: { id: string }) {
                       </td>
                       <td className=''>{e.cupsleft}</td>
                     </tr>
-                  </>
+                  </React.Fragment>
                 );
               })}
           </tbody>

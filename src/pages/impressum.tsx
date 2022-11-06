@@ -7,6 +7,7 @@ import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import Layout from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
+
 export default function HomePage() {
   return (
     <>
@@ -14,7 +15,6 @@ export default function HomePage() {
         {/* <Seo templateTitle='Home' /> */}
         <Seo />
         <Header />
-
         <main className='container mx-auto mt-48 mb-24'>
           <ScrollAnimation animateIn='fade-in slide-in-bottom'>
             <section className='container mx-auto mt-32 lg:px-28'>
@@ -50,10 +50,6 @@ export default function HomePage() {
               </div>
             </section>
           </ScrollAnimation>
-
-          {/* <div className='flex justify-center xl:text-9xl'>
-            <animated.div>{number.to((n) => n.toFixed(0))}</animated.div>l
-          </div> */}
         </main>
         <Footer />
       </Layout>

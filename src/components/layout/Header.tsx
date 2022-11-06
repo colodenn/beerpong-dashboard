@@ -15,7 +15,6 @@ const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
 export default function Header() {
   const [isOpen, setOpen] = useState(false);
-  // const [isDarkMode, setIsDarkMode] = useState(true);
   const { user, logoutUser, profile } = useUser();
   const { data } = useSWR(`/api/seasons`, fetcher);
   const seasonDropdownOptions = data?.['seasons'].map((e: Season) => {
