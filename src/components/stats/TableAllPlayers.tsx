@@ -15,14 +15,16 @@ export default function Table() {
         <table className='table overflow-y-scroll w-full bg-white rounded-lg'>
           <thead className='bg-white'>
             <tr className='bg-white'>
-              <th className='bg-white'>Player</th>
-              <td className='bg-white'>Games Won</td>
-              <td className='bg-white'>Played</td>
-              <td className='bg-white'>Schnickeln</td>
-              <td className='bg-white'>Draws</td>
-              <td className='bg-white'>Winrate</td>
-              <td className='bg-white'>Drunk</td>
-              <td className='bg-white'>Cup Difference Overall</td>
+              <th className='sticky top-0 z-10 bg-white'>Player</th>
+              <td className='sticky top-0 z-10 bg-white'>Games Won</td>
+              <td className='sticky top-0 z-10 bg-white'>Played</td>
+              <td className='sticky top-0 z-10 bg-white'>Schnickeln</td>
+              <td className='sticky top-0 z-10 bg-white'>Draws</td>
+              <td className='sticky top-0 z-10 bg-white'>Winrate</td>
+              <td className='sticky top-0 z-10 bg-white'>Drunk</td>
+              <td className='sticky top-0 z-10 bg-white'>
+                Cup Difference Overall
+              </td>
             </tr>
           </thead>
           <tbody>

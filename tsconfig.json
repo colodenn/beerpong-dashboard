@@ -20,13 +20,7 @@
     },
     "incremental": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "src/utils/client.ts"
-
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/utils/client.ts"],
   "exclude": ["node_modules"],
   "moduleResolution": ["node_modules", ".next", "node"]
 }
