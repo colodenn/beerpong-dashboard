@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import useLocalStorageState from 'use-local-storage-state';
 
 import { Stat } from './Stat';
+import { StatSwitcher } from './StatSwitcher';
 
 const fetcher = (args: any) => fetch(args).then((res) => res.json());
 
@@ -13,7 +14,7 @@ export function SoloStats({ id }: { id: string }) {
   const errorString = '0';
 
   return (
-    <ul className='grid grid-cols-2 gap-12 mx-auto mt-12 md:grid-cols-5'>
+    <ul className='grid grid-cols-2 gap-12 mx-auto mt-12 md:grid-cols-6'>
       <ScrollAnimation
         animateIn='fade-in slide-in-bottom'
         style={{ animationDelay: '0s', opacity: 0 }}
@@ -70,6 +71,42 @@ export function SoloStats({ id }: { id: string }) {
             stats?.stats?.beerdrunk ? stats.stats.beerdrunk : errorString
           } l`}
           imageUrl={'/images/icons/beer.png'}
+        />
+      </ScrollAnimation>
+      <ScrollAnimation
+        animateIn='fade-in slide-in-bottom'
+        style={{ animationDelay: '0.4s', opacity: 0 }}
+      >
+        <StatSwitcher
+          stats={[
+            {
+              text: 'Cup Difference Win',
+              stats: `${
+                stats?.stats?.cup_difference_win
+                  ? stats.stats.cup_difference_win
+                  : errorString
+              }`,
+              imageUrl: '/images/icons/divide-green.png',
+            },
+            {
+              text: 'Cup Difference Loss',
+              stats: `${
+                stats?.stats?.cup_difference_loss
+                  ? stats.stats.cup_difference_loss
+                  : errorString
+              }`,
+              imageUrl: '/images/icons/divide-red.png',
+            },
+            {
+              text: 'Cup Difference Overall',
+              stats: `${
+                stats?.stats?.cup_difference_overall
+                  ? stats.stats.cup_difference_overall
+                  : errorString
+              }`,
+              imageUrl: '/images/icons/divide-gray.png',
+            },
+          ]}
         />
       </ScrollAnimation>
     </ul>
