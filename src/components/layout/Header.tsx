@@ -105,6 +105,8 @@ export default function Header() {
               className='basic-single max-w-fit'
               isSearchable={false}
               isClearable={false}
+              id={'season-select'}
+              instanceId={'season-select'}
               classNamePrefix='select'
               options={seasonDropdownOptions}
               value={seasonDropdownOptions?.filter((option: any) => {
