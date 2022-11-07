@@ -15,9 +15,9 @@ module.exports = {
       'i.giphy.com',
       'jtvcdxtqxqyqiluktxaw.supabase.co',
     ],
+    disableStaticImages: true,
   },
   reactStrictMode: true,
-  disableStaticImages: true,
   // Uncoment to add domain whitelist
   // images: {
   //   domains: [

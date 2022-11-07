@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { Rotate as Hamburger } from 'hamburger-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -34,9 +35,39 @@ export default function Header() {
   //   setIsDarkMode(!isDarkMode);
   // }
 
+  const menuVariants = {
+    open: {
+      opacity: 1,
+      display: 'block',
+      y: 0,
+      transition: {
+        staggerChildren: 0.5,
+      },
+    },
+    closed: {
+      opacity: 0,
+      display: 'none',
+      y: '-60px',
+      transition: {
+        staggerChildren: 0.5,
+      },
+    },
+  };
+
+  const navOptionsVariants = {
+    open: {
+      opacity: 1,
+      y: 0,
+    },
+    closed: {
+      opacity: 0,
+      y: '-60px',
+    },
+  };
+
   const getNavOptions = () => {
     return (
-      <ul className='fade-in slide-in-bottom py-8 ml-2 space-y-4 text-4xl md:flex md:py-0 md:ml-8 md:space-y-0 md:text-lg'>
+      <ul className='fade-in slide-in-bottom text-[3rem] py-20 mr-2 space-y-10 md:flex md:py-0 md:ml-8 md:space-y-0 md:text-lg'>
         <li className='underline-offset-2 ml-1 font-semibold underline cursor-pointer md:ml-4'>
           {!user ? (
             <Link href='/login'>login</Link>
@@ -128,14 +159,27 @@ export default function Header() {
           />
         </div> */}
         </div>
-        <div
-          className={`flex justify-center text-xl md:hidden ${
-            isOpen ? 'block' : 'hidden'
-          }`}
-        >
-          {getNavOptions()}
-        </div>
       </header>
+      <div className='md:hidden'>
+        <AnimatePresence>
+          <motion.div
+            variants={menuVariants}
+            initial='closed'
+            onClick={() => setOpen(false)}
+            animate={isOpen ? 'open' : 'closed'}
+            className='bg-primary border-b-3 fixed top-20 z-50 px-8 pb-4 mx-auto w-full h-full bg-white bg-opacity-60 border-b-2 border-gray-200 drop-shadow-md backdrop-filter backdrop-blur-md backdrop-saturate-150 md:hidden'
+          >
+            <motion.div
+              initial='closed'
+              variants={navOptionsVariants}
+              animate={isOpen ? 'open' : 'closed'}
+              className={`text-center text-4xl`}
+            >
+              {getNavOptions()}
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
