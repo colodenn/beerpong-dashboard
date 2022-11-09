@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable unused-imports/no-unused-vars */
+import { Analytics } from '@vercel/analytics/react';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import '@/styles/globals.css';
-// !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
 import '@/styles/colors.css';
 
 import Layout from '@/components/layout/Layout';
@@ -57,6 +57,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <UserContextProvider>
       <Layout>
         <Component {...pageProps} />
+        <Analytics />
       </Layout>
     </UserContextProvider>
   );

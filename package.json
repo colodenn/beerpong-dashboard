@@ -24,6 +24,7 @@
     "@types/formidable": "^2.0.4",
     "@types/react-animate-on-scroll": "^2.1.5",
     "@types/react-datepicker": "^4.3.4",
+    "@vercel/analytics": "^0.1.4",
     "clsx": "^1.1.1",
     "daisyui": "^1.21.0",
     "formidable": "^2.0.1",
