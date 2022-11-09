@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useState } from 'react';
-import { useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import Select from 'react-select';
 import useSWR from 'swr';
@@ -40,7 +39,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             className='mx-8 rounded-xl'
             width={35}
             height={35}
-            src={e.avatar_url}
+            src={e.avatar_url !== '' ? e.avatar_url : '/images/icons/beer.png'}
             alt=''
           />
           <p className='font-semibold'>{e.username}</p>
@@ -132,17 +131,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const router = useRouter();
 
-  useEffect(() => {
-    getLocation();
-  }, []);
   return (
     <>
       {router.route != '/login' ? (
-        <a
-          href='#my-modal'
+        <label
+          htmlFor='my-modal'
+          onClick={() => getLocation()}
           onMouseOver={() => setOver(true)}
           onMouseLeave={() => setOver(false)}
-          className='border-full flex fixed right-0 bottom-0 z-50 justify-center items-center p-4 mr-4 mb-4 text-white bg-blue-500 bg-opacity-60 rounded-full shadow-xl backdrop-filter backdrop-blur-md backdrop-saturate-150 md:mr-16 md:mb-16 hover:bg-blue-600'
+          className='border-full flex fixed right-0 bottom-0 z-50 justify-center items-center p-4 mr-4 mb-4 text-white bg-blue-500 bg-opacity-60 rounded-full shadow-xl backdrop-filter backdrop-blur-md backdrop-saturate-150 md:mr-16 md:mb-16 hover:bg-blue-600 hover:cursor-pointer'
         >
           <Image
             width={72}
@@ -151,10 +148,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             src={over ? '/images/BallHitCup.gif' : '/images/BallHitCup.png'}
             className='mx-auto my-auto'
           />
-        </a>
+        </label>
       ) : (
         <div />
       )}
+      <input type='checkbox' id='my-modal' className='modal-toggle' />
       <div id='my-modal' className='modal'>
         <div className='modal-box'>
           <div className='flex'>
@@ -387,9 +385,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             >
               Accept
             </a>
-            <a href='' className='btn'>
+            <label htmlFor='my-modal' className='btn'>
               Close
-            </a>
+            </label>
           </div>
         </div>
       </div>
