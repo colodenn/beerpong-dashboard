@@ -101,6 +101,7 @@ export default function HomePage() {
                                       alt=''
                                       height={250}
                                       width={250}
+                                      objectFit='cover'
                                       className='rounded-full'
                                     />
                                   </div>
@@ -120,6 +121,7 @@ export default function HomePage() {
                                       height={250}
                                       width={250}
                                       alt=''
+                                      objectFit='cover'
                                       className='absolute mx-auto rounded-full hover:cursor-pointer'
                                       src={
                                         data?.player?.avatar_url ??
@@ -134,6 +136,7 @@ export default function HomePage() {
                         </ImageUploading>
                       ) : (
                         <Image
+                          objectFit='cover'
                           height={250}
                           width={250}
                           alt=''
