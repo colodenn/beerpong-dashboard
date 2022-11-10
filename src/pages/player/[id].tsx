@@ -101,6 +101,7 @@ export default function HomePage() {
                                       alt=''
                                       height={250}
                                       width={250}
+                                      objectFit='cover'
                                       className='rounded-full'
                                     />
                                   </div>
@@ -120,6 +121,7 @@ export default function HomePage() {
                                       height={250}
                                       width={250}
                                       alt=''
+                                      objectFit='cover'
                                       className='absolute mx-auto rounded-full hover:cursor-pointer'
                                       src={
                                         data?.player?.avatar_url ??
@@ -133,18 +135,17 @@ export default function HomePage() {
                           )}
                         </ImageUploading>
                       ) : (
-                        <div className='w-full h-full rounded-full'>
-                          <Image
-                            height={250}
-                            width={250}
-                            alt=''
-                            className='absolute mx-auto rounded-full'
-                            src={
-                              data?.player?.avatar_url ??
-                              'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
-                            }
-                          />
-                        </div>
+                        <Image
+                          objectFit='cover'
+                          height={250}
+                          width={250}
+                          alt=''
+                          className='absolute mx-auto rounded-full'
+                          src={
+                            data?.player?.avatar_url ??
+                            'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
+                          }
+                        />
                       )}
                     </div>
                   </div>
