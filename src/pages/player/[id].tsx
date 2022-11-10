@@ -215,7 +215,7 @@ const Badges = (props: any) => {
   return !badges ? (
     <>Loading</>
   ) : (
-    <div className='grid grid-cols-3 gap-8 px-12 w-full md:flex md:ml-12 md:space-x-12'>
+    <div className='grid grid-cols-2 gap-8 px-12 w-full md:flex md:ml-12 md:space-x-12'>
       {badges?.badges.map((e: any, key: number) => (
         <div key={key} className=''>
           <div
