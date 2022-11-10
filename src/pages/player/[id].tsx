@@ -133,16 +133,18 @@ export default function HomePage() {
                           )}
                         </ImageUploading>
                       ) : (
-                        <Image
-                          height={250}
-                          width={250}
-                          alt=''
-                          className='absolute mx-auto rounded-full'
-                          src={
-                            data?.player?.avatar_url ??
-                            'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
-                          }
-                        />
+                        <div className='w-full h-full rounded-full'>
+                          <Image
+                            height={250}
+                            width={250}
+                            alt=''
+                            className='absolute mx-auto rounded-full'
+                            src={
+                              data?.player?.avatar_url ??
+                              'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
+                            }
+                          />
+                        </div>
                       )}
                     </div>
                   </div>
