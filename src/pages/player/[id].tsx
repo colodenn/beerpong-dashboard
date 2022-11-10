@@ -145,14 +145,14 @@ export default function HomePage() {
                         />
                       )}
                     </div>
-                    <div>
-                      <Badges id={id} />
-                    </div>
                   </div>
                 </div>
               </div>
               <div className='flex justify-center items-center'>
                 <h3 className='mt-6 text-center'>@{data?.player?.username}</h3>
+              </div>
+              <div className='mt-4'>
+                <Badges id={id} />
               </div>
               <div className=''>
                 <div className='flex justify-center mt-8 md:justify-end'>
@@ -215,7 +215,7 @@ const Badges = (props: any) => {
   return !badges ? (
     <>Loading</>
   ) : (
-    <div className='md:flex md:ml-12 md:space-x-12'>
+    <div className='grid grid-cols-3 gap-8 px-12 w-full md:flex md:ml-12 md:space-x-12'>
       {badges?.badges.map((e: any, key: number) => (
         <div key={key} className=''>
           <div
