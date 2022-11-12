@@ -60,3 +60,17 @@ export type Season = {
   name: string;
   type: string;
 };
+
+export type PlayerStats = {
+  player: string;
+  avatar_url: string;
+  played: number;
+  wins: number;
+  schnickelwins: number;
+  draws: number;
+  beerdrunk: number;
+  winrate: number;
+  cup_difference_overall: number;
+  cup_difference_win: number;
+  cup_difference_loss: number;
+};
