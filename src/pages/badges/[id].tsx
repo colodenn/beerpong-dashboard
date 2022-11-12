@@ -23,7 +23,7 @@ export default function HomePage() {
         <Seo />
         <Header />
 
-        <main className='container mx-auto mt-48 mb-24'>
+        <main className='container px-8 mx-auto mt-48 mb-24 md:px-0 lg:px-0'>
           <Badge
             image_url={data?.badges[0].url}
             name={data?.badges[0].name}
