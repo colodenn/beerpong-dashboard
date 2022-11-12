@@ -220,7 +220,7 @@ const Badges = (props: any) => {
   ) : (
     <div className='grid grid-cols-2 gap-2 mx-auto sm:space-x-2 md:flex md:justify-center md:space-x-16 xl:space-x-24'>
       {badges?.badges.map((e: any, key: number) => (
-        <div key={key} className=''>
+        <div key={key} className='cursor-pointer'>
           <Link href={`/badges/${e.badgeID}`} passHref={true}>
             <div
               className='tooltip tooltip-top flex overflow-auto justify-center w-full'
