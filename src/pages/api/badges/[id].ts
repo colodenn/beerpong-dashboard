@@ -9,7 +9,11 @@ export default async function getBadges(
   res: NextApiResponse
 ) {
   const { id } = req.query;
-  const { data } = await supabase.from('badges').select('*').eq('id', id);
+  const { data } = await supabase
+    .from('badges')
+    .select('*')
+    .eq('id', id)
+    .limit(1);
   if (data) {
     res.status(200).json({ badges: data });
   } else {

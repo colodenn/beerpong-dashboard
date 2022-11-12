@@ -1,6 +1,7 @@
 /* eslint-disable unused-imports/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { useState } from 'react';
@@ -214,25 +215,26 @@ export default function HomePage() {
 
 const Badges = (props: any) => {
   const { data: badges } = useSWR(`/api/badges/player/${props.id}`, fetcher);
-
   return !badges ? (
     <>Loading</>
   ) : (
     <div className='grid grid-cols-2 gap-2 mx-auto sm:space-x-2 md:flex md:justify-center md:space-x-16 xl:space-x-24'>
       {badges?.badges.map((e: any, key: number) => (
         <div key={key} className=''>
-          <div
-            className='tooltip tooltip-top flex overflow-auto justify-center w-full'
-            data-tip={e.description}
-          >
-            <Image
-              height={75}
-              width={75}
-              alt={e.description}
-              src={e.url}
-              className='mx-auto'
-            />
-          </div>
+          <Link href={`/badges/${e.badgeID}`} passHref={true}>
+            <div
+              className='tooltip tooltip-top flex overflow-auto justify-center w-full'
+              data-tip={e.description}
+            >
+              <Image
+                height={75}
+                width={75}
+                alt={e.description}
+                src={e.url}
+                className='mx-auto'
+              />
+            </div>
+          </Link>
           <h3 className='mt-1 text-sm font-semibold text-center'>{e.name}</h3>
         </div>
       ))}
