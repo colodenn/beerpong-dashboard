@@ -11,6 +11,7 @@ import '@/styles/colors.css';
 import Layout from '@/components/layout/Layout';
 
 import { supabase } from '@/utils/client';
+import { trpc } from '@/utils/trpc';
 import { UserContextProvider } from '@/utils/useUser';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -63,4 +64,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default trpc.withTRPC(MyApp);

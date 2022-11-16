@@ -21,6 +21,11 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.29.1",
+    "@tanstack/react-query": "^4.16.1",
+    "@trpc/client": "^10.0.0-rc.8",
+    "@trpc/next": "^10.0.0-rc.8",
+    "@trpc/react-query": "^10.0.0-rc.8",
+    "@trpc/server": "^10.0.0-rc.8",
     "@types/formidable": "^2.0.4",
     "@types/react-animate-on-scroll": "^2.1.5",
     "@types/react-datepicker": "^4.3.4",
@@ -45,12 +50,14 @@
     "react-spinners": "^0.11.0",
     "react-spring": "^9.4.1",
     "supabase": "^1.11.7",
+    "superjson": "^1.11.0",
     "swr": "^1.1.2",
     "tailwind-merge": "^1.1.1",
     "theme-change": "^2.0.2",
     "use-dark-mode": "^2.3.1",
     "use-local-storage-state": "17",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.2.1",
