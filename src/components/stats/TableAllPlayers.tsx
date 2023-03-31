@@ -27,6 +27,25 @@ const emptyMessage = () => {
 export default function Table(props: { search?: string }) {
   const [season] = useLocalStorageState('SS 22');
   const { data } = useSWR('/api/players/stats/' + season, fetcher);
+  const { data: elo } = useSWR('/api/players/elo/' + season, fetcher);
+  // append elo to player stats
+  //TODO: vll bissel sketchy, man könnte auch die player_stats_function anpassen damit die direkt joined, aber wollte erstmal nicht so viel ändern
+  if (data && elo) {
+    data.players.forEach((player: any) => {
+      const playerElo = elo.players.find(
+        (e: any) => e.player_name === player.player
+      );
+      player.elo = playerElo?.elo;
+    });
+  }
+
+  // sort data by elo descending
+  //TODO: wäre nice wenn wir en table benutzen würden das selber sortieren kann
+  if (data) {
+    data.players.sort((a: any, b: any) => {
+      return b.elo - a.elo;
+    });
+  }
 
   const filterBySearch = (input: string): boolean => {
     if (props.search) {
@@ -43,6 +62,7 @@ export default function Table(props: { search?: string }) {
           <thead className='bg-white'>
             <tr className='bg-white'>
               <th className='sticky top-0 z-10 bg-white'>Player</th>
+              <td className='sticky top-0 z-10 bg-white'>Elo</td>
               <td className='sticky top-0 z-10 bg-white'>Games Won</td>
               <td className='sticky top-0 z-10 bg-white'>Played</td>
               <td className='sticky top-0 z-10 bg-white'>Schnickeln</td>
@@ -56,7 +76,7 @@ export default function Table(props: { search?: string }) {
           </thead>
           <tbody>
             {data &&
-              data?.players.map((e: PlayerStats, i: Key | null | undefined) => {
+              data?.players.map((e: any, i: Key | null | undefined) => {
                 return (
                   <tr
                     key={i}
@@ -64,6 +84,9 @@ export default function Table(props: { search?: string }) {
                   >
                     <td>
                       <User username={e.player} avatar_url={e.avatar_url} />
+                    </td>
+                    <td>
+                      <div className='font-bold'>{e.elo}</div>
                     </td>
                     <td>
                       <div className='font-bold'>{e.wins}</div>
@@ -101,6 +124,7 @@ export default function Table(props: { search?: string }) {
           <tfoot>
             <tr>
               <th className='bg-white'>Player</th>
+              <td className='bg-white'>Elo</td>
               <td className='bg-white'>Games Won</td>
               <td className='bg-white'>Played</td>
               <td className='bg-white'>Schnickeln</td>
