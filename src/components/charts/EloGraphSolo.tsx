@@ -1,13 +1,13 @@
 import dynamic from 'next/dynamic';
 import * as React from 'react';
-import { AxisOptions } from 'react-charts';
+import { AxisOptions, Chart as ChartType, ChartOptions } from 'react-charts';
 import useSWR from 'swr';
 import useLocalStorageState from 'use-local-storage-state';
 
 import { fetcher } from '@/utils/fetch';
 const Chart = dynamic(() => import('react-charts').then((mod) => mod.Chart), {
   ssr: false,
-});
+}) as typeof ChartType;
 
 export default function EloGraphSolo(props: { id: string }) {
   const [season] = useLocalStorageState('SS 22');
@@ -67,26 +67,24 @@ export default function EloGraphSolo(props: { id: string }) {
     (): AxisOptions<Elo>[] => [
       {
         getValue: (datum: { elo: number }) => datum.elo,
+        scaleType: 'linear',
       },
     ],
     []
   );
+
+  const chartOptions: ChartOptions<Elo> = {
+    data: chartData,
+    primaryAxis: primaryAxis,
+    secondaryAxes: secondaryAxes,
+  };
+
   return (
     <>
       <div className='h-96 bg-white rounded-lg'>
         {/* Das Chart hier wird immer als Fehler angezeigt. Liegt glaube dran dass man das so weird importieren muss.
             Aber solang es funktioniert is ja eigentlich wayne. */}
-        {elo_changes ? (
-          <Chart
-            options={{
-              data: chartData,
-              primaryAxis: primaryAxis,
-              secondaryAxes: secondaryAxes,
-            }}
-          />
-        ) : (
-          <div>loading...</div>
-        )}
+        {elo_changes ? <Chart options={chartOptions} /> : <div>loading...</div>}
       </div>
     </>
   );
