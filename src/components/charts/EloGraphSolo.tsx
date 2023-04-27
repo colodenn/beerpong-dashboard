@@ -96,6 +96,7 @@ export default function EloGraphSolo(props: { id: string }) {
               data: chartData,
               primaryAxis: primaryAxis,
               secondaryAxes: secondaryAxes,
+              tooltip: false,
             }}
           />
         ) : (
