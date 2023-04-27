@@ -10,6 +10,7 @@ import ImageUploading from 'react-images-uploading';
 import useSWR from 'swr';
 
 import Background from '@/components/charts/Background';
+import EloGraphSolo from '@/components/charts/EloGraphSolo';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import Layout from '@/components/layout/Layout';
@@ -191,6 +192,16 @@ export default function HomePage() {
                   <TablePersonalTeam id={String(id)} />
                 </Background>
               )}
+            </section>
+          </ScrollAnimation>
+          <ScrollAnimation animateIn='fade-in slide-in-bottom'>
+            <section
+              className='mx-auto mt-24 w-full'
+              style={{ height: '500px' }}
+            >
+              <Background title='Elo Graph' colour='#FF8379'>
+                <EloGraphSolo id={String(id)} />
+              </Background>
             </section>
           </ScrollAnimation>
           <ScrollAnimation animateIn='fade-in slide-in-bottom'>
