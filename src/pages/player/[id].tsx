@@ -10,7 +10,7 @@ import ImageUploading from 'react-images-uploading';
 import useSWR from 'swr';
 
 import Background from '@/components/charts/Background';
-import EloGraphSolo from '@/components/charts/EloGraphSolo';
+import EloGraphSoloAllGames from '@/components/charts/EloGraphSoloAllGames';
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import Layout from '@/components/layout/Layout';
@@ -200,7 +200,7 @@ export default function HomePage() {
               style={{ height: '500px' }}
             >
               <Background title='Elo Graph' colour='#FF8379'>
-                <EloGraphSolo id={String(id)} />
+                <EloGraphSoloAllGames id={String(id)} />
               </Background>
             </section>
           </ScrollAnimation>
