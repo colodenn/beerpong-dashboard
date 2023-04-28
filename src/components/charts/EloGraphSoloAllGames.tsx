@@ -40,12 +40,13 @@ export default function EloGraphSoloAllGames(props: { id: string }) {
     opponent_name: string;
   };
 
-  const elo_entries: Elo[] = React.useMemo(() => [], []);
+  let elo_entries: Elo[] = React.useMemo(() => [], []);
   let last_game_id = 0;
   let last_elo = elo_changes ? elo_changes.stats[0].elo : 0;
 
   //create chart data from elo_changes
   if (elo_changes) {
+    elo_entries = [];
     elo_changes.stats.forEach((change: elo_stat_entry) => {
       elo_entries.push({
         date: new Date(change.ts),
