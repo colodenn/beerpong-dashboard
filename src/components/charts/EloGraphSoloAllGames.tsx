@@ -42,7 +42,7 @@ export default function EloGraphSoloAllGames(props: { id: string }) {
 
   let elo_entries: Elo[] = React.useMemo(() => [], []);
   let last_game_id = 0;
-  let last_elo = elo_changes ? elo_changes.stats[0].elo : 0;
+  let last_elo = elo_changes ? elo_changes.stats[0]?.elo : 0;
 
   //create chart data from elo_changes
   if (elo_changes) {
