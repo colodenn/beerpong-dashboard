@@ -27,6 +27,7 @@ const emptyMessage = () => {
 export default function Table(props: { search?: string }) {
   const [season] = useLocalStorageState('SS 22');
   const { data } = useSWR('/api/players/stats/' + season, fetcher);
+  const king = data?.['players']?.[0]?.['player'];
   const { data: elo } = useSWR('/api/players/elo/' + season, fetcher);
   // append elo to player stats
   //TODO: vll bissel sketchy, man könnte auch die player_stats_function anpassen damit die direkt joined, aber wollte erstmal nicht so viel ändern
@@ -83,7 +84,11 @@ export default function Table(props: { search?: string }) {
                     className={filterBySearch(e.player) ? '' : 'hidden'}
                   >
                     <td>
-                      <User username={e.player} avatar_url={e.avatar_url} />
+                      <User
+                        username={e.player}
+                        avatar_url={e.avatar_url}
+                        king={king == e.player}
+                      />
                     </td>
                     <td>
                       <div className='font-bold'>{e.elo}</div>

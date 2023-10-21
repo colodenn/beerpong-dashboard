@@ -91,10 +91,11 @@ export default function Header() {
                 <div className='mr-2 cursor-pointer'>
                   <Image
                     alt='logo'
-                    width={48}
-                    height={48}
+                    objectFit='cover'
+                    width={120}
+                    height={56}
                     className='mx-atuo my-auto'
-                    src='/images/redcuplogo.png'
+                    src='/images/logo.png'
                   />
                 </div>
               </div>

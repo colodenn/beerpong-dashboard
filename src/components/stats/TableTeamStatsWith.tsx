@@ -26,6 +26,9 @@ export default function Table(props: { id: string }) {
     }
   });
   const stats = front.concat(back);
+  const { data: players } = useSWR('/api/players/stats/' + season, fetcher);
+
+  const king = players?.['players']?.[0]?.['player'];
 
   return (
     <>
@@ -39,7 +42,11 @@ export default function Table(props: { id: string }) {
                 <>
                   <tr key={i}>
                     <td>
-                      <User username={e.player} avatar_url={e.avatar_url} />
+                      <User
+                        username={e.player}
+                        avatar_url={e.avatar_url}
+                        king={king == e.player}
+                      />
                     </td>
                     <td>
                       <div className='font-bold'>{e.winrate} %</div>

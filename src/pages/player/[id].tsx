@@ -137,17 +137,29 @@ export default function HomePage() {
                           )}
                         </ImageUploading>
                       ) : (
-                        <Image
-                          objectFit='cover'
-                          height={250}
-                          width={250}
-                          alt=''
-                          className='absolute mx-auto rounded-full'
-                          src={
-                            data?.player?.avatar_url ??
-                            'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
-                          }
-                        />
+                        <div className='relative w-full'>
+                          <div className='absolute bottom-0 z-50 mx-auto w-full h-full'>
+                            <Image
+                              objectFit='cover'
+                              height={250}
+                              width={250}
+                              alt=''
+                              className='w-full h-full rounded-full opacity-50'
+                              src={'/images/autumn.gif'}
+                            />
+                          </div>
+                          <Image
+                            objectFit='cover'
+                            height={250}
+                            width={250}
+                            alt=''
+                            className='rounded-full'
+                            src={
+                              data?.player?.avatar_url ??
+                              'https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/crown_1f451.png'
+                            }
+                          />
+                        </div>
                       )}
                     </div>
                   </div>
