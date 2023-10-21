@@ -17,7 +17,7 @@ export default function Table(props: { id: string }) {
   );
   const { data: players } = useSWR('/api/players/stats/' + season, fetcher);
 
-  const king = players['players'][0]['player'];
+  const king = players?.['players']?.[0]?.['player'];
 
   const front: any = [];
   const back: any = [];

@@ -18,7 +18,8 @@ export function Team({
 
   const { data: players } = useSWR('/api/players/stats/' + season, fetcher);
 
-  const king = players['players'][0]['player'];
+  const king = players?.['players']?.[0]?.['player'];
+
   return (
     <Link href={`/player/${player_1.username}`} passHref={true}>
       <div className='flex items-center space-x-3 cursor-pointer'>
