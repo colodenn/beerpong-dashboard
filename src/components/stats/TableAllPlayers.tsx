@@ -27,8 +27,9 @@ const emptyMessage = () => {
 export default function Table(props: { search?: string }) {
   const [season] = useLocalStorageState('SS 22');
   const { data } = useSWR('/api/players/stats/' + season, fetcher);
-  const king = data?.['players']?.[0]?.['player'];
   const { data: elo } = useSWR('/api/players/elo/' + season, fetcher);
+  const king = elo?.['players']?.[0]?.['player_name'];
+
   // append elo to player stats
   //TODO: vll bissel sketchy, man könnte auch die player_stats_function anpassen damit die direkt joined, aber wollte erstmal nicht so viel ändern
   if (data && elo) {
