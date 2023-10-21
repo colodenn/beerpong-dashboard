@@ -23,7 +23,7 @@ const emptyMessage = () => {
     </tr>
   );
 };
-
+// test
 export default function Table(props: { search?: string }) {
   const [season] = useLocalStorageState('SS 22');
   const { data } = useSWR('/api/players/stats/' + season, fetcher);
