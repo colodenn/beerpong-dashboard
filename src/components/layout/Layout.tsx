@@ -10,6 +10,8 @@ import useSWR from 'swr';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
+import { useUser } from '@/utils/useUser';
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [toggle, setToggle] = useState(false);
   const [lat, setLat] = useState<null | number>(null);
@@ -30,6 +32,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const fetcher = (args: any) => fetch(args).then((res) => res.json());
   const { data } = useSWR('/api/players', fetcher);
+  const { session } = useUser();
   const playerOptions = data?.['players'].map((e: any, index: number) => {
     return {
       value: e.username,
@@ -133,7 +136,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      {router.route != '/login' ? (
+      {router.route != '/login' && session != null ? (
         <label
           htmlFor='my-modal'
           onClick={() => getLocation()}
