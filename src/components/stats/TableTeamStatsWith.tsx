@@ -26,9 +26,8 @@ export default function Table(props: { id: string }) {
     }
   });
   const stats = front.concat(back);
-  const { data: players } = useSWR('/api/players/stats/' + season, fetcher);
-
-  const king = players?.['players']?.[0]?.['player'];
+  const { data: elo } = useSWR('/api/players/elo/' + season, fetcher);
+  const king = elo?.['players'][0]['player_name'];
 
   return (
     <>
