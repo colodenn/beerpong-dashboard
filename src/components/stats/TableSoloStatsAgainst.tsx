@@ -17,7 +17,6 @@ export default function Table(props: { id: string }) {
   );
   const { data: elo } = useSWR('/api/players/elo/' + season, fetcher);
   const king = elo?.['players'][0]['player_name'];
-
   const front: any = [];
   const back: any = [];
   data?.stats?.map((e: any) => {
