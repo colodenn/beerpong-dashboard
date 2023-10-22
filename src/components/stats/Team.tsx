@@ -16,9 +16,8 @@ export function Team({
 }) {
   const [season] = useLocalStorageState('SS 22');
 
-  const { data: players } = useSWR('/api/players/stats/' + season, fetcher);
-
-  const king = players?.['players']?.[0]?.['player'];
+  const { data: elo } = useSWR('/api/players/elo/' + season, fetcher);
+  const king = elo?.['players'][0]['player_name'];
 
   return (
     <Link href={`/player/${player_1.username}`} passHref={true}>
